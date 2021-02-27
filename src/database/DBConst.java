@@ -39,6 +39,7 @@ public class DBConst {
 	public static final String START_DATE = "startDate";
 	public static final String END_DATE = "endDate";
 	public static final String SAVE_TYPE = "saveType";
+	public static final String AMOUNT_TO_SAVE = "amountToSave";
 	public static final String IS_BREAK = "isBreak";
 	public static final String GOAL_USER_ID = "userId";
 	
