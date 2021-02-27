@@ -17,8 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="600.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="controller.TargetGoalController">
+<BorderPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TargetGoalController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -76,8 +75,8 @@
                <children>
                   <Label layoutX="239.0" layoutY="12.0" text="Start Date" />
                   <Label layoutX="504.0" layoutY="12.0" text="End Date" />
-                  <JFXDatePicker fx:id="startDate" layoutX="196.0" layoutY="34.0" />
-                  <JFXDatePicker fx:id="endDate" layoutX="460.0" layoutY="34.0" />
+                  <JFXDatePicker fx:id="startDate" layoutX="196.0" layoutY="34.0" onAction="#processDate" />
+                  <JFXDatePicker fx:id="endDate" layoutX="460.0" layoutY="34.0" onAction="#processDate" />
                </children>
             </AnchorPane>
             <JFXTextField fx:id="txtSaveAmount" labelFloat="true" promptText="Amount To Save" GridPane.columnIndex="1" GridPane.rowIndex="5">
