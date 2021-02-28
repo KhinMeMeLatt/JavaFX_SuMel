@@ -8,6 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx15"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javafx"/>
 	<classpathentry kind="lib" path="src/lib/javax.json-1.0.jar"/>
 	<classpathentry kind="lib" path="src/lib/jfoenix-9.0.10.jar"/>
 	<classpathentry kind="lib" path="src/lib/mysql-connector-java-8.0.11.jar"/>
