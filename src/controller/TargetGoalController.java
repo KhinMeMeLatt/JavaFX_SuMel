@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -16,6 +17,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import model.Goal;
 import model.GoalDBModel;
 
@@ -51,6 +56,9 @@ public class TargetGoalController implements Initializable {
     @FXML
     private JFXButton btnCreateGoal;
     
+    @FXML
+    private ImageView imViewGoal;
+    
     private LocalDate startDate = LocalDate.now();
     
     private LocalDate endDate = LocalDate.now().plus(1,ChronoUnit.DAYS);
@@ -62,17 +70,21 @@ public class TargetGoalController implements Initializable {
     private double period = 1;
     
     private boolean changeDate = true;
-
+    
+    private boolean isStartProgram = true;
+    
+    private String imgSrc;
+    
     @FXML
     void convertCurrency(ActionEvent event) {
 
     }
-
+    
     @FXML
     void createGoal(ActionEvent event) {
     	String goalName = txtGoalName.getText();
     	double amountToSave = Double.valueOf(txtSaveAmount.getText());
-    	Goal newGoal = new Goal(goalName, this.objAmount, this.startDate.toString(), this.endDate.toString(), this.saveType, amountToSave, 0, 1);
+    	Goal newGoal = new Goal(goalName, this.imgSrc, this.objAmount, this.startDate.toString(), this.endDate.toString(), this.saveType, amountToSave, 0, 1);
     	GoalDBModel goalModel = new GoalDBModel();
     	goalModel.insertGoal(newGoal);
     }
@@ -80,6 +92,24 @@ public class TargetGoalController implements Initializable {
     @FXML
     void processAbout(ActionEvent event) {
 
+    }
+    
+    @FXML
+    void addImage(ActionEvent event) {
+    	FileChooser fileChooser = new FileChooser();
+    	
+    	//define initial directory
+    	fileChooser.setInitialDirectory(new File("C:\\"));
+    	
+    	//define image extension
+    	fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.ico"));
+    	File imgFile = fileChooser.showOpenDialog(null);
+    	
+    	if(imgFile != null) {
+    		this.imgSrc = imgFile.toURI().toString();
+    		Image image = new Image(this.imgSrc);
+    		imViewGoal.setImage(image);
+    	}
     }
     
     @FXML
@@ -94,7 +124,8 @@ public class TargetGoalController implements Initializable {
 
     @FXML
     void processEndDate(ActionEvent event) {
-    	if(changeDate) {
+    	if(this.changeDate || this.isStartProgram) {
+    		this.isStartProgram = !isStartProgram;
     		this.endDate = dpEndDate.getValue();
         	
         	//Total number of target days 
@@ -109,14 +140,14 @@ public class TargetGoalController implements Initializable {
         	}
         	processSaveType(event);
     	}else {
-    		changeDate = true;
+    		changeDate = !changeDate;
     	}
     	
     }
     
     @FXML
     void processSaveType(ActionEvent event) {
-    	this.changeDate = false;
+    	this.changeDate = !changeDate;
     	if(rbWeekly.isSelected()) {
     		this.saveType = "Weekly";
     	}
@@ -169,10 +200,10 @@ public class TargetGoalController implements Initializable {
 					}else if(rbMonthly.isSelected()) {
 						amountToAdd = today.plus(noOfDays*30,ChronoUnit.DAYS);
 					}
-					changeDate = false;
+					changeDate = !changeDate;
 					dpEndDate.setValue(amountToAdd);
 				}else {
-					changeDate = true;
+					changeDate = !changeDate;
 				}
 				
 			}
