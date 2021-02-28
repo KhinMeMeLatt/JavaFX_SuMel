@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.fontawesome.AwesomeIcon?>
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginController">
+   <children>
+      <AnchorPane layoutX="24.0" layoutY="117.0" prefHeight="457.0" prefWidth="309.0" style="-fx-background-color: #d0ccc7;">
+         <children>
+            <Label layoutX="13.0" layoutY="14.0" prefHeight="41.0" prefWidth="307.0" text="Don't have an Account?" textFill="#ff7b0e">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <Label graphicTextGap="1.0" layoutX="13.0" layoutY="63.0" prefHeight="57.0" prefWidth="307.0" text=" If you don't an account, sign up now for your new activities !" textFill="#f27c0d" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="103.0" layoutY="357.0" onAction="#processSignUp" prefHeight="44.0" prefWidth="113.0" ripplerFill="#e8ca45" style="-fx-background-color: #ff8400;" text="Sign Up" textFill="#f1f2ee">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="81.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pig.PNG" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="57.0" fitWidth="73.0" layoutX="24.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/pig.PNG" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="403.0" layoutY="33.0" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="600.0" layoutY="33.0" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #1a6ada;" text="About" textFill="#fcf6f6">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <Label alignment="CENTER" layoutX="88.0" layoutY="28.0" prefHeight="57.0" prefWidth="79.0" text="SUMEL" textFill="#e1460e">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tfUserEmail" focusColor="#ff3d0f" layoutX="415.0" layoutY="242.0" opacity="0.6" prefHeight="51.0" prefWidth="250.0" promptText="User Email" style="-fx-background-color: transparent;" unFocusColor="#ff7b0e">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+     <!--  <FontAwesomeIconView fill="#ff7b0e" glyphName="USER" layoutX="369.0" layoutY="347.0" size="25" wrappingWidth="22.0" />
+      <FontAwesomeIconView fill="#ff7b0e" glyphName="KEY" layoutX="367.0" layoutY="426.0" size="25" /> -->
+      <JFXButton layoutX="415.0" layoutY="431.0" onAction="#processLogin" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: #ff8400;" text="LogIn" textFill="#fcfbf9">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+    <FontAwesomeIconView fill="#ff7b0e" glyphName="USERS" layoutX="410.0" layoutY="197.0" size="40" text="" wrappingWidth="43.79411697387695" />
+      <Label alignment="CENTER" layoutX="471.0" layoutY="157.0" prefHeight="51.0" prefWidth="122.0" text="User Login" textFill="#ff7b0e">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <JFXPasswordField fx:id="pfPassword" focusColor="#ff3d0f" layoutX="415.0" layoutY="330.0" opacity="0.6" prefHeight="44.0" prefWidth="250.0" promptText="Password" unFocusColor="#ff7b0e">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXPasswordField>
+      <Label fx:id="lblStatus" layoutX="389.0" layoutY="503.0" prefHeight="40.0" prefWidth="268.0" text="Status" visible="false" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnClose" layoutX="556.0" layoutY="431.0" onAction="#processClose" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: #ff8400;" text="Close" textFill="#fcfbf9">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
