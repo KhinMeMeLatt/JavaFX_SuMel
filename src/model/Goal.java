@@ -3,6 +3,7 @@ package model;
 public class Goal {
 
 	private String goalName;
+	private String goalImgPath;
 	private int goalAmount;
 	private String startDate;
 	private String endDate;
@@ -11,10 +12,11 @@ public class Goal {
 	private int isBreak; // It is flag variable for money box status
 	private int userId;
 	
-	public Goal(String goalName, int goalAmount, String startDate, String endDate, String saveType, double amountToSave,
+	public Goal(String goalName, String goalImgPath, int goalAmount, String startDate, String endDate, String saveType, double amountToSave,
 			int isBreak, int userId) {
 		super();
 		this.goalName = goalName;
+		this.goalImgPath = goalImgPath;
 		this.goalAmount = goalAmount;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -71,6 +73,14 @@ public class Goal {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public String getGoalImgPath() {
+		return goalImgPath;
+	}
+
+	public void setGoalImgPath(String goalImgPath) {
+		this.goalImgPath = goalImgPath;
 	}
 	
 	
