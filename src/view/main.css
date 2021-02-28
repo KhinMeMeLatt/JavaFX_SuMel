@@ -1,0 +1,63 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+* {
+    -fx-primary : #2A2E37;
+    -fx-secondary : #FFFF8D;
+    -fx-primarytext : #B2B2B2;
+ }
+
+.mysubu{
+	
+	-fx-background-color:  #FFFFFF;
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+}
+
+.mysubu:hover, .mysubu:focused{
+    -fx-border-color: -fx-secondary;
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-primary;
+}
+
+.searchsubu{
+	-fx-background-color:  #F0F1F6;
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+}
+
+.searchfield{
+	-fx-prompt-text-fill: #B0BEC5;
+}
+
+.history{
+	-fx-background-color:  #FFFFFF;
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+}
+
+.subuscrollpane{
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+}
+
+.sidebutton{
+    -fx-text-fill: -fx-primarytext;
+    -fx-background-color:  #F0F1F6;
+    -fx-border-color: #F0F1F6;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-font-size: 12pt;
+    -fx-text-alignment: center;
+}
+
+.sidebutton:hover, .sidebutton:focused{
+    -fx-border-color: -fx-secondary;
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-primary;
+}
+
+.transparent{
+	-fx-background-color: rgba(0,0,0,0);
+}
+
+
