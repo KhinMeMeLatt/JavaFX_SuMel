@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="controller.GoalDetailController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GoalDetailController">
    <children>
       <TableView layoutX="59.0" layoutY="109.0" prefHeight="374.0" prefWidth="590.0">
         <columns>
@@ -20,31 +19,23 @@
             <TableColumn fx:id="lblHistory" prefWidth="100.0" text="History" />
         </columns>
       </TableView>
-      <Button layoutX="135.0" layoutY="498.0" mnemonicParsing="false" onAction="#processSaveGoal" prefHeight="46.0" prefWidth="160.0" style="-fx-background-color: #e05f26;" text="Save For Goal" textFill="#fff9f9">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button layoutX="416.0" layoutY="498.0" mnemonicParsing="false" onAction="#processJustSave" prefHeight="46.0" prefWidth="160.0" style="-fx-background-color: #e05f26;" text="Just To Save" textFill="#fff9f9">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
       <Label alignment="CENTER" layoutX="87.0" layoutY="560.0" prefHeight="26.0" prefWidth="470.0" text="Powered by UIT NTT-AT Scholarship Students" />
       <Label layoutX="62.0" layoutY="36.0" prefHeight="45.0" prefWidth="218.0" text="SuMel" textFill="#e05f26">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Button layoutX="302.0" layoutY="36.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #0707ff;" text="Currency Converter" textFill="#fdfdff">
+      <JFXButton layoutX="190.0" layoutY="509.0" onAction="#processSaveForGoal" prefHeight="37.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Save For Goal" textFill="#fffafa">
          <font>
             <Font size="15.0" />
          </font>
-      </Button>
-      <Button layoutX="491.0" layoutY="36.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #0707ff;" text="About" textFill="#fdfdff">
+      </JFXButton>
+      <JFXButton layoutX="400.0" layoutY="509.0" onAction="#processJustToSave" prefHeight="37.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Just To Save" textFill="#fffafa">
          <font>
             <Font size="15.0" />
          </font>
-      </Button>
+      </JFXButton>
+      <JFXButton layoutX="271.0" layoutY="46.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0728fc;" text="Currency Converter" textFill="#f4f4f8" />
+      <JFXButton layoutX="476.0" layoutY="46.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0728fc;" text="About" textFill="#f4f4f8" />
    </children>
 </AnchorPane>
