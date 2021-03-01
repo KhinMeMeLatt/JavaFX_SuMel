@@ -15,6 +15,7 @@ public class FramesController {
 	public final void openFrame(String frameName) throws IOException {
 		mainParent = FXMLLoader.load(getClass().getResource("../view/"+frameName+".fxml"));
 		Scene scene = new Scene(mainParent);
+		scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 		this.stage = new Stage();
 		this.stage.hide();
 		this.stage.setScene(scene);
