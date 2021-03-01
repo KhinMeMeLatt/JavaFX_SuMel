@@ -126,6 +126,7 @@
             <Image url="@../assets/users.PNG" />
          </image>
       </ImageView>
+      <Label alignment="CENTER" layoutX="97.0" layoutY="570.0" prefHeight="26.0" prefWidth="470.0" text="Powered by UIT NTT-AT Scholarship Students" />
       <!-- <FontAwesomeIconView layoutX="212.0" layoutY="30.0" wrappingWidth="60.0" /> -->
      <!--  <FontAwesomeIconView fill="#ff7b0e" glyphName="USER" layoutX="363.0" layoutY="228.0" size="25" text="" wrappingWidth="25.0" />
       <FontAwesomeIconView fill="#ff7b0e" glyphName="ENVELOPE" layoutX="363.0" layoutY="297.0" size="25" />
