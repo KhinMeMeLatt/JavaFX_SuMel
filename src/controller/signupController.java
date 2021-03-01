@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import database.DBConnection;
+import database.DBConst;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -55,7 +56,7 @@ public class SignupController extends FramesController{
 					if (status > 0) {
 						lblStatus.setTextFill(Color.GREEN);
 						lblStatus.setText("Congratulations! SignUp SuccessFul.! ");
-						mainFrame();
+						openFrame("MainUI");
 
 					}
 				} else {
@@ -71,7 +72,7 @@ public class SignupController extends FramesController{
 
 	@FXML //// Scenes Changes to Login Scene
 	void processLogin(ActionEvent event) throws IOException {
-		loginFrame();
+		openFrame("LoginUI");
 	}
 
 	@FXML // Close the scenes

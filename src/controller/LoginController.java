@@ -41,7 +41,7 @@ public class LoginController extends FramesController{
 				if (userLogin.isValidated(tfUserEmail.getText().trim(), pfPassword.getText())) {
 					lblStatus.setTextFill(Color.GREEN);
 					lblStatus.setText("Congratulations! Login Success! ");
-					mainFrame();
+					openFrame("MainUI");
 				} else {
 					lblStatus.setTextFill(Color.RED);
 					lblStatus.setText("Incorrect email or password! Try Again !!");
@@ -53,7 +53,7 @@ public class LoginController extends FramesController{
 
 	@FXML // Scenes Changes to SignUp Scene
 	void processSignUp(ActionEvent event) throws IOException {
-		signUpFrame();
+		openFrame("Signup");
 	}
 
 	@FXML // Close the scene

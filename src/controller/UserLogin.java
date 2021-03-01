@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import database.DBConnection;
+import database.DBConst;
 
 public class UserLogin {
 	private Connection connection;
@@ -16,7 +17,7 @@ public class UserLogin {
 		connection = DBConnection.getConnection();
 		stmt = connection.createStatement();
 		rs = stmt.executeQuery(
-				"select * from user where email='" + email + "' and " + "password='" + password + "';");
+				"select * from "+DBConst.USER_TABLE+" where "+DBConst.EMAIL+"='" + email + "' and " + ""+DBConst.PASSWORD+"='" + password + "';");
 
 		boolean isOk = false;
 		while (rs.next()) {

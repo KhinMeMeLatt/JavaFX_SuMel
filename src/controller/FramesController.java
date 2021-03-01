@@ -12,27 +12,14 @@ public class FramesController {
 	Parent mainParent;
 	Stage stage = new Stage();
 
-	public final void loginFrame() throws IOException {
-		mainParent = FXMLLoader.load(getClass().getResource("../view/LoginUI.fxml"));
+	public final void openFrame(String frameName) throws IOException {
+		mainParent = FXMLLoader.load(getClass().getResource("../view/"+frameName+".fxml"));
 		Scene scene = new Scene(mainParent);
 		this.stage = new Stage();
 		this.stage.hide();
 		this.stage.setScene(scene);
 		this.stage.show();
-		this.stage.setTitle("LoginUI");
+		this.stage.setTitle(frameName);
 	}
 	
-	public final void signUpFrame() {
-		
-	}
-	
-	public final void mainFrame() throws IOException {
-		mainParent = FXMLLoader.load(getClass().getResource("../view/MainUI.fxml"));
-		Scene scene = new Scene(mainParent);
-		this.stage.hide();
-		this.stage.setScene(scene);
-		this.stage.close();
-		this.stage.show();
-		this.stage.setTitle("mainUI");
-	}
 }
