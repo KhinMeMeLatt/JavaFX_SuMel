@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
+   <children>
+      <Label alignment="CENTER" layoutX="74.0" layoutY="14.0" prefHeight="57.0" prefWidth="79.0" text="SUMEL" textFill="#e1460e">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/pig.PNG" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="393.0" layoutY="23.0" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="590.0" layoutY="23.0" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #1a6ada;" text="About" textFill="#fcf6f6">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane layoutX="98.0" layoutY="105.0" prefHeight="468.0" prefWidth="504.0" style="-fx-background-color: #d0ccc7;">
+         <children>
+            <Label alignment="CENTER" layoutY="-2.0" prefHeight="114.0" prefWidth="504.0" text="Welcome to SUMEL" textFill="#ff7b0e">
+               <font>
+                  <Font name="Cinzel Black" size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="142.0" layoutY="101.0" prefHeight="57.0" prefWidth="220.0" text="Let's Start" textFill="#ee7b0e">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="86.0" layoutY="362.0" onAction="#processLogin" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #ff8400;" text="LogIn" textFill="#fcfbf9">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="319.0" layoutY="362.0" onAction="#processSignUp" prefHeight="44.0" prefWidth="113.0" ripplerFill="#e8ca45" style="-fx-background-color: #ff8400;" text="Sign Up" textFill="#f1f2ee">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="173.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/pig.PNG" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
