@@ -13,6 +13,5 @@
 	<classpathentry kind="lib" path="src/lib/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="lib" path="src/lib/TrayNotification.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javafx15"/>
-	<classpathentry kind="lib" path="src/lib/fontawesomefx-8.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

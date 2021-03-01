@@ -18,7 +18,7 @@ public class UserLogin {
 		rs = stmt.executeQuery(
 				"select * from user where email='" + email + "' and " + "password='" + password + "';");
 
-		var isOk = false;
+		boolean isOk = false;
 		while (rs.next()) {
 			if (rs.getString("email").equals(email) && rs.getString("password").equals(password)) {
 				isOk = true;
