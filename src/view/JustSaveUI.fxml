@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,16 +20,6 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button layoutX="303.0" layoutY="49.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #0707ff;" text="Currency Converter" textFill="#fdfdff">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button layoutX="502.0" layoutY="49.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #0707ff;" text="About" textFill="#fdfdff">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
       <GridPane layoutX="44.0" layoutY="129.0" prefHeight="364.0" prefWidth="613.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="185.0" />
@@ -43,10 +33,6 @@
             <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="tfGoalName" prefHeight="41.0" prefWidth="428.0" GridPane.columnIndex="2" />
-            <TextField fx:id="tfObjAmount" prefHeight="41.0" prefWidth="428.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="tfStartDate" prefHeight="41.0" prefWidth="428.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField fx:id="tfSaveAmount" prefHeight="41.0" prefWidth="428.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Label prefHeight="38.0" prefWidth="123.0" text="Goal Name" textFill="#e05f26" GridPane.columnIndex="1">
                <font>
                   <Font size="14.0" />
@@ -99,25 +85,28 @@
                   <Image url="@../assets/justmoney.png" />
                </image>
             </ImageView>
+            <JFXTextField fx:id="txtGoalName" GridPane.columnIndex="2" />
+            <JFXTextField fx:id="txtObjAmount" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <JFXTextField fx:id="txtStartDate" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <JFXTextField fx:id="txtSaveAmount" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <HBox layoutX="65.0" layoutY="497.0" prefHeight="45.0" prefWidth="592.0" spacing="100.0">
+      <HBox layoutX="65.0" layoutY="497.0" prefHeight="45.0" prefWidth="592.0" spacing="70.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#processBack" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Back" textFill="#f8f7f6">
+            <JFXButton onAction="#processBack" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Back">
                <HBox.margin>
-                  <Insets left="230.0" />
+                  <Insets left="120.0" />
                </HBox.margin>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#processCreateGoal" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Create Goal" textFill="#f8f7f6">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
+            </JFXButton>
+            <JFXButton onAction="#processCreateGoal" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Create Goal">
+               <HBox.margin>
+                  <Insets left="120.0" />
+               </HBox.margin>
+            </JFXButton>
          </children>
       </HBox>
       <Label alignment="CENTER" layoutX="187.0" layoutY="560.0" prefHeight="26.0" prefWidth="470.0" text="Powered by UIT NTT-AT Scholarship Students" />
+      <JFXButton layoutX="291.0" layoutY="54.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0728fc;" text="Currency Converter" textFill="#f4f4f8" />
+      <JFXButton layoutX="496.0" layoutY="54.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0728fc;" text="About" textFill="#f4f4f8" />
    </children>
 </AnchorPane>

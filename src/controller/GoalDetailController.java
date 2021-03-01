@@ -25,12 +25,12 @@ public class GoalDetailController {
     private TableColumn<?, ?> lblHistory;
 
     @FXML
-    void processJustSave(ActionEvent event) {
+    void processJustToSave(ActionEvent event) {
 
     }
 
     @FXML
-    void processSaveGoal(ActionEvent event) {
+    void processSaveForGoal(ActionEvent event) {
 
     }
 
