@@ -11,7 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class mainController implements Initializable {
+public class MainController implements Initializable {
 
 	@FXML // Scenes Changes to Login Scene
 	void processLogin(ActionEvent event) throws IOException {
