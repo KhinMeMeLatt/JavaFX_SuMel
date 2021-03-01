@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	
-	private static String url = "jdbc:mysql://localhost:3306/sumel?useSSL=false";
+	private static String url = "jdbc:mysql://localhost:3306/sumeldb?useSSL=false";
 	private static String user = "root";
-	private static String password = "1234";
+	private static String password = "root";
 	
 	public static Connection getConnection() {
 		Connection connection = null;

@@ -9,15 +9,11 @@ import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class LoginController {
+public class LoginController extends FramesController{
 
 	@FXML
 	private JFXTextField tfUserEmail;
@@ -34,7 +30,6 @@ public class LoginController {
 
 	@FXML // Login Into SUMEL App
 	void processLogin(ActionEvent event) throws IOException, SQLException {
-		Stage mainStage = new Stage();
 		lblStatus.setVisible(true);
 		{
 			String email = tfUserEmail.getText();
@@ -46,13 +41,7 @@ public class LoginController {
 				if (userLogin.isValidated(tfUserEmail.getText().trim(), pfPassword.getText())) {
 					lblStatus.setTextFill(Color.GREEN);
 					lblStatus.setText("Congratulations! Login Success! ");
-					Parent mainParent = FXMLLoader.load(getClass().getResource("../view/mainUI.fxml"));
-					Scene scene = new Scene(mainParent);
-					mainStage.hide();
-					mainStage.setScene(scene);
-					mainStage.close();
-					mainStage.show();
-					mainStage.setTitle("mainUI");
+					mainFrame();
 				} else {
 					lblStatus.setTextFill(Color.RED);
 					lblStatus.setText("Incorrect email or password! Try Again !!");
@@ -64,15 +53,7 @@ public class LoginController {
 
 	@FXML // Scenes Changes to SignUp Scene
 	void processSignUp(ActionEvent event) throws IOException {
-		Parent mainParent = FXMLLoader.load(getClass().getResource("../view/signupUI.fxml"));
-		Scene scene = new Scene(mainParent);
-		//Stage mainStage = new Stage();
-		Stage mainStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-		mainStage.setScene(scene);
-		mainStage.hide();
-		mainStage.setScene(scene);
-		mainStage.show();
-		mainStage.setTitle("SignUpUI");
+		signUpFrame();
 	}
 
 	@FXML // Close the scene

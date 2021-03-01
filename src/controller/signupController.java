@@ -12,14 +12,11 @@ import com.jfoenix.controls.JFXTextField;
 import database.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class signupController {
+public class SignupController extends FramesController{
 
 	@FXML
 	private JFXTextField tfUserEmail;
@@ -41,7 +38,6 @@ public class signupController {
 
 	@FXML // User Registration
 	void processSignup(ActionEvent event) throws IOException {
-		Stage mainStage = new Stage();
 		lblStatus.setVisible(true);
 		Connection connection = DBConnection.getConnection();
 		try {
@@ -60,12 +56,7 @@ public class signupController {
 					if (status > 0) {
 						lblStatus.setTextFill(Color.GREEN);
 						lblStatus.setText("Congratulations! SignUp SuccessFul.! ");
-						Parent mainParent = FXMLLoader.load(getClass().getResource("../view/mainUI.fxml"));
-						Scene scene = new Scene(mainParent);
-						mainStage.hide();
-						mainStage.setScene(scene);
-						mainStage.show();
-						mainStage.setTitle("SignUpUI");
+						mainFrame();
 
 					}
 				} else {
@@ -81,13 +72,7 @@ public class signupController {
 
 	@FXML //// Scenes Changes to Login Scene
 	void processLogin(ActionEvent event) throws IOException {
-		Parent mainParent = FXMLLoader.load(getClass().getResource("../view/loginUI.fxml"));
-		Scene scene = new Scene(mainParent);
-		Stage mainStage = new Stage();
-		mainStage.hide();
-		mainStage.setScene(scene);
-		mainStage.show();
-		mainStage.setTitle("LoginUI");
+		loginFrame();
 	}
 
 	@FXML // Close the scenes
