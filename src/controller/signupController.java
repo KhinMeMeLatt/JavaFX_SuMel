@@ -51,8 +51,7 @@ public class SignupController extends FramesController{
 				lblStatus.setText("All the required fields must be filled! Try Again !!");
 			} else {
 				if (password.equals(rePassword)) {
-					int status = statement.executeUpdate("insert into user (userName,email,password) values ('"
-							+ userName + "','" + email + "','" + password + "')");
+					int status = statement.executeUpdate("insert into  "+DBConst.USER_TABLE+"("+DBConst.USER_NAME+", "+DBConst.EMAIL+", "+DBConst.PASSWORD+")"+"values ('"+ userName + "','" + email + "','" + password + "')");
 					if (status > 0) {
 						lblStatus.setTextFill(Color.GREEN);
 						lblStatus.setText("Congratulations! SignUp SuccessFul.! ");
