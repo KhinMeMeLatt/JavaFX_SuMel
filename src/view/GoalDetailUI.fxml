@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="controller.GoalDetailController">
+   <children>
+      <TableView layoutX="59.0" layoutY="109.0" prefHeight="374.0" prefWidth="590.0">
+        <columns>
+          <TableColumn fx:id="lblGoal" prefWidth="100.0" text="Goal" />
+          <TableColumn fx:id="lblGoalName" prefWidth="100.0" text="GoalName" />
+            <TableColumn fx:id="lblSave" prefWidth="100.0" text="Save" />
+            <TableColumn fx:id="lblWithdraw" prefWidth="100.0" text="Withdraw" />
+            <TableColumn fx:id="lblBreak" prefWidth="100.0" text="Break" />
+            <TableColumn fx:id="lblHistory" prefWidth="100.0" text="History" />
+        </columns>
+      </TableView>
+      <Button layoutX="135.0" layoutY="498.0" mnemonicParsing="false" onAction="#processSaveGoal" prefHeight="46.0" prefWidth="160.0" style="-fx-background-color: #e05f26;" text="Save For Goal" textFill="#fff9f9">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="416.0" layoutY="498.0" mnemonicParsing="false" onAction="#processJustSave" prefHeight="46.0" prefWidth="160.0" style="-fx-background-color: #e05f26;" text="Just To Save" textFill="#fff9f9">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="87.0" layoutY="560.0" prefHeight="26.0" prefWidth="470.0" text="Powered by UIT NTT-AT Scholarship Students" />
+      <Label layoutX="62.0" layoutY="36.0" prefHeight="45.0" prefWidth="218.0" text="SuMel" textFill="#e05f26">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="302.0" layoutY="36.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #0707ff;" text="Currency Converter" textFill="#fdfdff">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="491.0" layoutY="36.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="151.0" style="-fx-background-color: #0707ff;" text="About" textFill="#fdfdff">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
