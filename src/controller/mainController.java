@@ -11,12 +11,12 @@ public class MainController extends FramesController implements Initializable {
 
 	@FXML // Scenes Changes to Login Scene
 	void processLogin(ActionEvent event) throws IOException {
-		loginFrame();
+		openFrame("LoginUI");
 	}
 
 	@FXML // Scenes Changes to SignUp Scene
 	void processSignUp(ActionEvent event) throws IOException {
-		signUpFrame();
+		openFrame("SignupUI");
 	}
 
 	@Override
