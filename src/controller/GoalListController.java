@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 
-public class GoalDetailController {
+public class GoalListController {
 
     @FXML
     private TableColumn<?, ?> lblGoal;
