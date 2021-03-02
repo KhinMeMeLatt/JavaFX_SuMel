@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.MainController">
    <children>
       <Label alignment="CENTER" layoutX="74.0" layoutY="14.0" prefHeight="57.0" prefWidth="79.0" text="SUMEL" textFill="#e1460e">
          <font>
@@ -16,7 +16,7 @@
       </Label>
       <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/pig.PNG" />
+            <Image url="@../../assets/pig.PNG" />
          </image>
       </ImageView>
       <JFXButton layoutX="393.0" layoutY="23.0" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
@@ -53,7 +53,7 @@
             </JFXButton>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="173.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/pig.PNG" />
+                  <Image url="@../../assets/pig.PNG" />
                </image>
             </ImageView>
          </children>

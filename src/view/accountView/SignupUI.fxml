@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignupController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.SignupController">
    <children>
       <Label alignment="CENTER" layoutX="84.0" layoutY="14.0" prefHeight="57.0" prefWidth="79.0" text="SUMEL" textFill="#e1460e">
          <font>
@@ -18,7 +18,7 @@
       </Label>
       <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/pig.PNG" />
+            <Image url="@../../assets/pig.PNG" />
          </image>
       </ImageView>
       <JFXButton layoutX="404.0" layoutY="17.0" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
@@ -85,7 +85,7 @@
             </JFXButton>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="81.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/pig.PNG" />
+                  <Image url="@../../assets/pig.PNG" />
                </image>
             </ImageView>
          </children>
@@ -103,27 +103,27 @@
       </JFXButton>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="361.0" layoutY="384.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/key.PNG" />
+            <Image url="@../../assets/key.PNG" />
          </image>
       </ImageView>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="361.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/key.PNG" />
+            <Image url="@../../assets/key.PNG" />
          </image>
       </ImageView>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="361.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/envelopment.PNG" />
+            <Image url="@../../assets/envelopment.PNG" />
          </image>
       </ImageView>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="364.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/user.PNG" />
+            <Image url="@../../assets/user.PNG" />
          </image>
       </ImageView>
       <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="416.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/users.PNG" />
+            <Image url="@../../assets/users.PNG" />
          </image>
       </ImageView>
       <Label alignment="CENTER" layoutX="97.0" layoutY="570.0" prefHeight="26.0" prefWidth="470.0" text="Powered by UIT NTT-AT Scholarship Students" />

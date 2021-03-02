@@ -1,21 +1,20 @@
-package controller;
+package controller.accountController;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
-import database.DBConnection;
-import database.DBConst;
+import controller.FramesController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.accountModel.AccountDBModel;
+import model.accountModel.User;
 
 public class SignupController extends FramesController{
 
@@ -40,23 +39,26 @@ public class SignupController extends FramesController{
 	@FXML // User Registration
 	void processSignup(ActionEvent event) throws IOException {
 		lblStatus.setVisible(true);
-		Connection connection = DBConnection.getConnection();
+
 		try {
 			String userName = tfUserName.getText();
 			String email = tfUserEmail.getText();
 			String password = pfPassword.getText();
 			String rePassword = pfRePassword.getText();
-			Statement statement = connection.createStatement();
+
 			if (password.equals("") || rePassword.equals("") || userName.equals("") || email.equals("")) {
 				lblStatus.setTextFill(Color.RED);
 				lblStatus.setText("All the required fields must be filled! Try Again !!");
 			} else {
 				if (password.equals(rePassword)) {
-					int status = statement.executeUpdate("insert into  "+DBConst.USER_TABLE+"("+DBConst.USER_NAME+", "+DBConst.EMAIL+", "+DBConst.PASSWORD+")"+"values ('"+ userName + "','" + email + "','" + password + "')");
+					AccountDBModel accountDb = new AccountDBModel();
+					User user = new User(userName, email, password);
+					
+					int status = accountDb.signUp(user);
 					if (status > 0) {
 						lblStatus.setTextFill(Color.GREEN);
 						lblStatus.setText("Congratulations! SignUp SuccessFul.! ");
-						openFrame("MainUI");
+						openFrame("accountView","MainUI");
 
 					}
 				} else {
@@ -72,7 +74,7 @@ public class SignupController extends FramesController{
 
 	@FXML //// Scenes Changes to Login Scene
 	void processLogin(ActionEvent event) throws IOException {
-		openFrame("LoginUI");
+		openFrame("accountView","LoginUI");
 	}
 
 	@FXML // Close the scenes

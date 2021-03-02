@@ -12,10 +12,10 @@ public class FramesController {
 	Parent mainParent;
 	Stage stage = new Stage();
 
-	public final void openFrame(String frameName) throws IOException {
-		mainParent = FXMLLoader.load(getClass().getResource("../view/"+frameName+".fxml"));
+	public final void openFrame(String path, String frameName) throws IOException {
+		mainParent = FXMLLoader.load(getClass().getResource("../../view/"+path+"/"+frameName+".fxml"));
 		Scene scene = new Scene(mainParent);
-		scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("../../view/application.css").toExternalForm());
 		this.stage = new Stage();
 		this.stage.hide();
 		this.stage.setScene(scene);

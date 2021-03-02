@@ -1,4 +1,4 @@
-package controller;
+package controller.subuController;
 
 
 import java.net.URL;
@@ -23,7 +23,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import model.Subu;
+import model.subuModel.Subu;
 
 public class SubuController implements Initializable {
 	

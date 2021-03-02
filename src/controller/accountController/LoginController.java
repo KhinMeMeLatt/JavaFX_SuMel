@@ -1,4 +1,4 @@
-package controller;
+package controller.accountController;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -7,11 +7,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import controller.FramesController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.accountModel.AccountDBModel;
+import model.accountModel.User;
 
 public class LoginController extends FramesController{
 
@@ -26,9 +29,7 @@ public class LoginController extends FramesController{
 	@FXML
 	private JFXButton btnClose;
 
-	private final UserLogin userLogin = new UserLogin();
-
-	@FXML // Login Into SUMEL App
+	@FXML
 	void processLogin(ActionEvent event) throws IOException, SQLException {
 		lblStatus.setVisible(true);
 		{
@@ -38,10 +39,16 @@ public class LoginController extends FramesController{
 				lblStatus.setTextFill(Color.RED);
 				lblStatus.setText("All the required fields must be filled! Try Again !!");
 			} else {
-				if (userLogin.isValidated(tfUserEmail.getText().trim(), pfPassword.getText())) {
+				AccountDBModel accountDb = new AccountDBModel();
+				
+				User user = new User();
+				user.setEmail(email);
+				user.setPassword(password);
+				
+				if (accountDb.isValidated(user)) {
 					lblStatus.setTextFill(Color.GREEN);
 					lblStatus.setText("Congratulations! Login Success! ");
-					openFrame("MainUI");
+					openFrame("accountView","MainUI");
 				} else {
 					lblStatus.setTextFill(Color.RED);
 					lblStatus.setText("Incorrect email or password! Try Again !!");
@@ -53,7 +60,7 @@ public class LoginController extends FramesController{
 
 	@FXML // Scenes Changes to SignUp Scene
 	void processSignUp(ActionEvent event) throws IOException {
-		openFrame("Signup");
+		openFrame("accountView","Signup");
 	}
 
 	@FXML // Close the scene

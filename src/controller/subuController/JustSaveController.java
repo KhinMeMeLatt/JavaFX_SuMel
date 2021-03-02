@@ -1,4 +1,4 @@
-package controller;
+package controller.subuController;
 
 import java.io.File;
 import java.net.URL;
@@ -16,8 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import model.Goal;
-import model.GoalDBModel;
+import model.subuModel.Goal;
+import model.subuModel.GoalDBModel;
 
 public class JustSaveController implements Initializable{
 
