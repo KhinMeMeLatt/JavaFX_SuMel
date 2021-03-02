@@ -1,4 +1,4 @@
-package model;
+package model.subuModel;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

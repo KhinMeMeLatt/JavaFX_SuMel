@@ -18,7 +18,7 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="sbCurrentPrice" text="1700">
+      <Label fx:id="sbCurrentPrice" text="17000">
          <font>
             <Font name="Georgia Bold" size="17.0" />
          </font>
