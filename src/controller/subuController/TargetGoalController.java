@@ -1,4 +1,4 @@
-package controller.moneyBoxController;
+package controller.subuController;
 
 import java.io.File;
 import java.net.URL;

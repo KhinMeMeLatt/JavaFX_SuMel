@@ -1,4 +1,4 @@
-package controller;
+package controller.subuController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,7 +15,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.Subu;
+import model.subuModel.Subu;
 
 public class HomeController implements Initializable {
 

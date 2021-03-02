@@ -59,8 +59,5 @@ public class Subu {
 	public void setCurrentPrice(int currentPrice) {
 		this.currentPrice = currentPrice;
 	}
-	
-	
-
 
 }
