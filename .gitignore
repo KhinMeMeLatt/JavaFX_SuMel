@@ -28,3 +28,5 @@ DBConnection.java
 Main.java
 
 /bin/
+
+.classpath
