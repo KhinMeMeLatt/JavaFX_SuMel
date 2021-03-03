@@ -1,7 +1,11 @@
 package controller;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -10,9 +14,7 @@ import com.jfoenix.controls.JFXPopup.PopupHPosition;
 import com.jfoenix.controls.JFXPopup.PopupVPosition;
 import com.jfoenix.effects.JFXDepthManager;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
+import database.GoalDBModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
@@ -25,6 +27,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import model.Goal;
 import model.Subu;
 
 public class SubuController implements Initializable {
@@ -41,15 +44,47 @@ public class SubuController implements Initializable {
     private VBox subuBox;
     
     private VBox actionBox;
+    
+	private GoalDBModel goalDbModel;
+
 
 	@FXML
 	private Label sbCurrentPrice;
 	
-	public void setData(Subu subu) {
-		Image image = new Image(getClass().getResourceAsStream(subu.getSbImageSrc()));
+	private Subu subu;
+	
+	public void setSubuDataToUI(Subu subu) {
+		Image image = null;
+		if(subu.getSbImageSrc() == null) {
+			image = new Image(getClass().getResourceAsStream("../assets/goal.png"));
+		}else {
+			System.out.println(subu.getSbImageSrc());
+			try {
+				image = new Image(new FileInputStream(subu.getSbImageSrc()));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 		sbImgView.setImage(image);
 		sbName.setText(subu.getSbName());
-		sbCurrentPrice.setText(String.valueOf(subu.getCurrentPrice()));
+		sbCurrentPrice.setText(String.valueOf(500));
+	}
+	
+	public List<Subu> getSubus(){
+		//get goals data
+		List<Goal> goals = new ArrayList<Goal>();
+		goalDbModel = new GoalDBModel();
+		goals = goalDbModel.selectAllGoal(2);
+		
+		//set goal data to subu
+		List<Subu> subus = new ArrayList<Subu>();
+		for (int i = 0; i < goals.size(); i++) {
+			subu = new Subu();
+			subu.setSbName(goals.get(i).getGoalName());
+			subu.setSbImageSrc(goals.get(i).getGoalImgPath());
+			subus.add(subu);
+		}
+		return subus;
 	}
 	
 	private void initPopup() {
@@ -131,5 +166,34 @@ public class SubuController implements Initializable {
        actionPopup();
 	}
 	
+	
+	/*
+	 * private List<Subu> setSubus() { List<Subu> subus = new ArrayList<Subu>();
+	 * Subu travel = new Subu(); travel.setSbName("Travel");
+	 * travel.setSbImageSrc("/assets/img/travel.png"); travel.setCurrentPrice(5000);
+	 * 
+	 * Subu food = new Subu(); food.setSbName("Food");
+	 * food.setSbImageSrc("/assets/img/food.png"); food.setCurrentPrice(5000);
+	 * 
+	 * Subu movie = new Subu(); movie.setSbName("Movie");
+	 * movie.setSbImageSrc("/assets/img/movie.png"); movie.setCurrentPrice(5000);
+	 * 
+	 * Subu bus = new Subu(); bus.setSbName("Bus");
+	 * bus.setSbImageSrc("../assets/img/bus.png"); bus.setCurrentPrice(5000);
+	 * 
+	 * Subu taxi = new Subu(); taxi.setSbName("Taxi");
+	 * taxi.setSbImageSrc("../assets/img/taxi.png"); taxi.setCurrentPrice(5000);
+	 * 
+	 * Subu bus1 = new Subu(); bus1.setSbName("Bus");
+	 * bus1.setSbImageSrc("../assets/img/bus.png"); bus1.setCurrentPrice(5000);
+	 * 
+	 * Subu taxi1 = new Subu(); taxi1.setSbName("Taxi");
+	 * taxi1.setSbImageSrc("../assets/img/taxi.png"); taxi1.setCurrentPrice(5000);
+	 * 
+	 * subus.add(taxi); subus.add(movie); subus.add(travel); subus.add(food);
+	 * subus.add(bus); subus.add(bus1); subus.add(taxi1);
+	 * 
+	 * return subus; }
+	 */
 
 }

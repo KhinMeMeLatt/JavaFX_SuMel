@@ -2,6 +2,7 @@ package model;
 
 public class Goal {
 
+	private int goalId;
 	private String goalName;
 	private String goalImgPath;
 	private int goalAmount;
@@ -12,8 +13,12 @@ public class Goal {
 	private int isBreak; // It is flag variable for money box status
 	private int userId;
 	
-	public Goal(String goalName, String goalImgPath, int goalAmount, String startDate, String endDate, String saveType, double amountToSave,
-			int isBreak, int userId) {
+	public Goal() {
+		
+	};
+	
+	public Goal(String goalName, String goalImgPath, int goalAmount, String startDate, String endDate, String saveType,
+			double amountToSave, int isBreak, int userId) {
 		super();
 		this.goalName = goalName;
 		this.goalImgPath = goalImgPath;
@@ -26,6 +31,13 @@ public class Goal {
 		this.userId = userId;
 	}
 	
+	
+	public int getGoalId() {
+		return goalId;
+	}
+	public void setGoalId(int goalId) {
+		this.goalId = goalId;
+	}
 	public String getGoalName() {
 		return goalName;
 	}
@@ -81,6 +93,14 @@ public class Goal {
 
 	public void setGoalImgPath(String goalImgPath) {
 		this.goalImgPath = goalImgPath;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Goal [goalId=" + goalId + ", goalName=" + goalName + ", goalImgPath=" + goalImgPath + ", goalAmount="
+				+ goalAmount + ", startDate=" + startDate + ", endDate=" + endDate + ", saveType=" + saveType
+				+ ", amountToSave=" + amountToSave + ", isBreak=" + isBreak + ", userId=" + userId + "]";
 	}
 	
 	
