@@ -8,12 +8,12 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import controller.FramesController;
+import database.AccountDBModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.accountModel.AccountDBModel;
 import model.accountModel.User;
 
 public class LoginController extends FramesController{
@@ -48,7 +48,7 @@ public class LoginController extends FramesController{
 				if (accountDb.isValidated(user)) {
 					lblStatus.setTextFill(Color.GREEN);
 					lblStatus.setText("Congratulations! Login Success! ");
-					openFrame("accountView","MainUI");
+					openFrame("subuView","HomeUI");
 				} else {
 					lblStatus.setTextFill(Color.RED);
 					lblStatus.setText("Incorrect email or password! Try Again !!");

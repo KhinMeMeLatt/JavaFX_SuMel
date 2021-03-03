@@ -2,6 +2,7 @@ package model.accountModel;
 
 public class User {
 
+	public static int userId;
 	private String userName;
 	private String email;
 	private String password;
