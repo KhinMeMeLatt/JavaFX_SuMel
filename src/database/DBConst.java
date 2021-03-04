@@ -19,6 +19,7 @@ public class DBConst {
 	public static final String USER_NAME = "userName";
 	public static final String EMAIL = "email";
 	public static final String PASSWORD = "password";
+	public static final String TARGET_EXPENSE = "targetExpense"; 
 	
 	//Columns' Name of Save Table
 	public static final String SAVE_ID = "saveId";
@@ -49,7 +50,6 @@ public class DBConst {
 	public static final String EXPENSE_NAME = "expenseName";
 	public static final String EXPENSE_CATEGORY = "expenseCategory";
 	public static final String EXPENSE_AMOUNT = "expenseAmount";
-	public static final String TARGET_AMOUNT = "targetAmount";
 	public static final String SPEND_AT = "spendAt";
 	public static final String EXPENSE_USER_ID = "userId";
 }
