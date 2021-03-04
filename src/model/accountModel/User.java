@@ -6,6 +6,7 @@ public class User {
 	private String userName;
 	private String email;
 	private String password;
+	public static int expectedExpense;
 	
 	public User(String userName, String email, String password) {
 		super();
