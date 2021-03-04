@@ -150,8 +150,10 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnSpan="2">
                <children>
-                  <JFXButton onAction="#addImage" prefHeight="43.0" prefWidth="125.0" style="-fx-background-color: #e05f26;" text="Add Image" textFill="WHITE" />
-                  <ImageView fx:id="imViewGoal" fitHeight="95.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imViewGoal" fitHeight="95.0" fitWidth="141.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/upload.png" />
+                     </image></ImageView>
                </children>
             </HBox>
          </children>

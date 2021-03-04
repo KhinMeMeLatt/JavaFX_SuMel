@@ -8,16 +8,18 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import database.GoalDBModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import model.accountModel.User;
 import model.subuModel.Goal;
-import model.subuModel.GoalDBModel;
 
 public class JustSaveController implements Initializable{
 
@@ -33,7 +35,9 @@ public class JustSaveController implements Initializable{
 	@FXML
     private DatePicker dpStartDate;
 	
-	private String imgSrc;
+	private Image goalImage;
+    
+    private String imageName;	
 
 	@FXML
 	void processBack(ActionEvent event) {
@@ -41,7 +45,7 @@ public class JustSaveController implements Initializable{
 	}
 	
 	@FXML
-    void addImage(ActionEvent event) {
+	 void addImage(MouseEvent event) {
 		FileChooser fileChooser = new FileChooser();
     	
     	//define initial directory
@@ -52,18 +56,18 @@ public class JustSaveController implements Initializable{
     	File imgFile = fileChooser.showOpenDialog(null);
     	
     	if(imgFile != null) {
-    		this.imgSrc = imgFile.toURI().toString();
-    		Image image = new Image(this.imgSrc);
-    		imViewGoal.setImage(image);
+    		this.goalImage = new Image(imgFile.toURI().toString());
+    		imViewGoal.setImage(this.goalImage);
+    		this.imageName = imgFile.getName();
     	}else {
-    		this.imgSrc = "../assets/JustSave.png";
+    		this.imageName = "JustSave.png";
     	}
     }
 
 	@FXML
 	void processCreateGoal(ActionEvent event) {
 		String goalName = txtGoalName.getText();
-    	Goal newGoal = new Goal(goalName, this.imgSrc, 0, dpStartDate.getValue().toString(), null, null, 0, 0, 1);
+    	Goal newGoal = new Goal(goalName, this.imageName, 0, dpStartDate.getValue().toString(), null, null, 0, false, User.userId);
     	GoalDBModel goalModel = new GoalDBModel();
     	goalModel.insertGoal(newGoal);
 	}

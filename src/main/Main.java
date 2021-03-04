@@ -11,7 +11,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("../view/subuView/TargetGoalUI.fxml"));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../view/accountView/MainUI.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 			primaryStage.setScene(scene);

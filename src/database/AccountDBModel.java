@@ -25,7 +25,7 @@ public class AccountDBModel {
 
 		boolean isOk = false;
 		while (rs.next()) {
-			if (rs.getString("email").equals(user.getEmail()) && rs.getString("password").equals(user.getPassword())) {
+			if (rs.getString(DBConst.EMAIL).equals(user.getEmail()) && rs.getString(DBConst.PASSWORD).equals(user.getPassword())) {
 				isOk = true;
 				User.userId = rs.getInt(DBConst.USER_ID);
 			} else {

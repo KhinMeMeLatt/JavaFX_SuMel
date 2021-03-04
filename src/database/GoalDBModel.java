@@ -1,12 +1,13 @@
-package model.subuModel;
+package database;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
-import database.DBConnection;
-import database.DBConst;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import model.subuModel.Goal;
 
 public class GoalDBModel {
 	
@@ -21,14 +22,17 @@ public class GoalDBModel {
 		this.preparedStatement = DBConnection.getConnection().prepareStatement(insertGoal);
 		
 		this.preparedStatement.setString(1, goal.getGoalName());
-		this.preparedStatement.setString(2, goal.getGoalImgPath());
-		this.preparedStatement.setString(3, String.valueOf(goal.getGoalAmount()));
-		this.preparedStatement.setString(4, goal.getStartDate());
+		this.preparedStatement.setString(2, goal.getGoalImgName());
+		this.preparedStatement.setInt(3, goal.getGoalAmount());
+		
+		LocalDate date = LocalDate.parse(goal.getStartDate());
+		Date startDate = Date.valueOf(date);
+		this.preparedStatement.setDate(4, startDate);
 		this.preparedStatement.setString(5, goal.getEndDate());
 		this.preparedStatement.setString(6, goal.getSaveType());
-		this.preparedStatement.setString(7, String.valueOf(goal.getAmountToSave()));
-		this.preparedStatement.setString(8, String.valueOf(goal.getIsBreak()));
-		this.preparedStatement.setString(9, String.valueOf(goal.getUserId()));
+		this.preparedStatement.setDouble(7, goal.getAmountToSave());
+		this.preparedStatement.setBoolean(8, goal.getIsBreak());
+		this.preparedStatement.setInt(9, goal.getUserId());
 		
 		this.preparedStatement.executeUpdate();
 		alert.setAlertType(AlertType.INFORMATION);
