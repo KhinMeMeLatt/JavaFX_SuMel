@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 
+import database.GoalDBModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -19,10 +20,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import model.accountModel.User;
 import model.subuModel.Goal;
-import model.subuModel.GoalDBModel;
 
 public class TargetGoalController implements Initializable {
 
@@ -73,7 +75,9 @@ public class TargetGoalController implements Initializable {
     
     private boolean isStartProgram = true;
     
-    private String imgSrc;
+    private Image goalImage;
+    
+    private String imageName;
     
     @FXML
     void convertCurrency(ActionEvent event) {
@@ -84,7 +88,10 @@ public class TargetGoalController implements Initializable {
     void createGoal(ActionEvent event) {
     	String goalName = txtGoalName.getText();
     	double amountToSave = Double.valueOf(txtSaveAmount.getText());
-    	Goal newGoal = new Goal(goalName, this.imgSrc, this.objAmount, this.startDate.toString(), this.endDate.toString(), this.saveType, amountToSave, 0, 1);
+    	
+    	
+    	
+    	Goal newGoal = new Goal(goalName, this.imageName, this.objAmount, this.startDate.toString(), this.endDate.toString(), this.saveType, amountToSave, false, User.userId);
     	GoalDBModel goalModel = new GoalDBModel();
     	goalModel.insertGoal(newGoal);
     }
@@ -95,7 +102,7 @@ public class TargetGoalController implements Initializable {
     }
     
     @FXML
-    void addImage(ActionEvent event) {
+    void addImage(MouseEvent event) {
     	FileChooser fileChooser = new FileChooser();
     	
     	//define initial directory
@@ -106,9 +113,9 @@ public class TargetGoalController implements Initializable {
     	File imgFile = fileChooser.showOpenDialog(null);
     	
     	if(imgFile != null) {
-    		this.imgSrc = imgFile.toURI().toString();
-    		Image image = new Image(this.imgSrc);
-    		imViewGoal.setImage(image);
+    		this.goalImage = new Image(imgFile.toURI().toString());
+    		imViewGoal.setImage(this.goalImage);
+    		this.imageName = imgFile.getName();
     	}
     }
     
@@ -179,7 +186,7 @@ public class TargetGoalController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		System.out.println(User.userId);
 		dpStartDate.setValue(LocalDate.now()); //Set current date in date picker for start date
 		dpEndDate.setValue(LocalDate.now().plus(1,ChronoUnit.DAYS));
 		

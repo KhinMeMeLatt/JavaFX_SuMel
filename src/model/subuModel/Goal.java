@@ -2,21 +2,26 @@ package model.subuModel;
 
 public class Goal {
 
+	private int goalId;
 	private String goalName;
-	private String goalImgPath;
+	private String goalImgName;
 	private int goalAmount;
 	private String startDate;
 	private String endDate;
 	private String saveType;
 	private double amountToSave;
-	private int isBreak; // It is flag variable for money box status
+	private boolean isBreak; // It is flag variable for money box status
 	private int userId;
 	
-	public Goal(String goalName, String goalImgPath, int goalAmount, String startDate, String endDate, String saveType, double amountToSave,
-			int isBreak, int userId) {
+	public Goal() {
+		
+	};
+	
+	public Goal(String goalName, String goalImgName, int goalAmount, String startDate, String endDate, String saveType, double amountToSave,
+			boolean isBreak, int userId) {
 		super();
 		this.goalName = goalName;
-		this.goalImgPath = goalImgPath;
+		this.goalImgName = goalImgName;
 		this.goalAmount = goalAmount;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -26,6 +31,12 @@ public class Goal {
 		this.userId = userId;
 	}
 	
+	public int getGoalId() {
+		return goalId;
+	}
+	public void setGoalId(int goalId) {
+		this.goalId = goalId;
+	}
 	public String getGoalName() {
 		return goalName;
 	}
@@ -62,10 +73,10 @@ public class Goal {
 	public void setAmountToSave(double amountToSave) {
 		this.amountToSave = amountToSave;
 	}
-	public int getIsBreak() {
+	public boolean getIsBreak() {
 		return isBreak;
 	}
-	public void setIsBreak(int isBreak) {
+	public void setIsBreak(boolean isBreak) {
 		this.isBreak = isBreak;
 	}
 	public int getUserId() {
@@ -75,13 +86,18 @@ public class Goal {
 		this.userId = userId;
 	}
 
-	public String getGoalImgPath() {
-		return goalImgPath;
+	public String getGoalImgName() {
+		return goalImgName;
 	}
 
-	public void setGoalImgPath(String goalImgPath) {
-		this.goalImgPath = goalImgPath;
+	public void setGoalImgName(String goalImgName) {
+		this.goalImgName = goalImgName;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Goal [goalId=" + goalId + ", goalName=" + goalName + ", goalImgName=" + goalImgName + ", goalAmount="
+				+ goalAmount + ", startDate=" + startDate + ", endDate=" + endDate + ", saveType=" + saveType
+				+ ", amountToSave=" + amountToSave + ", isBreak=" + isBreak + ", userId=" + userId + "]";
+	}
 }

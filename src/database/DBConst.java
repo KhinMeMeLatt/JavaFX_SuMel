@@ -36,7 +36,7 @@ public class DBConst {
 	//Columns' Names of Goal Table
 	public static final String GOAL_ID = "goalId";
 	public static final String GOAL_NAME = "goalName";
-	public static final String GOAL_IMAGE_PATH = "goalImgPath";
+	public static final String GOAL_IMAGE_NAME = "goalImgName";
 	public static final String GOAL_AMOUNT = "goalAmount";
 	public static final String START_DATE = "startDate";
 	public static final String END_DATE = "endDate";

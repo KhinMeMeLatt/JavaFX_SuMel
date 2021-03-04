@@ -60,8 +60,10 @@
                </image>
             </ImageView>
             <JFXTextField fx:id="txtGoalName" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ImageView fx:id="imViewGoal" fitHeight="75.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-            <JFXButton onAction="#addImage" prefHeight="43.0" prefWidth="91.0" style="-fx-background-color: #e05f26;" text="Add Image" GridPane.columnIndex="1" />
+            <ImageView fx:id="imViewGoal" fitHeight="75.0" fitWidth="143.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@../../assets/upload.png" />
+               </image></ImageView>
             <DatePicker fx:id="dpStartDate" prefHeight="33.0" prefWidth="152.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
