@@ -1,10 +1,17 @@
 package controller.subuController;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -75,9 +82,11 @@ public class TargetGoalController implements Initializable {
     
     private boolean isStartProgram = true;
     
-    private Image goalImage;
+    private String imgSrc;
     
     private String imageName;
+    
+    private File imgFile;
     
     @FXML
     void convertCurrency(ActionEvent event) {
@@ -85,12 +94,15 @@ public class TargetGoalController implements Initializable {
     }
     
     @FXML
-    void createGoal(ActionEvent event) {
+    void createGoal(ActionEvent event) throws IOException {
     	String goalName = txtGoalName.getText();
     	double amountToSave = Double.valueOf(txtSaveAmount.getText());
     	
+    	BufferedImage bImage = ImageIO.read(imgFile);
     	
+    	String mimeType = URLConnection.guessContentTypeFromName(imageName);
     	
+    	ImageIO.write(bImage, mimeType.substring(mimeType.indexOf("/")+1), new File("src/assets/goals/"+imageName));
     	Goal newGoal = new Goal(goalName, this.imageName, this.objAmount, this.startDate.toString(), this.endDate.toString(), this.saveType, amountToSave, false, User.userId);
     	GoalDBModel goalModel = new GoalDBModel();
     	goalModel.insertGoal(newGoal);
@@ -110,11 +122,11 @@ public class TargetGoalController implements Initializable {
     	
     	//define image extension
     	fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.ico"));
-    	File imgFile = fileChooser.showOpenDialog(null);
+    	imgFile = fileChooser.showOpenDialog(null);
     	
     	if(imgFile != null) {
-    		this.goalImage = new Image(imgFile.toURI().toString());
-    		imViewGoal.setImage(this.goalImage);
+    		this.imgSrc = imgFile.toURI().toString();
+    		imViewGoal.setImage(new Image(this.imgSrc));
     		this.imageName = imgFile.getName();
     	}
     }
@@ -186,9 +198,10 @@ public class TargetGoalController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println(User.userId);
 		dpStartDate.setValue(LocalDate.now()); //Set current date in date picker for start date
 		dpEndDate.setValue(LocalDate.now().plus(1,ChronoUnit.DAYS));
+		
+		this.disableSaveTypes(true, true);
 		
 		txtSaveAmount.textProperty().addListener(new ChangeListener<Object>() {
 
@@ -221,7 +234,7 @@ public class TargetGoalController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends Object> observableValue, Object oldValue, Object newValue) {
-				objAmount = Integer.valueOf(txtObjAmount.getText());
+				objAmount = (txtObjAmount.getText() == "")? 0 : Integer.valueOf(txtObjAmount.getText());
 				calculateSaveAmount();
 			}
 		});
