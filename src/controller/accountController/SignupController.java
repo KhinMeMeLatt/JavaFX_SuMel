@@ -8,12 +8,12 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import controller.FramesController;
+import database.AccountDBModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.accountModel.AccountDBModel;
 import model.accountModel.User;
 
 public class SignupController extends FramesController{
@@ -55,10 +55,13 @@ public class SignupController extends FramesController{
 					User user = new User(userName, email, password);
 					
 					int status = accountDb.signUp(user);
+					
+					User.userId = accountDb.getLatestUserId();
+					
 					if (status > 0) {
 						lblStatus.setTextFill(Color.GREEN);
 						lblStatus.setText("Congratulations! SignUp SuccessFul.! ");
-						openFrame("accountView","MainUI");
+						openFrame("subuView","TargetGoalUI");
 
 					}
 				} else {

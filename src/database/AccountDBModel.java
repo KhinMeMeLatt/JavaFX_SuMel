@@ -1,12 +1,11 @@
-package model.accountModel;
+package database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import database.DBConnection;
-import database.DBConst;
+import model.accountModel.User;
 
 public class AccountDBModel {
 
@@ -26,8 +25,9 @@ public class AccountDBModel {
 
 		boolean isOk = false;
 		while (rs.next()) {
-			if (rs.getString("email").equals(user.getEmail()) && rs.getString("password").equals(user.getPassword())) {
+			if (rs.getString(DBConst.EMAIL).equals(user.getEmail()) && rs.getString(DBConst.PASSWORD).equals(user.getPassword())) {
 				isOk = true;
+				User.userId = rs.getInt(DBConst.USER_ID);
 			} else {
 				isOk = false;
 			}
@@ -40,5 +40,12 @@ public class AccountDBModel {
 	public int signUp(User user) throws SQLException {
 		String insertUser = "insert into  "+DBConst.USER_TABLE+"("+DBConst.USER_NAME+", "+DBConst.EMAIL+", "+DBConst.PASSWORD+")"+"values ('"+ user.getUserName() + "','" + user.getEmail() + "','" + user.getPassword() + "')";
 		return this.stmt.executeUpdate(insertUser);
+	}
+	
+	public int getLatestUserId() throws SQLException {
+		
+		rs = this.stmt.executeQuery("select count(*) as latestUserId from user;");
+		rs.next();
+		return rs.getInt("latestUserId");
 	}
 }

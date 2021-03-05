@@ -2,9 +2,11 @@ package model.accountModel;
 
 public class User {
 
+	public static int userId;
 	private String userName;
 	private String email;
 	private String password;
+	public static int expectedExpense;
 	
 	public User(String userName, String email, String password) {
 		super();
