@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.time.LocalDate;
 
 import alert.AlertMaker;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart.Data;
 import model.Expense;
 import model.accountModel.User;
 
@@ -18,6 +21,7 @@ public class ExpenseDB {
 	private PreparedStatement preparedStatement;
 	private Statement stmt;
 	private ResultSet rs;
+	ObservableList<Expense> expenseList = FXCollections.observableArrayList();
 	
 	public ExpenseDB() {
 		this.connection = DBConnection.getConnection();
@@ -51,8 +55,23 @@ public class ExpenseDB {
 	
 	public void selectTargetExpense() throws SQLException {
 		this.stmt = this.connection.createStatement();
-		this.rs = this.stmt.executeQuery("SELECT "+DBConst.TARGET_EXPENSE+" FROM "+DBConst.USER_TABLE+" WHERE "+DBConst.USER_ID+"='"+User.userId+"'");
+		this.rs = this.stmt.executeQuery("SELECT "+DBConst.TARGET_EXPENSE+" FROM "+DBConst.USER_TABLE
+										+" WHERE "+DBConst.USER_ID+"='"+User.userId+"'");
 		this.rs.next();
 		User.expectedExpense = this.rs.getInt("targetExpense");
+	}
+	
+	public ObservableList<Data> selectWithCategory() throws SQLException {
+		this.stmt = this.connection.createStatement();
+		this.rs = this.stmt.executeQuery("SELECT "+DBConst.EXPENSE_CATEGORY+", sum("+DBConst.EXPENSE_AMOUNT+") AS totalAmount "
+										+" FROM "+DBConst.EXPENSE_TABLE
+										+" WHERE userId='"+User.userId
+										+"' GROUP BY "+DBConst.EXPENSE_CATEGORY+";");
+		
+		ObservableList<Data> pieChartData = FXCollections.observableArrayList();
+		while(this.rs.next()) {
+			pieChartData.add(new Data(rs.getString("expenseCategory"), rs.getInt("totalAmount")));
+		}
+		return pieChartData;
 	}
 }
