@@ -24,10 +24,10 @@
             <TableColumn fx:id="tcAmount" prefWidth="206.0" text="Amount" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btnAdd" layoutX="224.0" layoutY="450.0" onAction="#addRow" prefHeight="37.0" prefWidth="85.0" style="-fx-background-color: #e1460e;" text="Add a record" textFill="WHITE" />
+      <JFXButton fx:id="btnAdd" layoutX="55.0" layoutY="544.0" onAction="#addRow" prefHeight="37.0" prefWidth="85.0" style="-fx-background-color: #e1460e;" text="Add a record" textFill="WHITE" />
       <DatePicker fx:id="dpSpendAt" layoutX="519.0" layoutY="25.0" />
       <Label layoutX="240.0" layoutY="569.0" text="Powered By UIT NTT-AT Scholarship Students" />
-      <JFXButton layoutX="328.0" layoutY="450.0" onAction="#removeSelectedRows" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: #f00;" text="Remove Row" textFill="WHITE" />
+      <JFXButton layoutX="328.0" layoutY="407.0" onAction="#removeSelectedRows" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: #f00;" text="Remove Row" textFill="WHITE" />
       <JFXTextField fx:id="txtExpenseName" labelFloat="true" layoutX="14.0" layoutY="394.0" prefHeight="25.0" prefWidth="174.0" promptText="Name" />
       <JFXTextField fx:id="txtAmount" labelFloat="true" layoutX="14.0" layoutY="493.0" prefHeight="25.0" prefWidth="174.0" promptText="Amount" />
       <JFXComboBox fx:id="cobCategory" layoutX="14.0" layoutY="443.0" prefHeight="25.0" prefWidth="174.0" promptText="Choose Expense Category" />
@@ -47,7 +47,7 @@
             <Font name="System Bold Italic" size="36.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="213.0" layoutY="398.0" prefHeight="21.0" prefWidth="209.0" text="Press &quot;Ctrl+N&quot; for new line" textFill="#ff0606">
+      <Label alignment="CENTER" layoutX="205.0" layoutY="373.0" prefHeight="21.0" prefWidth="209.0" text="Press &quot;Ctrl+N&quot; for new line" textFill="#ff0606">
          <font>
             <Font name="System Italic" size="15.0" />
          </font>
@@ -106,5 +106,6 @@
             </Label>
          </children>
       </GridPane>
+      <JFXTextField fx:id="txtCategory" layoutX="206.0" layoutY="443.0" visible="false" />
    </children>
 </AnchorPane>

@@ -38,7 +38,7 @@
                         </ImageView>
                         <HBox alignment="CENTER">
                            <children>
-                              <Label text="Sumel" HBox.hgrow="ALWAYS">
+                              <Label prefHeight="24.0" prefWidth="135.0" text="Sumel" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Georgia" size="20.0" />
                                  </font>
@@ -48,12 +48,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </HBox>
-                        <Pane prefHeight="66.0" prefWidth="158.0" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Pane>
-                        <HBox alignment="CENTER" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="39.0" prefWidth="405.0" spacing="20.0">
                            <children>
                               <Label text="Overview" HBox.hgrow="ALWAYS">
                                  <font>
@@ -63,6 +58,16 @@
                               <Label text="Goal" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Georgia" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Currency Conventer">
+                                 <font>
+                                    <Font name="Georgia" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="About">
+                                 <font>
+                                    <Font name="Georgia" size="12.0" />
                                  </font>
                               </Label>
                            </children>
@@ -84,7 +89,7 @@
                            <children>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/img/wallet.png" />
+                                    <Image url="@../../assets/book.png" />
                                  </image>
                               </ImageView>
                               <HBox alignment="CENTER">
@@ -97,8 +102,13 @@
                                  </children>
                               </HBox>
                               <Pane prefHeight="42.0" prefWidth="177.0" HBox.hgrow="ALWAYS" />
-                              <HBox alignment="CENTER" styleClass="searchsubu">
+                              <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" styleClass="searchsubu">
                                  <children>
+                                    <ImageView fitHeight="22.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/search.png" />
+                                       </image>
+                                    </ImageView>
                                     <JFXTextField prefHeight="25.0" prefWidth="143.0" promptText="Expense Category" styleClass="searchfield" />
                                     <!-- <FontAwesomeIconView glyphName="SEARCH" size="17" /> -->
                                  </children>

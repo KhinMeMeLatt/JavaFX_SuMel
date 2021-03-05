@@ -58,9 +58,10 @@ public class ExpenseDB {
 		this.rs = this.stmt.executeQuery("SELECT "+DBConst.TARGET_EXPENSE+" FROM "+DBConst.USER_TABLE
 										+" WHERE "+DBConst.USER_ID+"='"+User.userId+"'");
 		this.rs.next();
-		User.expectedExpense = this.rs.getInt("targetExpense");
+		User.expectedExpense = this.rs.getInt(DBConst.TARGET_EXPENSE);
 	}
 	
+	// for pie chart
 	public ObservableList<Data> selectWithCategory() throws SQLException {
 		this.stmt = this.connection.createStatement();
 		this.rs = this.stmt.executeQuery("SELECT "+DBConst.EXPENSE_CATEGORY+", sum("+DBConst.EXPENSE_AMOUNT+") AS totalAmount "
@@ -70,8 +71,58 @@ public class ExpenseDB {
 		
 		ObservableList<Data> pieChartData = FXCollections.observableArrayList();
 		while(this.rs.next()) {
-			pieChartData.add(new Data(rs.getString("expenseCategory"), rs.getInt("totalAmount")));
+			pieChartData.add(new Data(rs.getString(DBConst.EXPENSE_CATEGORY), rs.getInt("totalAmount")));
 		}
 		return pieChartData;
 	}
+	
+	//History
+	public ObservableList<Expense> show(String type, String value) throws SQLException{
+		this.stmt = this.connection.createStatement();
+		String query = null;
+		if(type=="all") {
+			query = "SELECT * FROM "+DBConst.EXPENSE_TABLE
+					+" WHERE "+DBConst.EXPENSE_USER_ID+"='"+User.userId
+					+"' ORDER BY "+DBConst.SPEND_AT+" DESC;";
+		}else {
+			query = "SELECT * FROM "+DBConst.EXPENSE_TABLE
+					+" WHERE "+DBConst.EXPENSE_USER_ID+"='"+User.userId
+					+"' AND "+type+"='"+value+"' ORDER BY "+DBConst.SPEND_AT+" DESC;";
+		}
+		this.rs = this.stmt.executeQuery(query);
+		while(this.rs.next()) {
+			expenseList.add(new Expense(rs.getString(DBConst.EXPENSE_NAME), 
+										rs.getString(DBConst.EXPENSE_CATEGORY), 
+										rs.getInt(DBConst.EXPENSE_AMOUNT), 
+										rs.getString(DBConst.SPEND_AT)));
+		}
+		return expenseList;
+	}
+	
+	public ObservableList<String> selectCategory() throws SQLException{
+		ObservableList<String> category = FXCollections.observableArrayList();
+		this.stmt = this.connection.createStatement();
+		this.rs = this.stmt.executeQuery("SELECT DISTINCT "+DBConst.EXPENSE_CATEGORY+" FROM "+DBConst.EXPENSE_TABLE);
+		while(this.rs.next()) {
+			category.add(rs.getString(DBConst.EXPENSE_CATEGORY));
+		}
+		System.out.println(category.get(0));
+		if(!category.contains("Travel Expense")) {
+			category.add("Travel Expense");
+		}
+		if(!category.contains("Food")){
+			category.add("Food");
+		}
+		if(!category.contains("Electricity bill")){
+			category.add("Electricity bill");
+		}
+		if(!category.contains("Clothes")){
+			category.add("Clothes");
+		}
+		if(!category.contains("Others")){
+			category.add("Others");
+		}
+		return category;
+	}
+	
 }
