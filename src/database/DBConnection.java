@@ -8,7 +8,11 @@ public class DBConnection {
 	
 	private static String url = "jdbc:mysql://localhost:3306/sumeldb?useSSL=false&useTimezone=true&serverTimezone=UTC";
 	private static String user = "root";
+
+	
+=======
 	private static String password = "";
+
 	
 	public static Connection getConnection() {
 		Connection connection = null;
