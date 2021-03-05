@@ -45,7 +45,7 @@ public class HomeController implements Initializable {
 		for (Subu subu : subus) {
 			try {
 				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(getClass().getResource("../view/Subu.fxml"));
+				loader.setLocation(getClass().getResource("../../view/subuView/Subu.fxml"));
 				VBox mySubu = loader.load();
 				SubuController subuController = loader.getController();
 				subuController.setSubuDataToUI(subu);		 

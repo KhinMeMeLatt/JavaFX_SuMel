@@ -46,7 +46,6 @@ public class SubuController implements Initializable {
     
 	private GoalDBModel goalDbModel;
 
-
 	@FXML
 	private Label sbCurrentPrice;
 	
@@ -59,7 +58,7 @@ public class SubuController implements Initializable {
 		}else {
 			System.out.println(subu.getSbImageSrc());
 			try {
-				image = new Image(new FileInputStream(subu.getSbImageSrc()));
+				image = new Image(new FileInputStream("src/assets/goals/"+subu.getSbImageSrc()));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
