@@ -13,7 +13,6 @@ import database.ExpenseDB;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,6 +77,9 @@ public class CreatingExpenseController implements Initializable{
 
     @FXML
     private Label lblExcessAmount;
+    
+    @FXML
+    private JFXTextField txtCategory;
 
     private ObservableList<Expense> expenseList = FXCollections.observableArrayList();
     
@@ -97,11 +99,11 @@ public class CreatingExpenseController implements Initializable{
         tvExpense.getSelectionModel().clearSelection();
 
         // create new record and add it to the model
-        //Data data = new Data(0d,0d);
         int expenseAmount;
         
         expenseAmount = (txtAmount.getText() == "") ? 0 : Integer.valueOf(txtAmount.getText());
-        Expense expense = new Expense(txtExpenseName.getText(),cobCategory.getValue(), expenseAmount, dpSpendAt.getValue().toString());
+        String category = (cobCategory.getValue() == "Others")? txtCategory.getText() : cobCategory.getValue();
+        Expense expense = new Expense(txtExpenseName.getText(),category, expenseAmount, dpSpendAt.getValue().toString());
         tvExpense.getItems().add(expense);
         clearData();
 
@@ -260,10 +262,24 @@ public class CreatingExpenseController implements Initializable{
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		// Set combo box values
-		ObservableList<String> category = FXCollections.observableArrayList(
-				"Travel Expense","Food","Electricity bill","Clothes", "Others"
-				);
-		cobCategory.setItems(category);
+//		ObservableList<String> category = FXCollections.observableArrayList(
+//				"Travel Expense","Food","Electricity bill","Clothes", "Others"
+//				);
+		ObservableList<String> expenseCategory = FXCollections.observableArrayList();
+		try {
+			expenseCategory.addAll(expenseDB.selectCategory());
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		cobCategory.setItems(expenseCategory);
+		cobCategory.setOnAction(e -> {
+			if(cobCategory.getValue() == "Others") {
+				txtCategory.setVisible(true);
+			}else {
+				txtCategory.setVisible(false);
+			}
+		});
 		
 		dpSpendAt.setValue(LocalDate.now()); //Set current date in date picker for start date
 		
@@ -271,8 +287,6 @@ public class CreatingExpenseController implements Initializable{
 		tcName.setCellValueFactory(new PropertyValueFactory<Expense, String>("expenseName"));
 		tcCategory.setCellValueFactory(new PropertyValueFactory<Expense, String>("expenseCategory"));
 		tcAmount.setCellValueFactory(new PropertyValueFactory<Expense, Integer>("expenseAmount"));
-		
-		//tvExpense.setItems(expenseList);
 		
 		// single cell selection mode
 		tvExpense.getSelectionModel().setCellSelectionEnabled(true);
