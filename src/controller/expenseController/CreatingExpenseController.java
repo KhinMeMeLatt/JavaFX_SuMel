@@ -154,16 +154,11 @@ public class CreatingExpenseController implements Initializable{
     }
     
     @FXML
-    void saveExpense(ActionEvent event) {
+    void saveExpense(ActionEvent event) throws SQLException {
     	expenseList = tvExpense.getItems();
     	expenseList.forEach(expense -> {
-    		try {
-    			if(expense.getExpenseName() != "" && expense.getExpenseCategory() != "" && expense.getExpenseAmount() != 0) {
-    				expenseDB.insertExpense(expense);
-    			}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+    		if(expense.getExpenseName() != "" && expense.getExpenseCategory() != "" && expense.getExpenseAmount() != 0) {
+				expenseDB.insertExpense(expense);
 			}
     	});
     }

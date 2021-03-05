@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 
+import alert.AlertMaker;
 import model.Expense;
 import model.accountModel.User;
 
@@ -22,23 +23,30 @@ public class ExpenseDB {
 		this.connection = DBConnection.getConnection();
 	}
 	
-	public void insertExpense(Expense expense) throws SQLException {
+	public void insertExpense(Expense expense) {
 		String insertRow = "INSERT INTO "+DBConst.EXPENSE_TABLE+"("+DBConst.EXPENSE_NAME+","
 							+DBConst.EXPENSE_CATEGORY+","+DBConst.EXPENSE_AMOUNT+","+DBConst.SPEND_AT+","
 							+DBConst.EXPENSE_USER_ID+")"
 							+"VALUES(?,?,?,?,?)";
-		this.preparedStatement = connection.prepareStatement(insertRow);
-		
-		this.preparedStatement.setString(1, expense.getExpenseName());
-		this.preparedStatement.setString(2, expense.getExpenseCategory());
-		this.preparedStatement.setInt(3, expense.getExpenseAmount());
-		
-		LocalDate date = LocalDate.parse(expense.getSpendAt());
-		Date publishedDate = Date.valueOf(date);
-		this.preparedStatement.setDate(4, publishedDate);
-		this.preparedStatement.setInt(5, User.userId);
-		
-		this.preparedStatement.executeUpdate();
+		try {
+			this.preparedStatement = connection.prepareStatement(insertRow);
+			this.preparedStatement.setString(1, expense.getExpenseName());
+			this.preparedStatement.setString(2, expense.getExpenseCategory());
+			this.preparedStatement.setInt(3, expense.getExpenseAmount());
+			
+			LocalDate date = LocalDate.parse(expense.getSpendAt());
+			Date publishedDate = Date.valueOf(date);
+			this.preparedStatement.setDate(4, publishedDate);
+			this.preparedStatement.setInt(5, User.userId);
+			
+			this.preparedStatement.executeUpdate();
+			AlertMaker.showSimpleAlert("Successful Message", "Expenses are recorded successfully!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			AlertMaker.showErrorMessage("Error", "Expenses record process Failed!");
+			e.printStackTrace();
+		}
+	
 	}
 	
 	public void selectTargetExpense() throws SQLException {
