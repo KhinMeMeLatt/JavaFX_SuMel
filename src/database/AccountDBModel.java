@@ -43,8 +43,7 @@ public class AccountDBModel {
 	}
 	
 	public int getLatestUserId() throws SQLException {
-		
-		rs = this.stmt.executeQuery("select count(*) as latestUserId from user;");
+		rs = this.stmt.executeQuery("select count(*) as latestUserId from "+DBConst.USER_TABLE+";");
 		rs.next();
 		return rs.getInt("latestUserId");
 	}
