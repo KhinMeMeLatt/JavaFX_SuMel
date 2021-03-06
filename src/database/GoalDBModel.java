@@ -6,10 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import alert.AlertMaker;
+import javafx.scene.control.Alert.AlertType;
 import model.accountModel.User;
 import model.subuModel.Goal;
 
@@ -37,7 +39,7 @@ public class GoalDBModel {
 		this.ps.setString(2, goal.getGoalImgName());
 		this.ps.setInt(3, goal.getGoalAmount());
 		
-		LocalDate date = LocalDate.parse(goal.getStartDate());
+		LocalDate date = LocalDate.parse(goal.getStartDate()).plus(1,ChronoUnit.DAYS);
 		Date startDate = Date.valueOf(date);
 		this.ps.setDate(4, startDate);
 		this.ps.setString(5, goal.getEndDate());
@@ -47,10 +49,10 @@ public class GoalDBModel {
 		this.ps.setInt(9, User.userId);
 		
 		this.ps.executeUpdate();
-		AlertMaker.showSimpleAlert("Successful Message", "A new goal is created successfully!");
+		AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Expenses are recorded successfully!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			AlertMaker.showErrorMessage("Error", "Goal Creation Failed!");
+			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Expenses record process Failed!");
 			e.printStackTrace();
 		} 
 	}
@@ -102,10 +104,10 @@ public class GoalDBModel {
 				
 				goalList.add(goal);
 			}
-			AlertMaker.showSimpleAlert("Successful Message", "All Goals Loaded Successfully!");
+			AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Expenses are recorded successfully!");
 			return goalList;
 		} catch (SQLException e) {
-			AlertMaker.showErrorMessage("Error", "Goals loading Failed!");
+			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Expenses record process Failed!");
 			return null;
 		}
 	}
