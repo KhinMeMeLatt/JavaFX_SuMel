@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.effects.JFXDepthManager;
 
+import alert.AlertMaker;
 import database.ExpenseDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import model.accountModel.User;
 
 public class HomeController implements Initializable{
 
@@ -27,10 +29,12 @@ public class HomeController implements Initializable{
     private HBox subuScrollPane;
 
     @FXML
-    private GridPane mySubus;
+    private GridPane myExpense;
 
     @FXML
     private Label lblUserName;
+    
+    private int targetExpense;
     
     private ExpenseDB expenseDB = new ExpenseDB();
 
@@ -40,8 +44,12 @@ public class HomeController implements Initializable{
     }
 
     @FXML
-    void setTargetExpense(ActionEvent event) {
-
+    void setTargetExpense(ActionEvent event) throws SQLException {
+    	expenseDB.selectTargetExpense();
+    	targetExpense = AlertMaker.createTextDialog();
+    	if(targetExpense != -1 && targetExpense != User.expectedExpense) {
+    		expenseDB.setTargetExpense(targetExpense);
+    	}
     }
 
     @FXML

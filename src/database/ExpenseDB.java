@@ -161,4 +161,18 @@ public class ExpenseDB {
 		}
 	}
 	
+	public void setTargetExpense(int amount) {
+		try {
+			this.stmt = this.connection.createStatement();
+			this.stmt.executeUpdate("UPDATE "+DBConst.USER_TABLE
+									+" SET "+DBConst.TARGET_EXPENSE+"="+amount
+									+" WHERE "+DBConst.USER_ID+" ='"+User.userId+"';");
+			AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "An Expense Target is set!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Setting expense target fail!");
+			e.printStackTrace();
+		}
+	}
+	
 }
