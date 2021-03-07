@@ -1,6 +1,8 @@
 package controller.accountController;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.sql.SQLException;
 
 import com.jfoenix.controls.JFXButton;
@@ -14,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.accountModel.Encryption;
 import model.accountModel.User;
 
 public class SignupController extends FramesController{
@@ -37,7 +40,7 @@ public class SignupController extends FramesController{
 	private JFXPasswordField pfRePassword;
 
 	@FXML // User Registration
-	void processSignup(ActionEvent event) throws IOException {
+	void processSignup(ActionEvent event) throws IOException, NoSuchAlgorithmException, NoSuchProviderException {
 		lblStatus.setVisible(true);
 
 		try {
@@ -50,9 +53,13 @@ public class SignupController extends FramesController{
 				lblStatus.setTextFill(Color.RED);
 				lblStatus.setText("All the required fields must be filled! Try Again !!");
 			} else {
+				
 				if (password.equals(rePassword)) {
+					Encryption newEncryption=new Encryption();
+					 byte[] salt = newEncryption.getSalt();
+					 String securePassword = newEncryption.getSecurePassword(password, salt);
 					AccountDBModel accountDb = new AccountDBModel();
-					User user = new User(userName, email, password);
+					User user = new User(userName, email, securePassword);
 					
 					int status = accountDb.signUp(user);
 					
