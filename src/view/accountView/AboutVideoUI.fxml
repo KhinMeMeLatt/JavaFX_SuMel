@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="controller.accountController.AboutVideoController">
+   <children>
+      <JFXButton fx:id="btnClose" layoutX="633.0" layoutY="-3.0" onAction="#processClose" prefHeight="35.0" prefWidth="73.0" style="-fx-background-color: #f02c0e;" text="Close" textFill="#fcf6f6">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <MediaView fx:id="mediaView" fitHeight="555.0" fitWidth="700.0" layoutX="3.0" layoutY="39.0" />
+   </children>
+</AnchorPane>
