@@ -26,6 +26,11 @@ public class Expense {
 		this.spendAt = new SimpleStringProperty(spendAt);
 	}
 	
+	public Expense(String expenseCategory, int expenseAmount) {
+		this.expenseCategory = new SimpleStringProperty(expenseCategory);
+		this.expenseAmount = new SimpleIntegerProperty(expenseAmount); 
+	}
+	
 	public int getExpenseId() {
 		return expenseId.get();
 	}
@@ -57,5 +62,5 @@ public class Expense {
 	public String getSpendAt() {
 		return spendAt.get();
 	}
-		
+
 }

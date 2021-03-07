@@ -62,17 +62,17 @@
                               </Label>
                               <Label text="Currency Conventer">
                                  <font>
-                                    <Font name="Georgia" size="12.0" />
+                                    <Font name="Georgia" size="16.0" />
                                  </font>
                               </Label>
                               <Label text="About">
                                  <font>
-                                    <Font name="Georgia" size="12.0" />
+                                    <Font name="Georgia" size="16.0" />
                                  </font>
                               </Label>
                            </children>
                            <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="5.0" left="540.0" right="5.0" top="5.0" />
                            </HBox.margin>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -146,7 +146,7 @@
                      <children>
                         <HBox>
                            <children>
-                              <Label text="My SuBus">
+                              <Label text="My Expense List">
                                  <font>
                                     <Font name="Georgia" size="17.0" />
                                  </font>
@@ -159,7 +159,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </HBox>
-                        <HBox fx:id="subuScrollPane" VBox.vgrow="ALWAYS">
+                        <HBox fx:id="expenseScrollPane" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
