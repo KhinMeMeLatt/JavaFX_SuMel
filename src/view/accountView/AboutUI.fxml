@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.AboutController">
+   <children>
+      <Label alignment="CENTER" layoutX="94.0" layoutY="24.0" prefHeight="57.0" prefWidth="79.0" text="SUMEL" textFill="#e1460e">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="34.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/pig.PNG" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="436.0" layoutY="27.0" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnClose" layoutX="643.0" layoutY="27.0" onAction="#processClose" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #f02c0e;" text="Close" textFill="#fcf6f6">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <Label alignment="CENTER" layoutX="284.0" layoutY="77.0" prefHeight="70.0" prefWidth="214.0" text="SUMEL" textFill="#ff7b0e">
+         <font>
+            <Font name="Cinzel Black" size="48.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="57.0" fitWidth="53.0" layoutX="233.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../bin/assets/about2.PNG" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="3.0" layoutY="353.0" prefHeight="44.0" prefWidth="747.0" style="-fx-background-color: #FFFFFF;" text="           Our financial guide is finally here! Explore More In the Video !!" textFill="#1e130c">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="3.0" layoutY="244.0" prefHeight="116.0" prefWidth="747.0" style="-fx-background-color: #FFFFFF;" text="         First of all, SUMEL supports nearly all foreign currencies.Secondly, SUMEL  also provide to effortlessly save money in two possible ways sharing saving tips : Saving money for something you desire, Saving money randomlyThirdly, SUMEL allows you to records your expenses.Lastly, you can track all of your activities with high visibilities.Subscribe now....." textFill="#1e130c" wrapText="true">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="2.0" layoutY="177.0" prefHeight="70.0" prefWidth="753.0" style="-fx-background-color: #FFFFFF;" text="           SUMEL is money-saving app without a lot of bells and whistles. However, the unique features it does have       are worth exploring." textFill="#1e130c" wrapText="true">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="3.0" layoutY="482.0" prefHeight="116.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" text="         WE ARE TEAM UIT AND WE HAVE FIVE TEAM MEMBERS, KHIN MEME LATT, THIRI YADANAR AUNG, SHWE YEE THET HTAR, KYAW KYAW KHAING AND THAW MYO HTET. OUR TEAM IS HERE TO GIVE BEST SERVICE FOR YOUR MONEY." textFill="#1e1b19" wrapText="true">
+         <font>
+            <Font name="Georgia" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="51.0" fitWidth="73.0" layoutX="326.0" layoutY="414.0" onMouseClicked="#processPlay" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/videoPlay.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
