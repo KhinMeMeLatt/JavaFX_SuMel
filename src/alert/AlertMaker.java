@@ -5,6 +5,8 @@ import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
+import model.accountModel.User;
 
 public class AlertMaker {
 
@@ -22,5 +24,23 @@ public class AlertMaker {
 	        	alert.showAndWait();
 	        }
 	        return false;
-	    }
+	  }
+	  
+	  //Target Expense Setting
+	  public static int createTextDialog() {
+		  TextInputDialog dialog = new TextInputDialog(String.valueOf(User.expectedExpense));
+		  dialog.setTitle("Expense Target");
+		  dialog.setHeaderText("Set your expense target");
+		  dialog.setContentText("Amount:");
+		  Optional<String> result = dialog.showAndWait();
+		  if (result.isPresent()){
+			  try {
+				  return Integer.parseInt(result.get());  
+			  }catch(NumberFormatException e) {
+				  showAlert(AlertType.ERROR,"Error", "Error", "Input Amount is invalid");
+				  createTextDialog();
+			  }
+		  }
+		  return -1;
+	  }
 }

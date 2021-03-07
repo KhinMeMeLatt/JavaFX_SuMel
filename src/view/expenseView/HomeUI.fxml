@@ -20,7 +20,7 @@
 
 <!-- <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?> -->
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.expenseController.HomeController">
+<AnchorPane prefHeight="690.0" prefWidth="1366.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.expenseController.HomeController">
    <children>
       <HBox prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -133,7 +133,7 @@
                               <Separator opacity="0.26" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: gray;" HBox.hgrow="ALWAYS" />
                               <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <PieChart fx:id="pcExpense" prefHeight="107.0" prefWidth="239.0" />
+                                    <PieChart fx:id="pcExpense" prefHeight="333.0" prefWidth="565.0" />
                                  </children></Pane>
                            </children>
                            <VBox.margin>
@@ -166,7 +166,7 @@
                            <children>
                               <ScrollPane minHeight="120.0" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                                  <content>
-                                    <GridPane fx:id="mySubus" alignment="CENTER" hgap="5.0" styleClass="subuscrollpane">
+                                    <GridPane fx:id="myExpense" alignment="CENTER" hgap="5.0" styleClass="subuscrollpane">
                                        <columnConstraints>
                                           <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
                                        </columnConstraints>
