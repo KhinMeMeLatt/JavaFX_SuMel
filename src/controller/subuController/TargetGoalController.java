@@ -10,8 +10,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
