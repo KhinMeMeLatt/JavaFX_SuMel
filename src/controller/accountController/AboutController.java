@@ -27,7 +27,7 @@ public class AboutController extends FramesController{
 	 @FXML
 	    void processPlay(MouseEvent event) {
 		 Parent fxml;
-			try {
+			try { // Linking the new mediaView Scene
 				openFrame("accountView","AboutVideoUI");
 				
 			} catch (IOException e) {
