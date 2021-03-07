@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import alert.AlertMaker;
 import javafx.collections.FXCollections;
@@ -22,7 +24,7 @@ public class ExpenseDB {
 	private PreparedStatement preparedStatement;
 	private Statement stmt;
 	private ResultSet rs;
-	ObservableList<Expense> expenseList = FXCollections.observableArrayList();
+	
 	
 	public ExpenseDB() {
 		this.connection = DBConnection.getConnection();
@@ -62,23 +64,37 @@ public class ExpenseDB {
 		User.expectedExpense = this.rs.getInt(DBConst.TARGET_EXPENSE);
 	}
 	
-	// for pie chart
-	public ObservableList<Data> selectWithCategory() throws SQLException {
+	private void selectCategoryAmount() throws SQLException {
 		this.stmt = this.connection.createStatement();
 		this.rs = this.stmt.executeQuery("SELECT "+DBConst.EXPENSE_CATEGORY+", sum("+DBConst.EXPENSE_AMOUNT+") AS totalAmount "
 										+" FROM "+DBConst.EXPENSE_TABLE
 										+" WHERE userId='"+User.userId
 										+"' GROUP BY "+DBConst.EXPENSE_CATEGORY+";");
-		
+	}
+	
+	// for pie chart
+	public ObservableList<Data> selectWithCategory() throws SQLException {
 		ObservableList<Data> pieChartData = FXCollections.observableArrayList();
+		selectCategoryAmount();
 		while(this.rs.next()) {
 			pieChartData.add(new Data(rs.getString(DBConst.EXPENSE_CATEGORY), rs.getInt("totalAmount")));
 		}
 		return pieChartData;
 	}
 	
+	//for expense panel
+	public List<Expense> getCategoryAmount() throws SQLException{
+		List<Expense> expenseList = new ArrayList<Expense>();
+		selectCategoryAmount();
+		while(this.rs.next()) {
+			expenseList.add(new Expense(rs.getString(DBConst.EXPENSE_CATEGORY), rs.getInt("totalAmount")));
+		}
+		return expenseList;
+	}
+	
 	//History
 	public ObservableList<Expense> show(String type, String value) throws SQLException{
+		ObservableList<Expense> expenseList = FXCollections.observableArrayList();
 		this.stmt = this.connection.createStatement();
 		String query = null;
 		if(type=="all") {
