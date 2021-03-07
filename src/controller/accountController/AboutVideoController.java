@@ -19,7 +19,6 @@ public class AboutVideoController implements Initializable {
     private MediaView mediaView;
 	private Media media;
 	private MediaPlayer mediaPlayer;
-	//private final String Media_Url = "C:\\JavaFXWorkSpace\\SuMel\\src\\assets\\Video.mp4";
 	
 
     @FXML
@@ -37,13 +36,17 @@ public class AboutVideoController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+                //Initialising path of the media file,
 		File videoFile = new File("C:\\JavaFXWorkSpace\\SuMel\\src\\assets\\Video.mp4");
 		String videoPath = videoFile.toURI().toString();
+                //Instantiating Media class  
 		media = new Media(videoPath);
-	    mediaPlayer = new MediaPlayer(media);
+		//Instantiating MediaPlayer class  
+	        mediaPlayer = new MediaPlayer(media);
 		mediaView.setMediaPlayer(mediaPlayer);
-		// this.mediaPlayer.setAutoPlay(true);
 		mediaView.setMediaPlayer(mediaPlayer);
+		
+		//by setting this property to true, the Video will be played   
 		mediaPlayer.setAutoPlay(true);
 	}  
 
