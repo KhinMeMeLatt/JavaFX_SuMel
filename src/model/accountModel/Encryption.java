@@ -10,7 +10,7 @@ public class Encryption {
      
     public static String getSecurePassword(String passwordToHash, byte[] salt)
     {
-        String generatedPassword = null;
+        String generatedPassword= null;
         try {
             
             MessageDigest md = MessageDigest.getInstance("MD5");
