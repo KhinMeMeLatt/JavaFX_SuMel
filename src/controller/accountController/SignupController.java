@@ -55,11 +55,17 @@ public class SignupController extends FramesController{
 			} else {
 				
 				if (password.equals(rePassword)) {
-					Encryption newEncryption=new Encryption();
-					 byte[] salt = newEncryption.getSalt();
-					 String securePassword = newEncryption.getSecurePassword(password, salt);
+					
+					/*
+					 * Encryption newEncryption=new Encryption(); byte[] salt
+					 * =newEncryption.getSalt(); String securePassword
+					 * =newEncryption.getSecurePassword(password, salt);
+					 */
+					final String secretKey = "ssshhhhhhhhhhh!!!!";
+
+					String encryptedString = Encryption.encrypt(password, secretKey) ;
 					AccountDBModel accountDb = new AccountDBModel();
-					User user = new User(userName, email, securePassword);
+					User user = new User(userName, email, encryptedString );
 					
 					int status = accountDb.signUp(user);
 					
