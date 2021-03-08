@@ -119,7 +119,7 @@ public class CreatingExpenseController implements Initializable{
     }
     
     private void clearData() {
-    	txtExpenseName.clear();;
+    	txtExpenseName.clear();
     	cobCategory.setValue("");
     	txtAmount.clear();
     }

@@ -11,11 +11,24 @@ public class Expense {
 	private SimpleIntegerProperty expenseAmount;
 	private SimpleStringProperty spendAt;
 	
+	public Expense(int expenseId, String expenseName, String expenseCategory, int expenseAmount, String spendAt) {
+		this.expenseId = new SimpleIntegerProperty(expenseId);
+		this.expenseName = new SimpleStringProperty(expenseName);
+		this.expenseCategory = new SimpleStringProperty(expenseCategory);
+		this.expenseAmount = new SimpleIntegerProperty(expenseAmount); 
+		this.spendAt = new SimpleStringProperty(spendAt);
+	}
+	
 	public Expense(String expenseName, String expenseCategory, int expenseAmount, String spendAt) {
 		this.expenseName = new SimpleStringProperty(expenseName);
 		this.expenseCategory = new SimpleStringProperty(expenseCategory);
 		this.expenseAmount = new SimpleIntegerProperty(expenseAmount); 
 		this.spendAt = new SimpleStringProperty(spendAt);
+	}
+	
+	public Expense(String expenseCategory, int expenseAmount) {
+		this.expenseCategory = new SimpleStringProperty(expenseCategory);
+		this.expenseAmount = new SimpleIntegerProperty(expenseAmount); 
 	}
 	
 	public int getExpenseId() {
@@ -49,5 +62,5 @@ public class Expense {
 	public String getSpendAt() {
 		return spendAt.get();
 	}
-		
+
 }

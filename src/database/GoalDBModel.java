@@ -6,10 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import alert.AlertMaker;
+import javafx.scene.control.Alert.AlertType;
 import model.accountModel.User;
 import model.subuModel.Goal;
 
@@ -48,10 +50,10 @@ public class GoalDBModel {
 			this.ps.setInt(9, User.userId);
 
 			this.ps.executeUpdate();
-			AlertMaker.showSimpleAlert("Successful Message", "A new goal is created successfully!");
+			AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Expenses are recorded successfully!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			AlertMaker.showErrorMessage("Error", "Goal Creation Failed!");
+			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Expenses record process Failed!");
 			e.printStackTrace();
 		}
 	}

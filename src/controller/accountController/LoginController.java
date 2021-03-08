@@ -1,6 +1,8 @@
 package controller.accountController;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.sql.SQLException;
 
 import com.jfoenix.controls.JFXButton;
@@ -14,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.accountModel.Encryption;
 import model.accountModel.User;
 
 public class LoginController extends FramesController{
@@ -30,7 +33,7 @@ public class LoginController extends FramesController{
 	private JFXButton btnClose;
 
 	@FXML
-	void processLogin(ActionEvent event) throws IOException, SQLException {
+	void processLogin(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException, NoSuchProviderException {
 		lblStatus.setVisible(true);
 		{
 			String email = tfUserEmail.getText();
@@ -39,11 +42,14 @@ public class LoginController extends FramesController{
 				lblStatus.setTextFill(Color.RED);
 				lblStatus.setText("All the required fields must be filled! Try Again !!");
 			} else {
+				Encryption newEncryption=new Encryption();
+				 byte[] salt = newEncryption.getSalt();
+				 String securePassword = newEncryption.getSecurePassword(password, salt);
 				AccountDBModel accountDb = new AccountDBModel();
 				
 				User user = new User();
 				user.setEmail(email);
-				user.setPassword(password);
+				user.setPassword(securePassword);
 				
 				if (accountDb.isValidated(user)) {
 					lblStatus.setTextFill(Color.GREEN);

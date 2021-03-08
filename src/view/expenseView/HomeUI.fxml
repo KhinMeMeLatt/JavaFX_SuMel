@@ -18,8 +18,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<!-- <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?> -->
-
 <AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: gray;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.expenseController.HomeController">
    <children>
       <HBox prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -63,17 +61,17 @@
                               </Label>
                               <Label text="Currency Conventer">
                                  <font>
-                                    <Font name="Georgia" size="12.0" />
+                                    <Font name="Georgia" size="16.0" />
                                  </font>
                               </Label>
                               <Label text="About">
                                  <font>
-                                    <Font name="Georgia" size="12.0" />
+                                    <Font name="Georgia" size="16.0" />
                                  </font>
                               </Label>
                            </children>
                            <HBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="5.0" left="540.0" right="5.0" top="5.0" />
                            </HBox.margin>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -111,7 +109,6 @@
                                        </image>
                                     </ImageView>
                                     <JFXTextField prefHeight="25.0" prefWidth="143.0" promptText="Expense Category" styleClass="searchfield" />
-                                    <!-- <FontAwesomeIconView glyphName="SEARCH" size="17" /> -->
                                  </children>
                                  <HBox.margin>
                                     <Insets />
@@ -134,7 +131,7 @@
                               <Separator opacity="0.26" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: gray;" HBox.hgrow="ALWAYS" />
                               <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <PieChart fx:id="pcExpense" prefHeight="107.0" prefWidth="239.0" />
+                                    <PieChart fx:id="pcExpense" prefHeight="333.0" prefWidth="565.0" />
                                  </children></Pane>
                            </children>
                            <VBox.margin>
@@ -147,7 +144,7 @@
                      <children>
                         <HBox>
                            <children>
-                              <Label text="My SuBus">
+                              <Label text="My Expense List">
                                  <font>
                                     <Font name="Georgia" size="17.0" />
                                  </font>
@@ -160,14 +157,14 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </HBox>
-                        <HBox fx:id="subuScrollPane" VBox.vgrow="ALWAYS">
+                        <HBox fx:id="expenseScrollPane" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                            <children>
                               <ScrollPane minHeight="120.0" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                                  <content>
-                                    <GridPane fx:id="mySubus" alignment="CENTER" hgap="5.0" styleClass="subuscrollpane">
+                                    <GridPane fx:id="myExpense" alignment="CENTER" hgap="5.0" styleClass="subuscrollpane">
                                        <columnConstraints>
                                           <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
                                        </columnConstraints>
@@ -206,7 +203,6 @@
                                           <Image url="@../../assets/img/user1.png" />
                                        </image>
                                     </ImageView>
-                                    <!-- <FontAwesomeIconView glyphName="BELL_ALT" size="17" /> -->
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
