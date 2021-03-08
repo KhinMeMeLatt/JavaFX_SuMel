@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<!-- <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?> -->
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -18,7 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.HomeController">
+<!-- <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?> -->
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: gray;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.HomeController">
    <children>
       <HBox prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,7 +29,7 @@
                      <children>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                            <image>
-                              <Image url="@../assets/img/sumel.png" />
+                              <Image url="@../../assets/img/sumel.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="5.0" top="10.0" />
@@ -82,7 +83,7 @@
                            <children>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/img/wallet.png" />
+                                    <Image url="@../../assets/img/wallet.png" />
                                  </image>
                               </ImageView>
                               <HBox alignment="CENTER">
@@ -180,14 +181,14 @@
                            <children>
                               <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                                  <children>
-                                    <Label text="Kyaw">
+                                    <Label fx:id="userName" text="Kyaw">
                                        <font>
                                           <Font name="Georgia" size="16.0" />
                                        </font>
                                     </Label>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="imageBorder">
                                        <image>
-                                          <Image url="@../assets/img/user1.png" />
+                                          <Image url="@../../assets/img/user.png" />
                                        </image>
                                     </ImageView>
                                     <!-- <FontAwesomeIconView glyphName="BELL_ALT" size="17" /> -->
@@ -204,8 +205,8 @@
                                           <Font name="Georgia Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="I have goal" textAlignment="CENTER" wrapText="true" />
-                                    <JFXButton buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="I just want to save" wrapText="true">
+                                    <JFXButton buttonType="RAISED" onAction="#goalCreateAction" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="I have goal" textAlignment="CENTER" wrapText="true" />
+                                    <JFXButton buttonType="RAISED" onAction="#justSaveAction" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="I just want to save" wrapText="true">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
