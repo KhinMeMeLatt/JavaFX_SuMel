@@ -28,6 +28,7 @@ public class AccountDBModel {
 			if (rs.getString(DBConst.EMAIL).equals(user.getEmail()) && rs.getString(DBConst.PASSWORD).equals(user.getPassword())) {
 				isOk = true;
 				User.userId = rs.getInt(DBConst.USER_ID);
+				user.setUserName(rs.getString(DBConst.USER_NAME));
 			} else {
 				isOk = false;
 			}

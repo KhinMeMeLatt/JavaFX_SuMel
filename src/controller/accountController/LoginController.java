@@ -48,6 +48,8 @@ public class LoginController extends FramesController{
 				if (accountDb.isValidated(user)) {
 					lblStatus.setTextFill(Color.GREEN);
 					lblStatus.setText("Congratulations! Login Success! ");
+					Stage stage = (Stage) btnClose.getScene().getWindow();
+					stage.close();
 					openFrame("subuView","HomeUI");
 				} else {
 					lblStatus.setTextFill(Color.RED);
@@ -60,7 +62,9 @@ public class LoginController extends FramesController{
 
 	@FXML // Scenes Changes to SignUp Scene
 	void processSignUp(ActionEvent event) throws IOException {
-		openFrame("accountView","Signup");
+		Stage stage = (Stage) btnClose.getScene().getWindow();
+		stage.close();
+		openFrame("accountView","SignupUI");
 	}
 
 	@FXML // Close the scene

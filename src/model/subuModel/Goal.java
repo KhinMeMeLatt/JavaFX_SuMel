@@ -17,9 +17,22 @@ public class Goal {
 		
 	};
 	
+	public Goal(int goalId,String goalName, String goalImgName, int goalAmount, String startDate, String endDate, String saveType, double amountToSave,
+			boolean isBreak, int userId) {
+		this.goalId = goalId;
+		this.goalName = goalName;
+		this.goalImgName = goalImgName;
+		this.goalAmount = goalAmount;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.saveType = saveType;
+		this.amountToSave = amountToSave;
+		this.isBreak = isBreak;
+		this.userId = userId;
+	}
+	
 	public Goal(String goalName, String goalImgName, int goalAmount, String startDate, String endDate, String saveType, double amountToSave,
 			boolean isBreak, int userId) {
-		super();
 		this.goalName = goalName;
 		this.goalImgName = goalImgName;
 		this.goalAmount = goalAmount;

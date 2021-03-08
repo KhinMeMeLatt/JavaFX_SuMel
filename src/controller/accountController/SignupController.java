@@ -61,6 +61,8 @@ public class SignupController extends FramesController{
 					if (status > 0) {
 						lblStatus.setTextFill(Color.GREEN);
 						lblStatus.setText("Congratulations! SignUp SuccessFul.! ");
+						Stage stage = (Stage) btnClose.getScene().getWindow();
+						stage.close();
 						openFrame("subuView","TargetGoalUI");
 
 					}
@@ -77,6 +79,8 @@ public class SignupController extends FramesController{
 
 	@FXML //// Scenes Changes to Login Scene
 	void processLogin(ActionEvent event) throws IOException {
+		Stage stage = (Stage) btnClose.getScene().getWindow();
+		stage.close();
 		openFrame("accountView","LoginUI");
 	}
 
