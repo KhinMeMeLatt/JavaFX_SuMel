@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: gray;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.expenseController.HomeController">
+<AnchorPane prefHeight="690.0" prefWidth="1366.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.expenseController.HomeController">
    <children>
       <HBox prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -108,7 +110,7 @@
                                           <Image url="@../../assets/search.png" />
                                        </image>
                                     </ImageView>
-                                    <JFXTextField prefHeight="25.0" prefWidth="143.0" promptText="Expense Category" styleClass="searchfield" />
+                                    <JFXTextField fx:id="txtSearch" prefHeight="25.0" prefWidth="143.0" promptText="Expense Category" styleClass="searchfield" />
                                  </children>
                                  <HBox.margin>
                                     <Insets />
@@ -127,8 +129,17 @@
                         </HBox>
                         <HBox fx:id="history" prefHeight="100.0" prefWidth="200.0" styleClass="history" VBox.vgrow="ALWAYS">
                            <children>
-                              <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                               <Separator opacity="0.26" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: gray;" HBox.hgrow="ALWAYS" />
+                              <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <TableView fx:id="tvHistory" prefHeight="340.0" prefWidth="559.0">
+                                      <columns>
+                                        <TableColumn fx:id="tcDate" prefWidth="132.0" text="Date" />
+                                        <TableColumn fx:id="tcName" prefWidth="279.0" text="Name" />
+                                          <TableColumn fx:id="tcAmount" prefWidth="147.0" text="Amount" />
+                                      </columns>
+                                    </TableView>
+                                 </children></Pane>
                               <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <PieChart fx:id="pcExpense" prefHeight="333.0" prefWidth="565.0" />
