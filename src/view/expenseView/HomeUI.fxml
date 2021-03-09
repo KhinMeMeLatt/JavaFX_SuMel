@@ -28,7 +28,7 @@
                <children>
                   <HBox maxHeight="50.0" prefHeight="200.0" prefWidth="520.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                        <ImageView fitHeight="51.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                            <image>
                               <Image url="@../../assets/pig.PNG" />
                            </image>
@@ -36,14 +36,13 @@
                               <Insets left="5.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <HBox alignment="CENTER">
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="189.0">
                            <children>
                               <Label prefHeight="24.0" prefWidth="135.0" text="Sumel" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Georgia" size="20.0" />
                                  </font>
                               </Label>
-                              <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                            </children>
                            <HBox.margin>
                               <Insets left="10.0" />
