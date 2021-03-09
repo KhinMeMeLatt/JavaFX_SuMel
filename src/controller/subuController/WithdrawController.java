@@ -5,17 +5,16 @@ import java.util.Optional;
 
 import com.jfoenix.controls.JFXTextField;
 
+import database.GoalDBModel;
+import database.WithdrawDBModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
-import model.subuModel.Save;
-import model.subuModel.SaveDBModel;
 import model.subuModel.Withdraw;
-import model.subuModel.WithdrawDBModel;
 
 public class WithdrawController {
 
@@ -67,7 +66,7 @@ public class WithdrawController {
 
 
 	    	double withdrawValue =Double.valueOf(txtAmount.getText()); 
-	    	Withdraw newWithdraw = new Withdraw(withdrawValue,sqlTime, 1); 
+	    	Withdraw newWithdraw = new Withdraw(withdrawValue,sqlTime, GoalDBModel.goalId); 
 	    	WithdrawDBModel withdrawModel = new WithdrawDBModel();
 	    	withdrawModel.withdrawAmount(newWithdraw);
 			

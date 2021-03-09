@@ -102,6 +102,8 @@ public class TargetGoalController implements Initializable {
 	private Boolean isInEditMode = false;
 
 	GoalDBModel goalModel = new GoalDBModel();
+	
+	HomeController home = new HomeController();
 
 	@FXML
 	void processClose(ActionEvent event) {
@@ -129,7 +131,7 @@ public class TargetGoalController implements Initializable {
 	void createGoal(ActionEvent event) throws IOException {
 		if (isInEditMode) {
 			handleUpdateTargetGoal();
-			return;
+			return ;
 		}
 		String goalName = txtGoalName.getText();
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
@@ -145,8 +147,11 @@ public class TargetGoalController implements Initializable {
 
 		if (!goalModel.isSubuNameExists(goalName)) {
 			goalModel.insertGoal(newGoal);
+			home.refresh(true);
+
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
+			home.refresh(false);
 		}
 		
 	}
@@ -375,11 +380,16 @@ public class TargetGoalController implements Initializable {
 		if (!goalModel.isSubuNameExists(goalName)) {
 			if (goalModel.updateTargetGoal(newGoal)) {
 				AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Goal is updated successfully!");
+				Stage homeStage = (Stage) txtGoalName.getScene().getWindow();
+				homeStage.close();
+				home.refresh(true);
 			} else {
 				AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Goal Update Failed!");
+				home.refresh(false);
 			}
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
+			home.refresh(false);
 		}
 	}
 

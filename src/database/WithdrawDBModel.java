@@ -15,20 +15,24 @@ import alert.AlertMaker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Expense;
 import model.accountModel.User;
+import model.subuModel.SaveAndWithdrawHistory;
+import model.subuModel.Withdraw;
 
-public class ExpenseDB {
+public class WithdrawDBModel {
 
 	private Connection connection;
 	private PreparedStatement preparedStatement;
 	private Statement stmt;
 	private ResultSet rs;
 	private String query;
+	private SaveAndWithdrawHistory swh;
 	
 	
-	public ExpenseDB() {
+	public WithdrawDBModel() {
 		this.connection = DBConnection.getConnection();
 	}
 	
@@ -233,4 +237,57 @@ public class ExpenseDB {
 		
 		return expenseList;
 	}
+	
+	public void withdrawAmount(Withdraw withdrawAmount) {
+		String insertWithdraw = "INSERT INTO "+DBConst.WITHDRAW_TABLE+"("+DBConst.WITHDRAW_AMOUNT+", "+DBConst.WITHDRAW_AT+", "+DBConst.WITHDRAW_GOAL_ID+")"
+				+"VALUES(?,?,?)";
+		try {
+		this.preparedStatement = DBConnection.getConnection().prepareStatement(insertWithdraw);
+		
+		this.preparedStatement.setString(1, String.valueOf(withdrawAmount.getWithdrawAmount()));
+		this.preparedStatement.setString(2, String.valueOf(withdrawAmount.getWithdrawAt()));
+		this.preparedStatement.setString(3, String.valueOf(withdrawAmount.getGoalId()));
+		
+		
+		this.preparedStatement.executeUpdate();
+		
+		
+		  Alert alert = new Alert(AlertType.NONE);
+		  alert.setAlertType(AlertType.INFORMATION);
+		  alert.setHeaderText("Successfully withdrawed!"); 
+		  alert.show();
+	 
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} 
+	}
+	
+	public List<SaveAndWithdrawHistory> selectAllWithdrawData(int id ) {
+		  System.out.println(id);
+		  String sql = "SELECT * FROM withdraw where goalId = ?";
+		  List<SaveAndWithdrawHistory> swhLists = new ArrayList<SaveAndWithdrawHistory>();
+		  
+		  try {
+			  preparedStatement = this.connection.prepareStatement(sql);
+			  preparedStatement.setInt(1, id);
+				rs = preparedStatement.executeQuery();
+				while (rs.next()) {
+					swh = new SaveAndWithdrawHistory();
+					swh.setAmount(rs.getDouble(DBConst.WITHDRAW_AMOUNT));
+					swh.setAction("Withdraw");
+					swh.setAtTime(rs.getString(DBConst.WITHDRAW_AT));
+					
+					swhLists.add(swh);
+
+				}
+				return swhLists;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				// AlertMaker.showErrorMessage("Error", "Goals loading Failed!");
+				return null;
+			}
+			
+		}
 }

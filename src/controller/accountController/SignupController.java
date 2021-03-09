@@ -9,11 +9,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import alert.AlertMaker;
 import controller.FramesController;
 import database.AccountDBModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.accountModel.Encryption;
@@ -39,6 +41,16 @@ public class SignupController extends FramesController{
 	@FXML
 	private JFXPasswordField pfRePassword;
 
+	@FXML
+    void aboutFrame(ActionEvent event) throws IOException {
+       openFrame("accountView", "AboutUI", "About");
+    }
+
+    @FXML
+    void currencyConverterFrame(ActionEvent event) throws IOException {
+       openCurrencyFrame("CurrencyConverterUI", "Currency Converter");
+    }
+	
 	@FXML // User Registration
 	void processSignup(ActionEvent event) throws IOException, NoSuchAlgorithmException, NoSuchProviderException {
 		lblStatus.setVisible(true);
@@ -72,11 +84,10 @@ public class SignupController extends FramesController{
 					User.userId = accountDb.getLatestUserId();
 					
 					if (status > 0) {
-						lblStatus.setTextFill(Color.GREEN);
-						lblStatus.setText("Congratulations! SignUp SuccessFul.! ");
+						AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Account created successfully!Please Log in!");
 						Stage stage = (Stage) btnClose.getScene().getWindow();
 						stage.close();
-						openFrame("subuView","TargetGoalUI");
+						openFrame("accountView","LoginUI");
 
 					}
 				} else {

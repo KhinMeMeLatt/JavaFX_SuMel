@@ -1,27 +1,21 @@
 package controller.subuController;
 
-import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.NumberValidator;
-import com.jfoenix.validation.RequiredFieldValidator;
 
+import database.GoalDBModel;
+import database.SaveDBModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import model.subuModel.Save;
-import model.subuModel.SaveDBModel;
+
 
 
 public class SaveController {
@@ -80,9 +74,9 @@ public class SaveController {
 
 
 		    	double saveValue =Double.valueOf(txtAmount.getText()); 
-		    	Save newSave = new Save(saveValue,sqlTime, 1); 
+		    	Save newSave = new Save(saveValue,sqlTime, GoalDBModel.goalId); 
 		    	SaveDBModel saveModel = new SaveDBModel();
-		    	saveModel.saveAmount(newSave);
+		    	saveModel.saveAmount(newSave);		    	
 				
 				  } else {
 					  System.out.println("canceled"); }
