@@ -43,6 +43,7 @@
                                     <Font name="Georgia" size="20.0" />
                                  </font>
                               </Label>
+                              <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                            </children>
                            <HBox.margin>
                               <Insets left="10.0" />
@@ -210,7 +211,7 @@
                                     </Label>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="imageBorder">
                                        <image>
-                                          <Image url="@../assets/img/user1.png" />
+                                          <Image url="@../../assets/img/user1.png" />
                                        </image>
                                     </ImageView>
                                  </children>

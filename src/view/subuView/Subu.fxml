@@ -10,7 +10,7 @@
    <children>
       <ImageView fx:id="sbImgView" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/img/travel.png" />
+            <Image url="@../../assets/img/travel.png" />
          </image>
       </ImageView>
       <Label fx:id="sbName" text="Travel">
@@ -18,9 +18,9 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="sbCurrentPrice" text="1700">
+      <Label fx:id="sbCurrentPrice" text="\$1700000">
          <font>
-            <Font name="Georgia Bold" size="17.0" />
+            <Font name="Georgia Bold" size="16.0" />
          </font>
       </Label>
    </children>

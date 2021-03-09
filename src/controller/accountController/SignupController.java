@@ -55,11 +55,17 @@ public class SignupController extends FramesController{
 			} else {
 				
 				if (password.equals(rePassword)) {
-					Encryption newEncryption=new Encryption();
-					 byte[] salt = newEncryption.getSalt();
-					 String securePassword = newEncryption.getSecurePassword(password, salt);
+					
+					/*
+					 * Encryption newEncryption=new Encryption(); byte[] salt
+					 * =newEncryption.getSalt(); String securePassword
+					 * =newEncryption.getSecurePassword(password, salt);
+					 */
+					final String secretKey = "ssshhhhhhhhhhh!!!!";
+
+					String encryptedString = Encryption.encrypt(password, secretKey) ;
 					AccountDBModel accountDb = new AccountDBModel();
-					User user = new User(userName, email, securePassword);
+					User user = new User(userName, email, encryptedString );
 					
 					int status = accountDb.signUp(user);
 					
@@ -68,6 +74,8 @@ public class SignupController extends FramesController{
 					if (status > 0) {
 						lblStatus.setTextFill(Color.GREEN);
 						lblStatus.setText("Congratulations! SignUp SuccessFul.! ");
+						Stage stage = (Stage) btnClose.getScene().getWindow();
+						stage.close();
 						openFrame("subuView","TargetGoalUI");
 
 					}
@@ -84,6 +92,8 @@ public class SignupController extends FramesController{
 
 	@FXML //// Scenes Changes to Login Scene
 	void processLogin(ActionEvent event) throws IOException {
+		Stage stage = (Stage) btnClose.getScene().getWindow();
+		stage.close();
 		openFrame("accountView","LoginUI");
 	}
 

@@ -2,9 +2,8 @@ package controller.subuController;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -13,11 +12,15 @@ import com.jfoenix.controls.JFXPopup.PopupHPosition;
 import com.jfoenix.controls.JFXPopup.PopupVPosition;
 import com.jfoenix.effects.JFXDepthManager;
 
+import controller.FramesController;
 import database.GoalDBModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
@@ -26,76 +29,59 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import model.subuModel.Goal;
+import javafx.stage.Stage;
 import model.subuModel.Subu;
 
 public class SubuController implements Initializable {
-	
+
 	@FXML
 	private ImageView sbImgView;
 
 	@FXML
 	private Label sbName;
-	
-	private JFXPopup popup,actionPopup;
-	
-    @FXML
-    private VBox subuBox;
-    
-    private VBox actionBox;
-    
-	private GoalDBModel goalDbModel;
+
+	private JFXPopup popup, actionPopup;
+
+	@FXML
+	private VBox subuBox;
+
+	private VBox actionBox;
 
 	@FXML
 	private Label sbCurrentPrice;
-	
+
 	private Subu subu;
+
+	GoalDBModel goalDbModel = new GoalDBModel();
 	
+	FramesController frameController = new FramesController();
+
 	public void setSubuDataToUI(Subu subu) {
 		Image image = null;
-		if(subu.getSbImageSrc() == null) {
+		if (subu.getSbImageSrc() == null) {
 			image = new Image(getClass().getResourceAsStream("../assets/goal.png"));
-		}else {
-			System.out.println(subu.getSbImageSrc());
+		} else {
 			try {
-				image = new Image(new FileInputStream("src/assets/goals/"+subu.getSbImageSrc()));
+				image = new Image(new FileInputStream("src/assets/img/" + subu.getSbImageSrc()));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
 		sbImgView.setImage(image);
 		sbName.setText(subu.getSbName());
-		sbCurrentPrice.setText(String.valueOf(500));
+		sbCurrentPrice.setText(String.valueOf(subu.getCurrentPrice()));
 	}
-	
-	public List<Subu> getSubus(){
-		//get goals data
-		List<Goal> goals = new ArrayList<Goal>();
-		goalDbModel = new GoalDBModel();
-		goals = goalDbModel.selectAllGoal(2);
-		
-		//set goal data to subu
-		List<Subu> subus = new ArrayList<Subu>();
-		for (int i = 0; i < goals.size(); i++) {
-			subu = new Subu();
-			subu.setSbName(goals.get(i).getGoalName());
-			subu.setSbImageSrc(goals.get(i).getGoalImgName());
-			subus.add(subu);
-		}
-		return subus;
-	}
-	
+
 	private void initPopup() {
-		
-		
+
 		JFXButton action = new JFXButton("Action");
 		JFXButton save = new JFXButton("Save");
 		JFXButton withdraw = new JFXButton("WithDraw");
-		
-		
+
 		Separator separator1 = new Separator(Orientation.HORIZONTAL);
-		Separator separator2 = new Separator(Orientation.HORIZONTAL); // 
-		//separator.setStyle("-fx-border-color: black;-fx-border-style:solid;fx-border-width:0 0 1 0");
+		Separator separator2 = new Separator(Orientation.HORIZONTAL); //
+		// separator.setStyle("-fx-border-color:
+		// black;-fx-border-style:solid;fx-border-width:0 0 1 0");
 		Font font = Font.font("Georgia", 16);
 
 		action.setFont(font);
@@ -105,13 +91,23 @@ public class SubuController implements Initializable {
 		action.setMaxWidth(Double.MAX_VALUE);
 		save.setMaxWidth(Double.MAX_VALUE);
 		withdraw.setMaxWidth(Double.MAX_VALUE);
-
-		VBox vbox = new VBox(action,separator1, save, separator2, withdraw);
 		
-		action.setOnMouseClicked(e -> {
-			actionPopup.show(vbox, PopupVPosition.TOP, PopupHPosition.LEFT, action.getLayoutX()+80, action.getLayoutY());
+		save.setOnMouseClicked(e -> {
+			loadSaveUI();
 		});
 		
+		withdraw.setOnMouseClicked(e -> {
+			loadWithdrawUI();
+		});
+
+		VBox vbox = new VBox(action, separator1, save, separator2, withdraw);
+
+		action.setOnMouseClicked(e -> {
+			actionPopup.show(vbox, PopupVPosition.TOP, PopupHPosition.LEFT, action.getLayoutX() + 80,
+					action.getLayoutY());
+		});
+		
+
 		vbox.setAlignment(Pos.CENTER);
 
 		JFXDepthManager.setDepth(vbox, 1);
@@ -123,10 +119,46 @@ public class SubuController implements Initializable {
 
 	}
 	
+	private void loadSaveUI(){
+		Parent mainParent;
+		Stage stage = new Stage();
+		try {
+			mainParent = FXMLLoader.load(getClass().getResource("../../view/subuView/SaveUI.fxml"));
+			Scene scene = new Scene(mainParent);
+			scene.getStylesheets().add(getClass().getResource("../../view/main.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+			stage.setTitle("Save");
+			stage.getIcons().add(new Image("/assets/icon/sumel.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void loadWithdrawUI() {
+		Parent mainParent;
+		Stage stage = new Stage();
+		try {
+			mainParent = FXMLLoader.load(getClass().getResource("../../view/subuView/WithdrawUI.fxml"));
+			Scene scene = new Scene(mainParent);
+			scene.getStylesheets().add(getClass().getResource("../../view/main.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+			stage.setTitle("Save");
+			stage.getIcons().add(new Image("/assets/icon/sumel.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private void actionPopup() {
 
 		JFXButton edit = new JFXButton("Edit");
 		JFXButton delete = new JFXButton("Delete");
+
 		Separator separator = new Separator(Orientation.HORIZONTAL);
 		Font font = Font.font("Georgia", 16);
 
@@ -146,51 +178,30 @@ public class SubuController implements Initializable {
 
 		actionPopup = new JFXPopup(actionBox);
 
+		edit.setOnMouseClicked(e -> {
+			HomeController home1 = new HomeController();
+			home1.handleGoalEdit(sbName.getText());
+		});
+
+		delete.setOnMouseClicked(e -> {
+			HomeController home2 = new HomeController();
+			home2.handleGoalDelete(sbName.getText(), sbName.getParent());
+
+		});
+
 	}
-		
-	
+
 	@FXML
 	void showPopup(MouseEvent event) {
 		if (event.getButton() == MouseButton.SECONDARY) {
 			popup.show(subuBox, PopupVPosition.TOP, PopupHPosition.LEFT, event.getX(), event.getY());
 		}
 	}
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-       initPopup();	
-       actionPopup();
+		initPopup();
+		actionPopup();
 	}
-	
-	
-	/*
-	 * private List<Subu> setSubus() { List<Subu> subus = new ArrayList<Subu>();
-	 * Subu travel = new Subu(); travel.setSbName("Travel");
-	 * travel.setSbImageSrc("/assets/img/travel.png"); travel.setCurrentPrice(5000);
-	 * 
-	 * Subu food = new Subu(); food.setSbName("Food");
-	 * food.setSbImageSrc("/assets/img/food.png"); food.setCurrentPrice(5000);
-	 * 
-	 * Subu movie = new Subu(); movie.setSbName("Movie");
-	 * movie.setSbImageSrc("/assets/img/movie.png"); movie.setCurrentPrice(5000);
-	 * 
-	 * Subu bus = new Subu(); bus.setSbName("Bus");
-	 * bus.setSbImageSrc("../assets/img/bus.png"); bus.setCurrentPrice(5000);
-	 * 
-	 * Subu taxi = new Subu(); taxi.setSbName("Taxi");
-	 * taxi.setSbImageSrc("../assets/img/taxi.png"); taxi.setCurrentPrice(5000);
-	 * 
-	 * Subu bus1 = new Subu(); bus1.setSbName("Bus");
-	 * bus1.setSbImageSrc("../assets/img/bus.png"); bus1.setCurrentPrice(5000);
-	 * 
-	 * Subu taxi1 = new Subu(); taxi1.setSbName("Taxi");
-	 * taxi1.setSbImageSrc("../assets/img/taxi.png"); taxi1.setCurrentPrice(5000);
-	 * 
-	 * subus.add(taxi); subus.add(movie); subus.add(travel); subus.add(food);
-	 * subus.add(bus); subus.add(bus1); subus.add(taxi1);
-	 * 
-	 * return subus; }
-	 */
 
 }
