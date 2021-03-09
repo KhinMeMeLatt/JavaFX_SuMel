@@ -11,8 +11,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../view/accountView/LoginUI.fxml"));
-
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../view/accountView/EditProfileUI.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("../view/main.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -23,6 +22,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public static void main(String[] args) {
 		launch(args);

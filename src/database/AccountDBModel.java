@@ -69,7 +69,6 @@ public class AccountDBModel {
 			pStmt.setString(2, user.getEmail());
 			pStmt.setString(3, user.getPassword());
 			pStmt.setInt(4, User.userId);
-			pStmt.executeUpdate();
 			AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Account Information is updated!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
