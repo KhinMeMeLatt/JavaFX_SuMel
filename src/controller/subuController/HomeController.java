@@ -26,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -136,7 +137,7 @@ public class HomeController implements Initializable {
 	public void handleGoalEdit(String sbName) {
 		Goal goalForEdit = goalDbModel.selectSubuBySubuName(sbName);
 		if (goalForEdit == null) {
-			AlertMaker.showErrorMessage("Error", "Goal loaded Failed!");
+			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Goal loaded Failed!");
 			return;
 		}
 		try {
@@ -184,15 +185,15 @@ public class HomeController implements Initializable {
 		if (answer.get() == ButtonType.OK) {
 			Boolean result = goalDbModel.deleteSubuBySubuName(sbName);
 			if (result) {
-				AlertMaker.showSimpleAlert("Subu deleted", sbName + " was deleted successfully.");
+				AlertMaker.showAlert(AlertType.INFORMATION,"Subu deleted", null, sbName + " was deleted successfully.");
 				int i = GridPane.getColumnIndex(node);
 				subus.remove(i);
 				System.out.println(subus);
 			} else {
-				AlertMaker.showSimpleAlert("Failed", sbName + " could not be deleted");
+				AlertMaker.showAlert(AlertType.INFORMATION,"Failed", null, sbName + " could not be deleted");
 			}
 		} else {
-			AlertMaker.showSimpleAlert("Deletion cancelled", "Deletion process cancelled");
+			AlertMaker.showAlert(AlertType.INFORMATION,"Deletion cancelled", null, "Deletion process cancelled");
 		}
 	}
 

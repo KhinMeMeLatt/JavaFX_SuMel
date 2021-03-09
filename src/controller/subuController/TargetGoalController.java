@@ -27,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -145,7 +146,7 @@ public class TargetGoalController implements Initializable {
 		if (!goalModel.isSubuNameExists(goalName)) {
 			goalModel.insertGoal(newGoal);
 		} else {
-			AlertMaker.showErrorMessage("Error", "Please Enter Different Subu name!");
+			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
 		}
 		
 	}
@@ -373,12 +374,12 @@ public class TargetGoalController implements Initializable {
 		
 		if (!goalModel.isSubuNameExists(goalName)) {
 			if (goalModel.updateTargetGoal(newGoal)) {
-				AlertMaker.showSimpleAlert("Successful Message", "Goal is updated successfully!");
+				AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Goal is updated successfully!");
 			} else {
-				AlertMaker.showErrorMessage("Error", "Goal Update Failed!");
+				AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Goal Update Failed!");
 			}
 		} else {
-			AlertMaker.showErrorMessage("Error", "Please Enter Different Subu name!");
+			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
 		}
 	}
 
