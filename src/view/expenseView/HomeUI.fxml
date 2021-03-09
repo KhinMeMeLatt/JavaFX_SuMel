@@ -28,7 +28,7 @@
                <children>
                   <HBox maxHeight="50.0" prefHeight="200.0" prefWidth="520.0">
                      <children>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                        <ImageView fitHeight="51.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                            <image>
                               <Image url="@../../assets/pig.PNG" />
                            </image>
@@ -37,6 +37,7 @@
                            </HBox.margin>
                         </ImageView>
                         <HBox alignment="CENTER" prefWidth="100.0">
+
                            <children>
                               <Label prefHeight="24.0" prefWidth="80.0" text="Sumel" HBox.hgrow="ALWAYS">
                                  <font>
@@ -67,12 +68,12 @@
                               </Label>
                               <Label fx:id="lblCurrencyConverter" onMouseClicked="#currencyCoventerFrame" text="Currency Conventer">
                                  <font>
-                                    <Font name="Georgia" size="16.0" />
+                                    <Font size="16.0" />
                                  </font>
                               </Label>
                               <Label fx:id="lblAbout" onMouseClicked="#aboutFrame" text="About">
                                  <font>
-                                    <Font name="Georgia" size="16.0" />
+                                    <Font size="16.0" />
                                  </font>
                               </Label>
                            </children>
@@ -146,7 +147,7 @@
                               <Separator opacity="0.26" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: gray;" />
                               <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <PieChart fx:id="pcExpense" prefHeight="330.0" prefWidth="500.0" />
+                                    <PieChart fx:id="pcExpense" prefHeight="330.0" prefWidth="500.0" title="Expense Chart"/>
                                  </children>
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -238,12 +239,12 @@
                                        </font>
                                     </Label>
                                     <JFXButton buttonType="RAISED" onAction="#setTargetExpense" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="Set Target Expense" textAlignment="CENTER" wrapText="true" />
-                                    <JFXButton buttonType="RAISED" onAction="#processExpense" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="Expense Note" wrapText="true">
+                                    <JFXButton fx:id="btnExpense" buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="Expense Note" wrapText="true">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton buttonType="RAISED" onAction="#showHistory" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="History" wrapText="true">
+                                    <JFXButton fx:id="btnHistory" buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="History" wrapText="true">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

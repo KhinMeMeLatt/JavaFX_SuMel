@@ -6,16 +6,19 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
 import alert.AlertMaker;
 import controller.FramesController;
-import database.WithdrawDBModel;
+import database.AccountDBModel;
+import database.ExpenseDB;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,6 +36,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Expense;
 import model.accountModel.User;
@@ -50,7 +54,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label lblAbout;
-
+    
 	@FXML
 	private HBox history;
 
@@ -68,7 +72,7 @@ public class HomeController implements Initializable {
 
 	private int targetExpense;
 
-	private WithdrawDBModel expenseDB = new WithdrawDBModel();
+	private ExpenseDB expenseDB = new ExpenseDB();
 
 	private List<Expense> expenseList;
 
@@ -107,8 +111,14 @@ public class HomeController implements Initializable {
 		frameController.openFrame("subuView", "HomeUI", "Sumel");
 		Stage home = (Stage) lblExpense.getScene().getWindow();
 		home.close();
+	
+	@FXML
+    private JFXButton btnExpense;
+    
+    @FXML
+    private JFXButton btnHistory;
 
-	}
+	public static ObservableList<Expense> expense;
 
 	@FXML
 	void setTargetExpense(ActionEvent event) throws SQLException {
@@ -161,15 +171,21 @@ public class HomeController implements Initializable {
 
 	private void setTableData(String category) {
 		tvHistory.setItems(expenseDB.selectExpenseWith(category));
-		System.out.println(tvHistory.getItems().get(0).getExpenseAmount());
 	}
-
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// Draw Pie chart
-		lblExpense.setTextFill(Color.RED);;
+    lblExpense.setTextFill(Color.RED);
+		//set User name
+		try {
+			AccountDBModel account = new AccountDBModel();
+			lblUserName.setText(account.getUser());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//Draw Pie chart
 		try {
 			pcExpense.setData(expenseDB.selectWithCategory());
 		} catch (SQLException e) {
@@ -201,6 +217,105 @@ public class HomeController implements Initializable {
 		expenseList = expenseDB.getCategoryAmount();
 		setExpense(expenseList);
 
+		//expense note
+		btnExpense.setOnAction(
+				new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent arg0) {
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						Stage primaryStage = (Stage) btnExpense.getScene().getWindow();
+						dialog.initOwner(primaryStage);
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						try {
+							fxmlLoader.setLocation(getClass().getResource("../../view/expenseView/CreatingExpenseUI.fxml"));
+							fxmlLoader.load();
+							Parent root = fxmlLoader.getRoot();
+							dialog.setScene(new Scene(root));
+							CreatingExpenseController expenseController = fxmlLoader.getController();
+							dialog.showAndWait();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+		
+		//history
+		btnHistory.setOnAction(
+				new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent arg0) {
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						Stage primaryStage = (Stage) btnHistory.getScene().getWindow();
+						dialog.initOwner(primaryStage);
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						try {
+							fxmlLoader.setLocation(getClass().getResource("../../view/expenseView/HistoryUI.fxml"));
+							fxmlLoader.load();
+							Parent root = fxmlLoader.getRoot();
+							dialog.setScene(new Scene(root));
+							HistoryController historyController = fxmlLoader.getController();
+							dialog.showAndWait();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+
+		//About
+		btnAbout.setOnAction(
+				new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent arg0) {
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						Stage primaryStage = (Stage) btnAbout.getScene().getWindow();
+						dialog.initOwner(primaryStage);
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						try {
+							fxmlLoader.setLocation(getClass().getResource("../../view/accountView/AboutUI.fxml"));
+							fxmlLoader.load();
+							Parent root = fxmlLoader.getRoot();
+							dialog.setScene(new Scene(root));
+							AboutController aboutController = fxmlLoader.getController();
+							dialog.showAndWait();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+		
+		//Currency Converter
+		btnCurrency.setOnAction(
+				new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent arg0) {
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						Stage primaryStage = (Stage) btnCurrency.getScene().getWindow();
+						dialog.initOwner(primaryStage);
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						try {
+							fxmlLoader.setLocation(getClass().getResource("../../view/CurrencyConverterUI.fxml"));
+							fxmlLoader.load();
+							Parent root = fxmlLoader.getRoot();
+							dialog.setScene(new Scene(root));
+							CurrencyController currencyController = fxmlLoader.getController();
+							dialog.showAndWait();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
 	}
 
 }

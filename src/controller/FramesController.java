@@ -22,11 +22,9 @@ public class FramesController {
 		stage.setScene(scene);
 		stage.show();
 		stage.setTitle(frameName);
-		stage.getIcons().add(new Image("/assets/icon/sumel.png"));
-
+		stage.getIcons().add(new Image("../../assets/pig.PNG"));
 	}
-	
-	
+  
 	public final void openFrame(String path, String frameName,String title) throws IOException {
 		Parent mainParent;
 		Stage stage = new Stage();
@@ -38,7 +36,7 @@ public class FramesController {
 		stage.setScene(scene);
 		stage.show();
 		stage.setTitle(title);
-		stage.getIcons().add(new Image("/assets/icon/sumel.png"));
+		stage.getIcons().add(new Image("../../assets/pig.PNG"));
 
 	}
 	
@@ -53,8 +51,7 @@ public class FramesController {
 		stage.setScene(scene);
 		stage.show();
 		stage.setTitle(title);
-		stage.getIcons().add(new Image("/assets/icon/sumel.png"));
-
+		stage.getIcons().add(new Image("../../assets/pig.PNG"));
 	}
 	
 }
