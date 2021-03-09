@@ -22,8 +22,7 @@ public class FramesController {
 		this.stage.setScene(scene);
 		this.stage.show();
 		this.stage.setTitle(frameName);
-		stage.getIcons().add(new Image("/assets/icon/sumel.png"));
-
+		this.stage.getIcons().add(new Image(getClass().getResourceAsStream("../../assets/pig.PNG")));
 	}
 	
 }

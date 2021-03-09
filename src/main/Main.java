@@ -17,7 +17,8 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("../view/main.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			primaryStage.getIcons().add(new Image("/assets/icon/sumel.png"));
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../assets/pig.PNG")));
+			primaryStage.setTitle("SUMEL");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

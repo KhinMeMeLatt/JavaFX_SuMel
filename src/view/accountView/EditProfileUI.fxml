@@ -46,7 +46,7 @@
             <Image url="@/assets/key.png" />
          </image>
       </ImageView>
-      <Button layoutX="314.0" layoutY="397.0" mnemonicParsing="false" onAction="#processUpdate" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #ff8400;" text="Update" textFill="WHITE">
+      <Button fx:id="btnUpdate" layoutX="314.0" layoutY="397.0" mnemonicParsing="false" onAction="#processUpdate" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #ff8400;" text="Update" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
