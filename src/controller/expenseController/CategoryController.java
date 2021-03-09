@@ -2,7 +2,6 @@ package controller.expenseController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import model.Expense;
 
@@ -16,14 +15,12 @@ public class CategoryController {
 
     @FXML
     private Label lblAmount;
-
-    @FXML
-    void showHistory(MouseEvent event) {
-
-    }
+    
+    private String expenseCategory;
 
 	public void initData(Expense expense) {
-		lblcategoryName.setText(expense.getExpenseCategory());
+		expenseCategory = expense.getExpenseCategory();
+		lblcategoryName.setText(expenseCategory);
 		lblAmount.setText(String.valueOf(expense.getExpenseAmount()));
 	}
 

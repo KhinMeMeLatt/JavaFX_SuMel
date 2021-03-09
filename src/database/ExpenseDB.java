@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class ExpenseDB {
 	private PreparedStatement preparedStatement;
 	private Statement stmt;
 	private ResultSet rs;
+	private String query;
 	
 	
 	public ExpenseDB() {
@@ -31,12 +33,12 @@ public class ExpenseDB {
 	}
 	
 	public void insertExpense(Expense expense) {
-		String insertRow = "INSERT INTO "+DBConst.EXPENSE_TABLE+"("+DBConst.EXPENSE_NAME+","
+		this.query = "INSERT INTO "+DBConst.EXPENSE_TABLE+"("+DBConst.EXPENSE_NAME+","
 							+DBConst.EXPENSE_CATEGORY+","+DBConst.EXPENSE_AMOUNT+","+DBConst.SPEND_AT+","
 							+DBConst.EXPENSE_USER_ID+")"
 							+"VALUES(?,?,?,?,?)";
 		try {
-			this.preparedStatement = connection.prepareStatement(insertRow);
+			this.preparedStatement = connection.prepareStatement(this.query);
 			this.preparedStatement.setString(1, expense.getExpenseName());
 			this.preparedStatement.setString(2, expense.getExpenseCategory());
 			this.preparedStatement.setInt(3, expense.getExpenseAmount());
@@ -83,11 +85,16 @@ public class ExpenseDB {
 	}
 	
 	//for expense panel
-	public List<Expense> getCategoryAmount() throws SQLException{
+	public List<Expense> getCategoryAmount() {
 		List<Expense> expenseList = new ArrayList<Expense>();
-		selectCategoryAmount();
-		while(this.rs.next()) {
-			expenseList.add(new Expense(rs.getString(DBConst.EXPENSE_CATEGORY), rs.getInt("totalAmount")));
+		try {
+			selectCategoryAmount();
+			while(this.rs.next()) {
+				expenseList.add(new Expense(rs.getString(DBConst.EXPENSE_CATEGORY), rs.getInt("totalAmount")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return expenseList;
 	}
@@ -96,17 +103,16 @@ public class ExpenseDB {
 	public ObservableList<Expense> show(String type, String value) throws SQLException{
 		ObservableList<Expense> expenseList = FXCollections.observableArrayList();
 		this.stmt = this.connection.createStatement();
-		String query = null;
 		if(type=="all") {
-			query = "SELECT * FROM "+DBConst.EXPENSE_TABLE
+			this.query = "SELECT * FROM "+DBConst.EXPENSE_TABLE
 					+" WHERE "+DBConst.EXPENSE_USER_ID+"='"+User.userId
 					+"' ORDER BY "+DBConst.SPEND_AT+" DESC;";
 		}else {
-			query = "SELECT * FROM "+DBConst.EXPENSE_TABLE
+			this.query = "SELECT * FROM "+DBConst.EXPENSE_TABLE
 					+" WHERE "+DBConst.EXPENSE_USER_ID+"='"+User.userId
 					+"' AND "+type+"='"+value+"' ORDER BY "+DBConst.SPEND_AT+" DESC;";
 		}
-		this.rs = this.stmt.executeQuery(query);
+		this.rs = this.stmt.executeQuery(this.query);
 		while(this.rs.next()) {
 			expenseList.add(new Expense(rs.getInt("expenseId"),
 										rs.getString(DBConst.EXPENSE_NAME), 
@@ -155,16 +161,16 @@ public class ExpenseDB {
 	}
 	
 	public void updateExpense(Expense expense) {
-		String updateQuery = "UPDATE "+DBConst.EXPENSE_TABLE+" SET "+DBConst.EXPENSE_NAME+"=?,"
+		this.query = "UPDATE "+DBConst.EXPENSE_TABLE+" SET "+DBConst.EXPENSE_NAME+"=?,"
 							+DBConst.EXPENSE_CATEGORY+"=?,"+DBConst.EXPENSE_AMOUNT+"=?,"+DBConst.SPEND_AT+"=?"
 							+"WHERE "+DBConst.EXPENSE_ID+" =?";
 		try {
-			this.preparedStatement = connection.prepareStatement(updateQuery);
+			this.preparedStatement = connection.prepareStatement(this.query);
 			this.preparedStatement.setString(1, expense.getExpenseName());
 			this.preparedStatement.setString(2, expense.getExpenseCategory());
 			this.preparedStatement.setInt(3, expense.getExpenseAmount());
 			
-			LocalDate date = LocalDate.parse(expense.getSpendAt());
+			LocalDate date = LocalDate.parse(expense.getSpendAt()).plus(1,ChronoUnit.DAYS);
 			Date spendAt = Date.valueOf(date);
 			this.preparedStatement.setDate(4, spendAt);
 			this.preparedStatement.setInt(5, expense.getExpenseId());
@@ -191,4 +197,40 @@ public class ExpenseDB {
 		}
 	}
 	
+	public ObservableList<Expense> selectExpenseWith(String category) {
+		ObservableList<Expense> expenseList = FXCollections.observableArrayList();
+		try {
+			this.stmt = this.connection.createStatement();
+			this.rs = this.stmt.executeQuery("SELECT "+DBConst.SPEND_AT+","+DBConst.EXPENSE_NAME+","+DBConst.EXPENSE_AMOUNT
+											+" FROM "+DBConst.EXPENSE_TABLE
+											+" WHERE "+DBConst.EXPENSE_USER_ID+"='"+User.userId+"' and "+DBConst.EXPENSE_CATEGORY+" ='"+category+"';");
+			while(this.rs.next()) {
+				expenseList.add(new Expense(rs.getString(DBConst.SPEND_AT), rs.getString(DBConst.EXPENSE_NAME), rs.getInt(DBConst.EXPENSE_AMOUNT)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return expenseList;
+	}
+	
+	public List<Expense> searchByCategory(String category){
+		List<Expense> expenseList = new ArrayList<Expense>();
+		try {
+			this.stmt = this.connection.createStatement();
+			this.rs = this.stmt.executeQuery("SELECT "+DBConst.EXPENSE_CATEGORY+", sum("+DBConst.EXPENSE_AMOUNT+") AS totalAmount "
+											+" FROM "+DBConst.EXPENSE_TABLE
+											+" WHERE userId='"+User.userId
+											+"' and "+DBConst.EXPENSE_CATEGORY+" like '%"+category+"%'"
+											+" GROUP BY "+DBConst.EXPENSE_CATEGORY+";");
+			while(this.rs.next()) {
+				expenseList.add(new Expense(rs.getString(DBConst.EXPENSE_CATEGORY), rs.getInt("totalAmount")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return expenseList;
+	}
 }
