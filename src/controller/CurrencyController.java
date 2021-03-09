@@ -61,8 +61,7 @@ public class CurrencyController implements Initializable{
 			,"Serbia (RSD)","Russia (RUB)","Rwanda (RWF)","Saudi Arabia (SAR)","Solomon Islands (SBD)","Seychelles (SCR)","Sudan (SDG)","Sweden (SEK)","Singapore (SGD)","Saint Helena (SHP)"
 			,"Sierra Leone (SLL)","Somalia (SOS)","Suriname (SRD)","South Sudan (SSP)","Sao Tome and Principe (STN)","Syria (SYP)","Eswatini (SZL)","Thailand (THB)","Tajikistan (TJS)"
 			,"Turkmenistan (TMT)","Tunisia (TND)","Tonga (TOP)","Turkey (TRY)","Trinidad and Tobago (TTD)","Tuvalu (TVD)","Taiwan (TWD)","Tanzania (TZS)","Ukraine (UAH)","Uganda (UGX)"
-			,"United States (USD)","Uruguay (URU)","Uzbekistan (UZS)","Venezuela (VES)","Vietnam (VND)","Vanuatu (VUV)","Samoa (WST)","CEMAC (XAF)","Organisation of Eastern Caribbean States (XCD)"
-			,"International Monetary Fund (XDR)","CFA (XOF)","Collectives d'Outre-Mer (XPF)","Yemen (YER)","South Africa (ZAR)","Zambia (ZMW)"};
+			,"United States (USD)","Uruguay (UYU)","Uzbekistan (UZS)","Venezuela (VES)","Vietnam (VND)","Vanuatu (VUV)","Samoa (WST)","Yemen (YER)","South Africa (ZAR)","Zambia (ZMW)"};
 	
 	private float getExchangeRate(String baseCountryCode, String destinationCountryCode) {
 		try {
@@ -113,7 +112,10 @@ public class CurrencyController implements Initializable{
 		for(String country : countriesList) {
 			Label lblcountry = new Label(country);
 			Image icon = new Image(new FileInputStream("src/assets/countries/"+country.substring(country.indexOf("(")+1, country.indexOf(")"))+".png"));
-			lblcountry.setGraphic(new ImageView(icon));
+			ImageView img = new ImageView(icon);
+			img.setFitHeight(15);
+			img.setFitWidth(15);
+			lblcountry.setGraphic(img);
 			countries.add(lblcountry);
 		}
 		return countries;
@@ -121,9 +123,26 @@ public class CurrencyController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
+		
+		try { 
+			Label USA = new Label("United States (USD)");
+			Image USAicon = new Image(new FileInputStream("src/assets/countries/USD.png"));
+			ImageView USAimg = new ImageView(USAicon);
+			USAimg.setFitHeight(15);
+			USAimg.setFitWidth(15);
+			USA.setGraphic(USAimg);
+			
+			Label Mm = new Label("Myanmar (MMK)");
+			Image Mmicon = new Image(new FileInputStream("src/assets/countries/MMK.png"));
+			ImageView Mmimg = new ImageView(Mmicon);
+			Mmimg.setFitHeight(15);
+			Mmimg.setFitWidth(15);
+			Mm.setGraphic(Mmimg);
+			
 			fromCountry.setItems(getCountries());
+			fromCountry.setValue(USA);
 			toCountry.setItems(getCountries());
+			toCountry.setValue(Mm);	
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
