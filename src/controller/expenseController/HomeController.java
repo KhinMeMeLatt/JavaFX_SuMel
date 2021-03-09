@@ -6,20 +6,26 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
 import alert.AlertMaker;
+import controller.CurrencyController;
+import controller.accountController.AboutController;
 import database.AccountDBModel;
 import database.ExpenseDB;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -28,11 +34,19 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.Expense;
 import model.accountModel.User;
 
 public class HomeController implements Initializable{
 
+	@FXML
+    private JFXButton btnCurrency;
+
+    @FXML
+    private JFXButton btnAbout;
+    
 	@FXML
 	private HBox history;
 
@@ -68,13 +82,14 @@ public class HomeController implements Initializable{
 
 	@FXML
 	private JFXTextField txtSearch;
+	
+	@FXML
+    private JFXButton btnExpense;
+
+    @FXML
+    private JFXButton btnHistory;
 
 	public static ObservableList<Expense> expense;
-
-	@FXML
-	void processExpense(ActionEvent event) {
-
-	}
 
 	@FXML
 	void setTargetExpense(ActionEvent event) throws SQLException {
@@ -116,11 +131,6 @@ public class HomeController implements Initializable{
 
 	private void setTableData(String category) {
 		tvHistory.setItems(expenseDB.selectExpenseWith(category));
-	}
-
-	@FXML
-	void showHistory(ActionEvent event) {
-
 	}
 
 	@Override
@@ -166,6 +176,105 @@ public class HomeController implements Initializable{
 		expenseList = expenseDB.getCategoryAmount();
 		setExpense(expenseList);
 
+		//expense note
+		btnExpense.setOnAction(
+				new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent arg0) {
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						Stage primaryStage = (Stage) btnExpense.getScene().getWindow();
+						dialog.initOwner(primaryStage);
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						try {
+							fxmlLoader.setLocation(getClass().getResource("../../view/expenseView/CreatingExpenseUI.fxml"));
+							fxmlLoader.load();
+							Parent root = fxmlLoader.getRoot();
+							dialog.setScene(new Scene(root));
+							CreatingExpenseController expenseController = fxmlLoader.getController();
+							dialog.showAndWait();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+		
+		//history
+		btnHistory.setOnAction(
+				new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent arg0) {
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						Stage primaryStage = (Stage) btnHistory.getScene().getWindow();
+						dialog.initOwner(primaryStage);
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						try {
+							fxmlLoader.setLocation(getClass().getResource("../../view/expenseView/HistoryUI.fxml"));
+							fxmlLoader.load();
+							Parent root = fxmlLoader.getRoot();
+							dialog.setScene(new Scene(root));
+							HistoryController historyController = fxmlLoader.getController();
+							dialog.showAndWait();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+
+		//About
+		btnAbout.setOnAction(
+				new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent arg0) {
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						Stage primaryStage = (Stage) btnAbout.getScene().getWindow();
+						dialog.initOwner(primaryStage);
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						try {
+							fxmlLoader.setLocation(getClass().getResource("../../view/accountView/AboutUI.fxml"));
+							fxmlLoader.load();
+							Parent root = fxmlLoader.getRoot();
+							dialog.setScene(new Scene(root));
+							AboutController aboutController = fxmlLoader.getController();
+							dialog.showAndWait();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+		
+		//Currency Converter
+		btnCurrency.setOnAction(
+				new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent arg0) {
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						Stage primaryStage = (Stage) btnCurrency.getScene().getWindow();
+						dialog.initOwner(primaryStage);
+						FXMLLoader fxmlLoader = new FXMLLoader();
+						try {
+							fxmlLoader.setLocation(getClass().getResource("../../view/CurrencyConverterUI.fxml"));
+							fxmlLoader.load();
+							Parent root = fxmlLoader.getRoot();
+							dialog.setScene(new Scene(root));
+							CurrencyController currencyController = fxmlLoader.getController();
+							dialog.showAndWait();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
 	}
 
 }

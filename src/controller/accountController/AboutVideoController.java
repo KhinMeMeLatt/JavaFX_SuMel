@@ -20,12 +20,9 @@ public class AboutVideoController implements Initializable {
 	private Media media;
 	private MediaPlayer mediaPlayer;
 	
-
     @FXML
     private JFXButton btnClose;
     
-    
-
     @FXML
     void processClose(ActionEvent event) {
     	mediaPlayer.stop();
@@ -37,7 +34,7 @@ public class AboutVideoController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
                 //Initialising path of the media file,
-		File videoFile = new File("C:\\JavaFXWorkSpace\\SuMel\\src\\assets\\Video.mp4");
+		File videoFile = new File("src/assets/about.mp4");
 		String videoPath = videoFile.toURI().toString();
                 //Instantiating Media class  
 		media = new Media(videoPath);

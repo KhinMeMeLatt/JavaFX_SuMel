@@ -19,11 +19,6 @@
             <Image url="@../../assets/pig.PNG" />
          </image>
       </ImageView>
-      <JFXButton layoutX="436.0" layoutY="27.0" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
       <JFXButton fx:id="btnClose" layoutX="643.0" layoutY="27.0" onAction="#processClose" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #f02c0e;" text="Close" textFill="#fcf6f6">
          <font>
             <Font size="14.0" />
