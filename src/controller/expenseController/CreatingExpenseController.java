@@ -9,7 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
-import database.ExpenseDB;
+import database.WithdrawDBModel;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -87,7 +87,7 @@ public class CreatingExpenseController implements Initializable{
     
     private IntegerProperty totalAmount = new SimpleIntegerProperty(0);
     
-    private ExpenseDB expenseDB = new ExpenseDB(); 
+    private WithdrawDBModel expenseDB = new WithdrawDBModel(); 
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@FXML

@@ -7,7 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
-import database.ExpenseDB;
+import database.WithdrawDBModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,7 +33,7 @@ public class UpdateController {
     @FXML
     private JFXButton btnUpdate;
     
-    private ExpenseDB expenseDB = new ExpenseDB();
+    private WithdrawDBModel expenseDB = new WithdrawDBModel();
     
     private int expenseId;
     

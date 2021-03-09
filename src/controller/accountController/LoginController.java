@@ -34,6 +34,15 @@ public class LoginController extends FramesController{
 	private JFXButton btnClose;
 
 	@FXML
+    void aboutFrame(ActionEvent event) throws IOException {
+       openFrame("accountView", "AboutUI", "About");
+    }
+
+    @FXML
+    void currencyConverterFrame(ActionEvent event) throws IOException {
+       openCurrencyFrame("CurrencyConverterUI", "Currency Converter");
+    }
+	@FXML
 	void processLogin(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException, NoSuchProviderException {
 		lblStatus.setVisible(true);
 		{
