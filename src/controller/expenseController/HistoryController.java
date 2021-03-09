@@ -171,8 +171,14 @@ public class HistoryController implements Initializable{
 								dialog.setScene(new Scene(root));
 								UpdateController updateController = fxmlLoader.getController();
 								updateController.initData(expense);
-								dialog.show();
+								dialog.showAndWait();
 								clearData();
+								try {
+									getAllExpense();
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								try {
 									getAllExpense();
 								} catch (SQLException e) {
