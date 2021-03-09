@@ -141,7 +141,7 @@
                                  </children></Pane>
                               <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <PieChart fx:id="pcExpense" prefHeight="333.0" prefWidth="565.0" />
+                                    <PieChart fx:id="pcExpense" prefHeight="333.0" prefWidth="565.0" title="Expense Chart" />
                                  </children></Pane>
                            </children>
                            <VBox.margin>

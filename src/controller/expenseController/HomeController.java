@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
 import alert.AlertMaker;
+import database.AccountDBModel;
 import database.ExpenseDB;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -115,7 +116,6 @@ public class HomeController implements Initializable{
 
 	private void setTableData(String category) {
 		tvHistory.setItems(expenseDB.selectExpenseWith(category));
-		System.out.println(tvHistory.getItems().get(0).getExpenseAmount());
 	}
 
 	@FXML
@@ -125,6 +125,15 @@ public class HomeController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		//set User name
+		try {
+			AccountDBModel account = new AccountDBModel();
+			lblUserName.setText(account.getUser());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		//Draw Pie chart
 		try {
 			pcExpense.setData(expenseDB.selectWithCategory());

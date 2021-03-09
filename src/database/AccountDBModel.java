@@ -53,6 +53,13 @@ public class AccountDBModel {
 		return rs.getInt("latestUserId");
 	}
 	
+	public String getUser() throws SQLException {
+		rs = stmt.executeQuery("select "+DBConst.USER_NAME+" from "+DBConst.USER_TABLE
+							+" WHERE "+DBConst.USER_ID+"='"+User.userId+"';");
+		rs.next();
+		return rs.getString("userName");
+	}
+	
 	public void updateProfile(User user) {
 		String updateUser = "UPDATE "+DBConst.USER_TABLE+" SET "+ DBConst.USER_NAME+ "= ?,"+DBConst.EMAIL+ "= ?,"+DBConst.PASSWORD+"= ?"
 	+" WHERE " +DBConst.USER_ID+ "=?";
