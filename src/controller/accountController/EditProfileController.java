@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.accountModel.Encryption;
 import model.accountModel.User;
 
 public class EditProfileController implements Initializable {
@@ -45,12 +46,17 @@ public class EditProfileController implements Initializable {
 
     @FXML  //Update User info
     void processUpdate(ActionEvent event) throws SQLException {
-    	
+    	final String secretKey = "ssshhhhhhhhhhh!!!!";
+    	String password = pfPassword.getText();
+		String encryptedString = Encryption.encrypt(password, secretKey) ;
     	accountdb = new AccountDBModel();
     	user.setUserName(tfUserName.getText());
     	user.setEmail(tfUserEmail.getText());
-    	user.setPassword(pfPassword.getText());
+    	user.setPassword(encryptedString);
     	accountdb.updateProfile(user);
+    	
+
+    	
     }
 
 	@Override
