@@ -26,6 +26,12 @@ public class Expense {
 		this.spendAt = new SimpleStringProperty(spendAt);
 	}
 	
+	public Expense(String spendAt, String expenseName, int expenseAmount) {
+		this.spendAt = new SimpleStringProperty(spendAt);
+		this.expenseName = new SimpleStringProperty(expenseName);
+		this.expenseAmount = new SimpleIntegerProperty(expenseAmount); 
+	}
+	
 	public Expense(String expenseCategory, int expenseAmount) {
 		this.expenseCategory = new SimpleStringProperty(expenseCategory);
 		this.expenseAmount = new SimpleIntegerProperty(expenseAmount); 

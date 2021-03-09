@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import model.accountModel.Encryption;
 import model.accountModel.User;
 
+
 public class LoginController extends FramesController{
 
 	@FXML
@@ -42,18 +43,21 @@ public class LoginController extends FramesController{
 				lblStatus.setTextFill(Color.RED);
 				lblStatus.setText("All the required fields must be filled! Try Again !!");
 			} else {
-				Encryption newEncryption=new Encryption();
-				 byte[] salt = newEncryption.getSalt();
-				 String securePassword = newEncryption.getSecurePassword(password, salt);
+				
+				final String secretKey = "ssshhhhhhhhhhh!!!!";
+
+				String encryptedString = Encryption.encrypt(password, secretKey) ;
 				AccountDBModel accountDb = new AccountDBModel();
 				
 				User user = new User();
 				user.setEmail(email);
-				user.setPassword(securePassword);
+				user.setPassword(encryptedString);
 				
 				if (accountDb.isValidated(user)) {
 					lblStatus.setTextFill(Color.GREEN);
 					lblStatus.setText("Congratulations! Login Success! ");
+					Stage stage = (Stage) btnClose.getScene().getWindow();
+					stage.close();
 					openFrame("subuView","HomeUI");
 				} else {
 					lblStatus.setTextFill(Color.RED);
@@ -66,7 +70,9 @@ public class LoginController extends FramesController{
 
 	@FXML // Scenes Changes to SignUp Scene
 	void processSignUp(ActionEvent event) throws IOException {
-		openFrame("accountView","Signup");
+		Stage stage = (Stage) btnClose.getScene().getWindow();
+		stage.close();
+		openFrame("accountView","SignupUI");
 	}
 
 	@FXML // Close the scene
