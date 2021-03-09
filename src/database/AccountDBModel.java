@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import alert.AlertMaker;
+import javafx.scene.control.Alert.AlertType;
 import model.accountModel.User;
 
 public class AccountDBModel {
@@ -51,17 +53,22 @@ public class AccountDBModel {
 		return rs.getInt("latestUserId");
 	}
 	
-	public void updateProfile(User user) throws SQLException {
+	public void updateProfile(User user) {
 		String updateUser = "UPDATE "+DBConst.USER_TABLE+" SET "+ DBConst.USER_NAME+ "= ?,"+DBConst.EMAIL+ "= ?,"+DBConst.PASSWORD+"= ?"
 	+" WHERE " +DBConst.USER_ID+ "=?";
-		this.pStmt = this.connection.prepareStatement(updateUser);
-		pStmt.setString(1, user.getUserName());
-		pStmt.setString(2, user.getEmail());
-		pStmt.setString(3, user.getPassword());
-		pStmt.setInt(4, User.userId);
-		
-		pStmt.executeUpdate();
-			
+		try {
+			this.pStmt = this.connection.prepareStatement(updateUser);
+			pStmt.setString(1, user.getUserName());
+			pStmt.setString(2, user.getEmail());
+			pStmt.setString(3, user.getPassword());
+			pStmt.setInt(4, User.userId);
+			pStmt.executeUpdate();
+			AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Account Information is updated!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Sorry, account update fail!");
+			e.printStackTrace();
+		}
 	}
 	
 	public User selectUser() throws SQLException {

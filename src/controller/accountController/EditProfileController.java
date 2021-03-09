@@ -25,6 +25,9 @@ public class EditProfileController implements Initializable {
 
     @FXML
     private Button btnClose;
+    
+    @FXML
+    private Button btnUpdate;
 
     @FXML
     private JFXPasswordField pfPassword;
@@ -62,6 +65,9 @@ public class EditProfileController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		btnUpdate.disableProperty().bind((tfUserName.textProperty().isNotEmpty()
+				.and(tfUserEmail.textProperty().isNotEmpty()).and(pfPassword.textProperty().isNotEmpty())).not());
 		
 		
 	}
