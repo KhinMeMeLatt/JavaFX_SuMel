@@ -412,7 +412,7 @@ public class HomeController implements Initializable {
 		}
 	}
 	
-	private void setTable(int goalId) {
+	void setTable(int goalId) {
 		List<SaveAndWithdrawHistory> swhArrayList = new ArrayList<SaveAndWithdrawHistory>();	
 
 		swhArrayList = saveDBModel.selectAllSaveData(goalId);
