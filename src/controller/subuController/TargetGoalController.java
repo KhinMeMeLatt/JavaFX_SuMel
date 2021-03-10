@@ -102,6 +102,8 @@ public class TargetGoalController implements Initializable {
 	private Boolean isInEditMode = false;
 
 	GoalDBModel goalModel = new GoalDBModel();
+	
+	HomeController home = new HomeController();
 
 	@FXML
 	void processClose(ActionEvent event) {
@@ -129,7 +131,7 @@ public class TargetGoalController implements Initializable {
 	void createGoal(ActionEvent event) throws IOException {
 		if (isInEditMode) {
 			handleUpdateTargetGoal();
-			return;
+			return ;
 		}
 		String goalName = txtGoalName.getText();
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
@@ -145,8 +147,11 @@ public class TargetGoalController implements Initializable {
 
 		if (!goalModel.isSubuNameExists(goalName)) {
 			goalModel.insertGoal(newGoal);
+			home.refresh(true);
+
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
+			home.refresh(false);
 		}
 		
 	}
@@ -183,6 +188,17 @@ public class TargetGoalController implements Initializable {
 		rbMonthly.setDisable(monthly);
 		rbWeekly.setDisable(weekly);
 	}
+	
+	private void availableSaveType() {
+		if (this.period < 7) {
+			this.disableSaveTypes(true, true);// first argument is for weekly save type radio button, second
+												// argument is for monthly save type radio button
+		} else if (this.period < 30) {
+			this.disableSaveTypes(false, true);
+		} else {
+			this.disableSaveTypes(false, false);
+		}
+	}
 
 	@FXML
 	void processEndDate(ActionEvent event) {
@@ -192,15 +208,8 @@ public class TargetGoalController implements Initializable {
 
 			// Total number of target days
 			this.period = ChronoUnit.DAYS.between(this.startDate, this.endDate);
-
-			if (this.period < 7) {
-				this.disableSaveTypes(true, true);// first argument is for weekly save type radio button, second
-													// argument is for monthly save type radio button
-			} else if (this.period < 30) {
-				this.disableSaveTypes(false, true);
-			} else {
-				this.disableSaveTypes(false, false);
-			}
+			this.availableSaveType();
+			
 			processSaveType(event);
 		} else {
 			changeDate = !changeDate;
@@ -317,30 +326,10 @@ public class TargetGoalController implements Initializable {
 			this.isStartProgram = !isStartProgram;
 			this.endDate = dpEndDate.getValue();
 
-			// Total number of target days
-			this.period = ChronoUnit.DAYS.between(this.startDate, this.endDate);
-
-			if (this.period < 7) {
-				this.disableSaveTypes(true, true);// first argument is for weekly save type radio button, second
-													// argument is for monthly save type radio button
-			} else if (this.period < 30) {
-				this.disableSaveTypes(false, true);
-			} else {
-				this.disableSaveTypes(false, false);
-			}
+			this.period = ChronoUnit.DAYS.between(sDate, eDate);
+			this.availableSaveType();
 		} else {
 			changeDate = !changeDate;
-		}
-
-		if (goal.getSaveType().equals("Daily")) {
-			disableSaveTypes(true, true);
-			this.rbDaily.setSelected(true);
-		} else if (goal.getSaveType().equals("Weekly")) {
-			disableSaveTypes(false, true);
-			this.rbWeekly.setSelected(true);
-		} else if (goal.getSaveType().equals("Monthly")) {
-			disableSaveTypes(false, false);
-			this.rbMonthly.setSelected(true);
 		}
 
 		txtSaveAmount.setText(String.valueOf(goal.getAmountToSave()));
@@ -375,11 +364,16 @@ public class TargetGoalController implements Initializable {
 		if (!goalModel.isSubuNameExists(goalName)) {
 			if (goalModel.updateTargetGoal(newGoal)) {
 				AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Goal is updated successfully!");
+				Stage homeStage = (Stage) txtGoalName.getScene().getWindow();
+				homeStage.close();
+				home.refresh(true);
 			} else {
 				AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Goal Update Failed!");
+				home.refresh(false);
 			}
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
+			home.refresh(false);
 		}
 	}
 

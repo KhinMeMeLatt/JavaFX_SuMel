@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
+import alert.AlertMaker;
 import database.ExpenseDB;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -27,6 +28,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -80,6 +82,8 @@ public class CreatingExpenseController implements Initializable{
     
     @FXML
     private JFXTextField txtCategory;
+    
+    private boolean success = false;
 
     private ObservableList<Expense> expenseList = FXCollections.observableArrayList();
     
@@ -126,10 +130,14 @@ public class CreatingExpenseController implements Initializable{
 
     @FXML
     void removeSelectedRows(ActionEvent event) {
+    	int removeAmount = tvExpense.getSelectionModel().getSelectedItem().getExpenseAmount();
     	tvExpense.getItems().removeAll(tvExpense.getSelectionModel().getSelectedItems());
 
         // table selects by index, so we have to clear the selection or else items with that index would be selected 
         tvExpense.getSelectionModel().clearSelection();
+        totalItems.set(totalItems.get()-1);
+        
+        totalAmount.set(totalAmount.get()-removeAmount);
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -157,12 +165,19 @@ public class CreatingExpenseController implements Initializable{
     
     @FXML
     void saveExpense(ActionEvent event) throws SQLException {
+    	
     	expenseList = tvExpense.getItems();
     	expenseList.forEach(expense -> {
     		if(expense.getExpenseName() != "" && expense.getExpenseCategory() != "" && expense.getExpenseAmount() != 0) {
-				expenseDB.insertExpense(expense);
+				success = (expenseDB.insertExpense(expense) != 0)? true : false;
 			}
     	});
+    	if(success == true) {
+    		AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Expenses are recorded successfully!");
+    	}else {
+    		AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Expenses record process Failed!");
+    	}
+    	tvExpense.getItems().clear();
     }
     
     private void makeEditableTable() {

@@ -16,6 +16,16 @@ public class MainController extends FramesController {
 
 	@FXML
 	private JFXButton signUpBtn;
+	
+	@FXML
+    void aboutFrame(ActionEvent event) throws IOException {
+       openFrame("accountView", "AboutUI", "About");
+    }
+
+    @FXML
+    void currencyConverterFrame(ActionEvent event) throws IOException {
+       openCurrencyFrame("CurrencyConverterUI", "Currency Converter");
+    }
 
 	@FXML // Scenes Changes to Login Scene
 	void processLogin(ActionEvent event) throws IOException {

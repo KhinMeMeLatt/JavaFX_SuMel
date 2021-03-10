@@ -32,7 +32,7 @@ public class ExpenseDB {
 		this.connection = DBConnection.getConnection();
 	}
 	
-	public void insertExpense(Expense expense) {
+	public int insertExpense(Expense expense) {
 		this.query = "INSERT INTO "+DBConst.EXPENSE_TABLE+"("+DBConst.EXPENSE_NAME+","
 							+DBConst.EXPENSE_CATEGORY+","+DBConst.EXPENSE_AMOUNT+","+DBConst.SPEND_AT+","
 							+DBConst.EXPENSE_USER_ID+")"
@@ -48,12 +48,13 @@ public class ExpenseDB {
 			this.preparedStatement.setDate(4, spendAt);
 			this.preparedStatement.setInt(5, User.userId);
 			
-			this.preparedStatement.executeUpdate();
-			AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Expenses are recorded successfully!");
+			return this.preparedStatement.executeUpdate();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Expenses record process Failed!");
+			
 			e.printStackTrace();
+			return 0;
 		}
 	
 	}

@@ -5,20 +5,28 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import alert.AlertMaker;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
+import model.Expense;
 import model.accountModel.User;
 import model.subuModel.Goal;
+import model.subuModel.Subu;
 
 public class GoalDBModel {
+	
+	public static int goalId;
 
 	private Connection connection;
 	private PreparedStatement ps;
+	private Statement st;
 	private ResultSet rs;
 	private Goal goal;
 
@@ -50,16 +58,17 @@ public class GoalDBModel {
 			this.ps.setInt(9, User.userId);
 
 			this.ps.executeUpdate();
-			AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Expenses are recorded successfully!");
+			AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null,
+					"Expenses are recorded successfully!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Expenses record process Failed!");
+			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Expenses record process Failed!");
 			e.printStackTrace();
 		}
 	}
 
-	public List<Goal> selectAllSubu() {
-		List<Goal> goalList = new ArrayList<Goal>();
+	public ObservableList<Goal> selectAllSubu() {
+		ObservableList<Goal> goalList = FXCollections.observableArrayList();
 		String selectAllGoal = "SELECT * FROM goal WHERE userId = " + User.userId;
 
 		try {
@@ -80,8 +89,38 @@ public class GoalDBModel {
 				goalList.add(goal);
 
 			}
-			// AlertMaker.showSimpleAlert("Successful Message", "All Goals Loaded
-			// Successfully!");
+			return goalList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// AlertMaker.showErrorMessage("Error", "Goals loading Failed!");
+			return null;
+		}
+	}
+	
+	
+	public ObservableList<Goal> searchSubuByName(String name) {
+		ObservableList<Goal> goalList = FXCollections.observableArrayList();
+		String selectAllGoal = "SELECT * FROM goal WHERE goalName like ? AND userId = " + 2;
+
+		try {
+			ps = this.connection.prepareStatement(selectAllGoal);
+			ps.setString(1, "%"+name+"%");
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				goal = new Goal();
+				goal.setGoalId(rs.getInt(DBConst.GOAL_ID));
+				goal.setGoalName(rs.getString(DBConst.GOAL_NAME));
+				goal.setGoalImgName(rs.getString(DBConst.GOAL_IMAGE_NAME));
+				goal.setStartDate(rs.getString(DBConst.START_DATE));
+				goal.setEndDate(rs.getString(DBConst.END_DATE));
+				goal.setSaveType(rs.getString(DBConst.SAVE_TYPE));
+				goal.setGoalAmount(rs.getInt(DBConst.GOAL_AMOUNT));
+				goal.setAmountToSave(rs.getInt(DBConst.AMOUNT_TO_SAVE));
+				goal.setIsBreak(rs.getBoolean(DBConst.IS_BREAK));
+
+				goalList.add(goal);
+
+			}
 			return goalList;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,7 +131,7 @@ public class GoalDBModel {
 
 	public Goal selectSubuBySubuName(String sbName) {
 		Goal goal = new Goal();
-		String selectSubu = "SELECT * FROM goal Where goalName like ? ";
+		String selectSubu = "SELECT * FROM goal Where goalName like ? AND userId = " + 2;
 		try {
 			ps = this.connection.prepareStatement(selectSubu);
 			ps.setString(1, sbName);
@@ -115,6 +154,7 @@ public class GoalDBModel {
 		}
 	}
 
+	
 	public double getCurrentAmountByID(int goalId) {
 		double currentAmt = 0;
 		String selectAmount = "SELECT SUM(save.saveAmount), SUM(withdraw.withdrawAmount) " + "FROM save "
@@ -144,11 +184,10 @@ public class GoalDBModel {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				int count = rs.getInt(1);
-				System.out.println(count);
-				return (count > 0);
+				return (count > 1);
 			}
 		} catch (SQLException ex) {
-            ex.printStackTrace();
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -217,5 +256,6 @@ public class GoalDBModel {
 		}
 
 	}
+
 
 }

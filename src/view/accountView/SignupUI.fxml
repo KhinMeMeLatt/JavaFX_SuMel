@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.SignupController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.SignupController">
    <children>
       <Label alignment="CENTER" layoutX="84.0" layoutY="14.0" prefHeight="57.0" prefWidth="79.0" text="SUMEL" textFill="#e1460e">
          <font>
@@ -21,12 +21,12 @@
             <Image url="@../../assets/pig.PNG" />
          </image>
       </ImageView>
-      <JFXButton layoutX="404.0" layoutY="17.0" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
+      <JFXButton layoutX="404.0" layoutY="17.0" onAction="#currencyConverterFrame" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="600.0" layoutY="17.0" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #1a6ada;" text="About" textFill="#fcf6f6">
+      <JFXButton layoutX="600.0" layoutY="17.0" onAction="#aboutFrame" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #1a6ada;" text="About" textFill="#fcf6f6">
          <font>
             <Font size="14.0" />
          </font>

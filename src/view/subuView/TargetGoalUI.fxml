@@ -20,7 +20,7 @@
 
 <BorderPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.TargetGoalController">
    <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="700.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="61.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -35,20 +35,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXButton onAction="#convertCurrency" prefHeight="49.0" prefWidth="140.0" style="-fx-background-color: #3581e6;" text="Currency Converter" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-            <JFXButton onAction="#processAbout" prefHeight="50.0" prefWidth="82.0" style="-fx-background-color: #3581e6;" text="About" textFill="WHITE">
-               <HBox.margin>
-                  <Insets left="50.0" />
-               </HBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
       </HBox>
    </top>
    <center>

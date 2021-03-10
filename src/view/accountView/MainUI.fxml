@@ -19,12 +19,12 @@
             <Image url="@../../assets/pig.PNG" />
          </image>
       </ImageView>
-      <JFXButton layoutX="393.0" layoutY="23.0" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
+      <JFXButton layoutX="393.0" layoutY="23.0" onAction="#currencyConverterFrame" prefHeight="51.0" prefWidth="167.0" ripplerFill="#73c4da" style="-fx-background-color: #1a6ada;" text="Currency Converter" textFill="#f6f8fc">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="590.0" layoutY="23.0" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #1a6ada;" text="About" textFill="#fcf6f6">
+      <JFXButton layoutX="590.0" layoutY="23.0" onAction="#aboutFrame" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #1a6ada;" text="About" textFill="#fcf6f6">
          <font>
             <Font size="14.0" />
          </font>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.SaveController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.SaveController">
    <children>
       <ImageView fitHeight="61.0" fitWidth="100.0" layoutX="84.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,16 +23,6 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <JFXButton layoutX="315.0" layoutY="42.0" onAction="#convertCurrency" prefHeight="49.0" prefWidth="140.0" style="-fx-background-color: #3581e6;" text="Currency Converter" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="529.0" layoutY="43.0" onAction="#processAbout" prefHeight="50.0" prefWidth="82.0" style="-fx-background-color: #3581e6;" text="About" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
       <GridPane layoutX="84.0" layoutY="154.0" prefHeight="287.0" prefWidth="533.0" style="-fx-background-color: #eee9e7;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

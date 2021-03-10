@@ -179,12 +179,6 @@ public class HistoryController implements Initializable{
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								try {
-									getAllExpense();
-								} catch (SQLException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

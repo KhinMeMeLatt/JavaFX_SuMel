@@ -33,12 +33,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXComboBox fx:id="fromCountry" prefHeight="40.0" prefWidth="213.0" GridPane.rowIndex="1">
+            <JFXComboBox fx:id="fromCountry" prefHeight="40.0" prefWidth="212.0" promptText="From" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="40.0" />
                </GridPane.margin>
             </JFXComboBox>
-            <JFXComboBox fx:id="toCountry" prefHeight="40.0" prefWidth="213.0" GridPane.rowIndex="3">
+            <JFXComboBox fx:id="toCountry" prefHeight="40.0" prefWidth="212.0" promptText="To" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="40.0" />
                </GridPane.margin>
