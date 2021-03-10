@@ -83,15 +83,21 @@
                </padding>
             </JFXTextField>
             <DatePicker fx:id="dpSendAt" prefHeight="39.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <JFXButton fx:id="btnUpdate" onAction="#updateExpense" prefHeight="47.0" prefWidth="103.0" style="-fx-background-color: #e1460e;" text="Update" textFill="WHITE" GridPane.rowIndex="4">
+            <JFXButton fx:id="btnUpdate" onAction="#updateExpense" prefHeight="47.0" prefWidth="103.0" style="-fx-background-color: #f25d07;" text="Update" textFill="#fffcfa" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="80.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </JFXButton>
-            <JFXButton onAction="#processCancel" prefHeight="47.0" prefWidth="103.0" style="-fx-background-color: #f00;" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <JFXButton onAction="#processCancel" prefHeight="47.0" prefWidth="103.0" style="-fx-background-color: #f25d07;" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="80.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </JFXButton>
             <JFXComboBox fx:id="cobCategory" prefHeight="43.0" prefWidth="203.0" promptText="Choose Category" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>

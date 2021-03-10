@@ -50,8 +50,17 @@
             <Image url="@../../assets/search.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="237.0" layoutY="83.0" onAction="#showAll" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #e1460e;" text="Show All" textFill="WHITE" />
-      <JFXButton layoutX="430.0" layoutY="83.0" onAction="#deleteExpense" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #f00;" text="Delete" textFill="WHITE" />
-      <JFXButton fx:id="btnUpdate" layoutX="330.0" layoutY="84.0" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #e1460e;" text="Update" textFill="WHITE" />
+      <JFXButton layoutX="237.0" layoutY="83.0" onAction="#showAll" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #e1460e;" text="Show All" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></JFXButton>
+      <JFXButton layoutX="430.0" layoutY="83.0" onAction="#deleteExpense" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #f00;" text="Delete" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="btnUpdate" layoutX="330.0" layoutY="84.0" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #e1460e;" text="Update" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></JFXButton>
    </children>
 </AnchorPane>

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.JustSaveController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.JustSaveController">
    <children>
       <Label layoutX="103.0" layoutY="53.0" prefHeight="45.0" prefWidth="218.0" text="SuMel" textFill="#e05f26">
          <font>
@@ -36,12 +36,12 @@
          <children>
             <Label prefHeight="38.0" prefWidth="123.0" text="Goal Name" textFill="#e05f26" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
             <Label prefHeight="38.0" prefWidth="122.0" text="Start Date" textFill="#e05f26" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
-                  <Font size="14.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
             <ImageView fitHeight="62.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
@@ -75,21 +75,27 @@
       </GridPane>
       <HBox alignment="CENTER" layoutX="65.0" layoutY="497.0" prefHeight="45.0" prefWidth="592.0">
          <children>
-            <JFXButton onAction="#processBack" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Back">
+            <JFXButton onAction="#processBack" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Back" textFill="#fffafa">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </JFXButton>
-            <JFXButton fx:id="btnCreateGoal" onAction="#processCreateGoal" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Create Goal">
+            <JFXButton fx:id="btnCreateGoal" onAction="#processCreateGoal" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #e05f26;" text="Create Goal" textFill="#fffafa">
                <HBox.margin>
                   <Insets left="120.0" />
                </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </JFXButton>
          </children>
       </HBox>
       <Label alignment="CENTER" layoutX="115.0" layoutY="560.0" prefHeight="26.0" prefWidth="470.0" text="Powered by UIT NTT-AT Scholarship Students" />
-      <JFXButton layoutX="291.0" layoutY="54.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0728fc;" text="Currency Converter" textFill="#f4f4f8" />
-      <JFXButton layoutX="496.0" layoutY="54.0" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0728fc;" text="About" textFill="#f4f4f8" />
+      <JFXButton layoutX="291.0" layoutY="54.0" prefHeight="40.0" prefWidth="139.0" style="-fx-background-color: #0728fc;" text="Currency Converter" textFill="#f4f4f8" />
+      <JFXButton layoutX="496.0" layoutY="54.0" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: #0728fc;" text="About" textFill="#f4f4f8" />
       <ImageView fitHeight="62.0" fitWidth="75.0" layoutX="28.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../assets/pig.PNG" />

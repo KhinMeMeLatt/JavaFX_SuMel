@@ -28,7 +28,7 @@
       </ImageView>
       <JFXTextField fx:id="tfUserName" focusColor="#ff3d0f" layoutX="170.0" layoutY="122.0" prefHeight="37.0" prefWidth="230.0" promptText="User Name" unFocusColor="#ff7b0e">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </JFXTextField>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="86.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
@@ -38,7 +38,7 @@
       </ImageView>
       <JFXTextField fx:id="tfUserEmail" focusColor="#ff3d0f" layoutX="170.0" layoutY="219.0" prefHeight="37.0" prefWidth="230.0" promptText="User Email" unFocusColor="#ff7b0e">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </JFXTextField>
       <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="86.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
@@ -46,20 +46,20 @@
             <Image url="@/assets/key.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnUpdate" layoutX="314.0" layoutY="397.0" mnemonicParsing="false" onAction="#processUpdate" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #ff8400;" text="Update" textFill="WHITE">
+      <Button fx:id="btnUpdate" layoutX="303.0" layoutY="397.0" mnemonicParsing="false" onAction="#processUpdate" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #ff8400;" text="Update" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnClose" layoutX="204.0" layoutY="397.0" mnemonicParsing="false" onAction="#processClose" prefHeight="40.0" prefWidth="71.0" style="-fx-background-color: #ff8400;" text="Close" textFill="WHITE">
+      <Button fx:id="btnClose" layoutX="170.0" layoutY="397.0" mnemonicParsing="false" onAction="#processClose" prefHeight="40.0" prefWidth="71.0" style="-fx-background-color: #ff8400;" text="Close" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="473.0" text="Powered by UIT NTT-AT Scholarship Students" />
+      <Label alignment="CENTER" layoutX="165.0" layoutY="463.0" text="Powered by UIT NTT-AT Scholarship Students" />
       <JFXPasswordField fx:id="pfPassword" focusColor="#ff3d0f" layoutX="170.0" layoutY="312.0" prefHeight="37.0" prefWidth="230.0" promptText="Password" unFocusColor="#ff7b0e">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </JFXPasswordField>
    </children>
