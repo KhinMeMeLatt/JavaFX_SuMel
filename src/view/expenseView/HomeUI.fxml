@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1300.0" style="-fx-background-color: gray;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.expenseController.HomeController">
+<AnchorPane prefHeight="700.0" prefWidth="1300.0" style="-fx-background-color: gray;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.expenseController.HomeController">
    <children>
       <HBox prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -61,7 +61,7 @@
                                     <Font name="Georgia" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblExpense" text="Expense" HBox.hgrow="ALWAYS">
+                              <Label fx:id="lblGoal" text="Goal" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Georgia" size="16.0" />
                                  </font>
@@ -147,7 +147,7 @@
                               <Separator opacity="0.26" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: gray;" />
                               <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <PieChart fx:id="pcExpense" prefHeight="330.0" prefWidth="500.0" title="Expense Chart"/>
+                                    <PieChart fx:id="pcExpense" prefHeight="330.0" prefWidth="500.0" title="Expense Chart" />
                                  </children>
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -239,12 +239,12 @@
                                        </font>
                                     </Label>
                                     <JFXButton buttonType="RAISED" onAction="#setTargetExpense" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="Set Target Expense" textAlignment="CENTER" wrapText="true" />
-                                    <JFXButton fx:id="btnExpense" buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="Expense Note" wrapText="true">
+                                    <JFXButton fx:id="btnExpense" buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="Insert New Expenses" wrapText="true">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="btnHistory" buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="History" wrapText="true">
+                                    <JFXButton fx:id="btnHistory" buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="Expenses Notebook" wrapText="true">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

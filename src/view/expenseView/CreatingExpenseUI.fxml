@@ -94,12 +94,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Excess Amount:" GridPane.rowIndex="3">
+            <Label text="Excess Amount:" textFill="RED" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblExcessAmount" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="99.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label fx:id="lblExcessAmount" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="99.0" text="0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>

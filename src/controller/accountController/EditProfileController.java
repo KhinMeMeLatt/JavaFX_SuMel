@@ -54,9 +54,6 @@ public class EditProfileController implements Initializable {
     	user.setEmail(tfUserEmail.getText());
     	user.setPassword(encryptedString);
     	accountdb.updateProfile(user);
-    	
-
-    	
     }
 
 	@Override
@@ -74,9 +71,5 @@ public class EditProfileController implements Initializable {
 		
 		btnUpdate.disableProperty().bind((tfUserName.textProperty().isNotEmpty()
 				.and(tfUserEmail.textProperty().isNotEmpty()).and(pfPassword.textProperty().isNotEmpty())).not());
-		
-		
 	}
-	
-	
 }

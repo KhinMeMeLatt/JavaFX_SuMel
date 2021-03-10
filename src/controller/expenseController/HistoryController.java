@@ -9,7 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 
 import alert.AlertMaker;
-import database.WithdrawDBModel;
+import database.ExpenseDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -62,7 +62,7 @@ public class HistoryController implements Initializable{
 	@FXML
 	private JFXButton btnUpdate;
 
-	private WithdrawDBModel expenseDB = new WithdrawDBModel();
+	private ExpenseDB expenseDB = new ExpenseDB();
 
 	private Expense expense;
 

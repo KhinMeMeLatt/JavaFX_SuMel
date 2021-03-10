@@ -30,7 +30,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -47,7 +46,7 @@ public class HomeController implements Initializable {
     private Label lblmySubu;
 
     @FXML
-    private Label lblExpense;
+    private Label lblGoal;
 
     @FXML
     private Label lblCurrencyConverter;
@@ -90,6 +89,12 @@ public class HomeController implements Initializable {
 
 	@FXML
 	private JFXTextField txtSearch;
+	
+	@FXML
+    private JFXButton btnExpense;
+    
+    @FXML
+    private JFXButton btnHistory;
 
 	public static ObservableList<Expense> expense;
 	
@@ -109,17 +114,10 @@ public class HomeController implements Initializable {
 	@FXML
 	void mySubuFrame(MouseEvent event) throws IOException {	
 		frameController.openFrame("subuView", "HomeUI", "Sumel");
-		Stage home = (Stage) lblExpense.getScene().getWindow();
+		Stage home = (Stage) lblGoal.getScene().getWindow();
 		home.close();
+	}
 	
-	@FXML
-    private JFXButton btnExpense;
-    
-    @FXML
-    private JFXButton btnHistory;
-
-	public static ObservableList<Expense> expense;
-
 	@FXML
 	void setTargetExpense(ActionEvent event) throws SQLException {
 		expenseDB.selectTargetExpense();
@@ -142,7 +140,6 @@ public class HomeController implements Initializable {
 	void showHistory(ActionEvent event) throws IOException {
     	frameController.openFrame("expenseView", "HistoryUI", "Expense History");
 	}
-
 
 	private void setExpense(List<Expense> expenseList) {
 		clearGrid();
@@ -172,10 +169,19 @@ public class HomeController implements Initializable {
 	private void setTableData(String category) {
 		tvHistory.setItems(expenseDB.selectExpenseWith(category));
 	}
+	
+	private void drawPieChart() {
+		try {
+			pcExpense.setData(expenseDB.selectWithCategory());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    lblExpense.setTextFill(Color.RED);
+    lblGoal.setTextFill(Color.RED);
 		//set User name
 		try {
 			AccountDBModel account = new AccountDBModel();
@@ -186,12 +192,7 @@ public class HomeController implements Initializable {
 		}
 		
 		//Draw Pie chart
-		try {
-			pcExpense.setData(expenseDB.selectWithCategory());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		drawPieChart();
 
 		// //set table cell value
 		tcDate.setCellValueFactory(new PropertyValueFactory<Expense, String>("spendAt"));
@@ -235,6 +236,8 @@ public class HomeController implements Initializable {
 							dialog.setScene(new Scene(root));
 							CreatingExpenseController expenseController = fxmlLoader.getController();
 							dialog.showAndWait();
+							drawPieChart();
+							setExpense(expenseDB.getCategoryAmount());
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -260,56 +263,8 @@ public class HomeController implements Initializable {
 							dialog.setScene(new Scene(root));
 							HistoryController historyController = fxmlLoader.getController();
 							dialog.showAndWait();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
-
-		//About
-		btnAbout.setOnAction(
-				new EventHandler<ActionEvent>() {
-					
-					@Override
-					public void handle(ActionEvent arg0) {
-						final Stage dialog = new Stage();
-						dialog.initModality(Modality.APPLICATION_MODAL);
-						Stage primaryStage = (Stage) btnAbout.getScene().getWindow();
-						dialog.initOwner(primaryStage);
-						FXMLLoader fxmlLoader = new FXMLLoader();
-						try {
-							fxmlLoader.setLocation(getClass().getResource("../../view/accountView/AboutUI.fxml"));
-							fxmlLoader.load();
-							Parent root = fxmlLoader.getRoot();
-							dialog.setScene(new Scene(root));
-							AboutController aboutController = fxmlLoader.getController();
-							dialog.showAndWait();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
-		
-		//Currency Converter
-		btnCurrency.setOnAction(
-				new EventHandler<ActionEvent>() {
-					
-					@Override
-					public void handle(ActionEvent arg0) {
-						final Stage dialog = new Stage();
-						dialog.initModality(Modality.APPLICATION_MODAL);
-						Stage primaryStage = (Stage) btnCurrency.getScene().getWindow();
-						dialog.initOwner(primaryStage);
-						FXMLLoader fxmlLoader = new FXMLLoader();
-						try {
-							fxmlLoader.setLocation(getClass().getResource("../../view/CurrencyConverterUI.fxml"));
-							fxmlLoader.load();
-							Parent root = fxmlLoader.getRoot();
-							dialog.setScene(new Scene(root));
-							CurrencyController currencyController = fxmlLoader.getController();
-							dialog.showAndWait();
+							drawPieChart();
+							setExpense(expenseDB.getCategoryAmount());
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
