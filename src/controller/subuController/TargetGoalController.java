@@ -324,8 +324,8 @@ public class TargetGoalController implements Initializable {
 				}
 			});
 
-			//btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()
-					//.and(txtObjAmount.textProperty().isNotEmpty()).and(txtSaveAmount.textProperty().isNotEmpty())).not());
+			btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()
+					.and(txtObjAmount.textProperty().isNotEmpty()).and(txtSaveAmount.textProperty().isNotEmpty())).not());
 		
 	}
 
