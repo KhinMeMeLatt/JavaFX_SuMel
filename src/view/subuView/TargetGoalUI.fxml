@@ -61,8 +61,8 @@
         <rowConstraints>
             <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="175.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
@@ -75,14 +75,20 @@
                </GridPane.margin>
                <children>
                   <JFXTextField fx:id="txtGoalName" labelFloat="true" onKeyReleased="#nameExist" prefHeight="25.0" prefWidth="352.0" promptText="Goal Name" />
-                  <Label fx:id="nameExistLabel" onKeyReleased="#nameExist" />
                </children>
             </VBox>
-            <JFXTextField fx:id="txtObjAmount" labelFloat="true" promptText="Objective Amount" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="50.0" />
                </GridPane.margin>
-            </JFXTextField>
+               <children>
+                  <JFXTextField fx:id="txtObjAmount" labelFloat="true" prefHeight="15.0" prefWidth="493.0" promptText="Objective Amount" />
+                  <Label fx:id="nameAmount" onKeyReleased="#nameExist" textFill="#eb5a11">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+               </children>
+            </VBox>
             <AnchorPane prefHeight="66.0" prefWidth="429.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                <children>
                   <Label layoutX="239.0" layoutY="12.0" text="Start Date" />

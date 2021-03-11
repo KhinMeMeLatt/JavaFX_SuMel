@@ -73,11 +73,13 @@ public class TargetGoalController implements Initializable {
 
 	@FXML
 	private Label nameExistLabel;
+	
 	@FXML
-	private Label lblValidate;
+	private Label nameAmount;
 
 	@FXML
 	private ImageView imViewGoal;
+	
 
 	private LocalDate startDate = LocalDate.now();
 
@@ -118,6 +120,7 @@ public class TargetGoalController implements Initializable {
 		if (goalDbModel.isSubuNameExists(txtGoalName.getText())) {
 			nameExistLabel.setTextFill(Color.RED);
 			nameExistLabel.setText("***Subu name is already exist!!!Please Enter Different name.");
+			
 		} else {
 			nameExistLabel.setTextFill(Color.WHITE);
 			nameExistLabel.setText("");
@@ -135,42 +138,50 @@ public class TargetGoalController implements Initializable {
 
 	@FXML
 	void createGoal(ActionEvent event) throws IOException {
+		try {
 		if (isInEditMode) {
 			handleUpdateTargetGoal();
 			return;
 		}
 		String goalName = txtGoalName.getText();
-		if(goalName.length()>20) {
-			txtGoalName.setText("Invalid Length!");
-		}
+		
 
-		double amountToSave = Double.valueOf(txtSaveAmount.getText());
+			double amountToSave = Double.valueOf(txtSaveAmount.getText());
 
-		if (imgFile == null) {
-			imgFile = new File("src/assets/goal.png");
-			imageName = "goal.png";
-		}
 
-		BufferedImage bImage = ImageIO.read(imgFile);
-
-		String mimeType = URLConnection.guessContentTypeFromName(imageName);
-
-		ImageIO.write(bImage, mimeType.substring(mimeType.indexOf("/") + 1), new File("src/assets/goals/" + imageName));
-
-		Goal newGoal = new Goal(goalName, this.imageName, this.objAmount, this.startDate.toString(),
-				this.endDate.toString(), this.saveType, amountToSave, false, User.userId);
-
-		if (!(goalName.length() > 10)) {
-
-			if (!goalDbModel.isSubuNameExists(goalName)) {
-				goalDbModel.insertGoal(newGoal);
-			} else {
-				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
+			if (imgFile == null) {
+				imgFile = new File("src/assets/goal.png");
+				imageName = "goal.png";
 			}
 
-		} else {
-			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
+			BufferedImage bImage = ImageIO.read(imgFile);
+
+			String mimeType = URLConnection.guessContentTypeFromName(imageName);
+
+			ImageIO.write(bImage, mimeType.substring(mimeType.indexOf("/") + 1),
+					new File("src/assets/goals/" + imageName));
+
+			Goal newGoal = new Goal(goalName, this.imageName, this.objAmount, this.startDate.toString(),
+					this.endDate.toString(), this.saveType, amountToSave, false, User.userId);
+
+			if (!(goalName.length() > 10)) {
+
+				if (!goalDbModel.isSubuNameExists(goalName)) {
+					goalDbModel.insertGoal(newGoal);
+				} else {
+					AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
+				}
+
+			} else {
+				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
+			}
+		} catch (NumberFormatException e) {
+			//btnCreateGoal.setDisable(true);
+			btnCreateGoal.setDisable(true);
+			
 		}
+		
+		
 	}
 	@FXML
 	void addImage(MouseEvent event) {
@@ -260,7 +271,7 @@ public class TargetGoalController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
+		
 			goalDbModel = GoalDBModel.getInstance();
 			dpStartDate.setValue(LocalDate.now()); // Set current date in date picker for start date
 			dpEndDate.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
@@ -298,16 +309,24 @@ public class TargetGoalController implements Initializable {
 
 				@Override
 				public void changed(ObservableValue<? extends Object> observableValue, Object oldValue, Object newValue) {
-					objAmount = (txtObjAmount.getText() == "") ? 0 : Integer.valueOf(txtObjAmount.getText());
-					calculateSaveAmount();
+					try {
+						objAmount = (txtObjAmount.getText() == "") ? 0 : Integer.valueOf(txtObjAmount.getText());
+						calculateSaveAmount();
+
+					
+				} catch (NumberFormatException e) {
+					nameAmount.setText("Please Enter Numbers!");
+					btnCreateGoal.setDisable(true);
+					
+					
+				}
+					
 				}
 			});
 
-			btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()
-					.and(txtObjAmount.textProperty().isNotEmpty()).and(txtSaveAmount.textProperty().isNotEmpty())).not());
-		}catch(NumberFormatException e){
-			txtSaveAmount.setText("Please Enter Numbers!");
-		}
+			//btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()
+					//.and(txtObjAmount.textProperty().isNotEmpty()).and(txtSaveAmount.textProperty().isNotEmpty())).not());
+		
 	}
 
 	public void updateTargetGoalUI(Goal goal) {
@@ -355,6 +374,7 @@ public class TargetGoalController implements Initializable {
 
 	private void handleUpdateTargetGoal() {
 		String goalName = txtGoalName.getText();
+		
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
 
 		BufferedImage bImage;
@@ -396,6 +416,7 @@ public class TargetGoalController implements Initializable {
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
+		
 
 
 	}
