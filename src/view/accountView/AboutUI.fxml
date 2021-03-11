@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.AboutController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.AboutController">
    <children>
       <Label alignment="CENTER" layoutX="94.0" layoutY="24.0" prefHeight="57.0" prefWidth="79.0" text="SUMEL" textFill="#e1460e">
          <font>
@@ -19,21 +19,11 @@
             <Image url="@../../assets/pig.PNG" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btnClose" layoutX="643.0" layoutY="27.0" onAction="#processClose" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #f02c0e;" text="Close" textFill="#fcf6f6">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
-      <Label alignment="CENTER" layoutX="284.0" layoutY="77.0" prefHeight="70.0" prefWidth="214.0" text="SUMEL" textFill="#ff7b0e">
+      <Label alignment="CENTER" layoutX="266.0" layoutY="77.0" prefHeight="70.0" prefWidth="214.0" text="SUMEL" textFill="#ff7b0e">
          <font>
             <Font name="Cinzel Black" size="48.0" />
          </font>
       </Label>
-      <ImageView fitHeight="57.0" fitWidth="53.0" layoutX="233.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../bin/assets/about2.PNG" />
-         </image>
-      </ImageView>
       <Label alignment="CENTER" layoutX="3.0" layoutY="353.0" prefHeight="44.0" prefWidth="747.0" style="-fx-background-color: #FFFFFF;" text="           Our financial guide is finally here! Explore More In the Video !!" textFill="#1e130c">
          <font>
             <Font name="System Italic" size="18.0" />
@@ -59,5 +49,10 @@
             <Image url="@../../assets/videoPlay.png" />
          </image>
       </ImageView>
+      <JFXButton fx:id="btnHome" layoutX="644.0" layoutY="27.0" onAction="#homeFrame" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #1a6ada;" text="Home" textFill="#fcf6f6">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
