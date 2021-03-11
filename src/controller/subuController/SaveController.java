@@ -70,6 +70,7 @@ public class SaveController implements Initializable {
 
 		} catch (NumberFormatException e) {
 			lblValidation.setText("Please Enter Numbers!");
+			
 		}
 
 	}
