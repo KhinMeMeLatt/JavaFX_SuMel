@@ -18,7 +18,7 @@ his/her activities with high visualized formative charts. It also supports forei
 ## Installation
 
 ### Prerequisites
-- To run this project, you must have Java 8 or above
+- To run this project, you must have Java 15 and JavaFX15
 
 ### Step 1
 Begin by cloning this repository to your machine
@@ -26,17 +26,25 @@ Begin by cloning this repository to your machine
 git clone https://github.com/KhinMeMeLatt/SuMel.git
 ```
 
+### Step 2
+- Create sumeldb database
+- Import sql files to your database
+- Need to change the username and password in DBConnection.java
+
 ### Exchange Rate API
 - This project use Exchange Rate API. You can get it from [ExchangeRate API website](https://www.exchangerate-api.com/docs/supported-currencies)
 
 Please replace your api key in the following statement.
 
 ```bash
-String url_str = "https://v6.exchangerate-api.com/v6/b43099997aab83f2874b91c6/latest/"+baseCountryCode;
+String url_str = "https://v6.exchangerate-api.com/v6/588e05b36428d517c77d7639/latest/"+baseCountryCode;
 ```
 
 ## Future Works
+- Performance Enhancement
+- Multi-language
 - Notify the system user to save money according to saving plan
+- Backup and export bill transferring, and income
 
 ## Build With
 - [Java](https://docs.oracle.com/en/java/)
