@@ -65,7 +65,7 @@ public class CurrencyController implements Initializable{
 	
 	private float getExchangeRate(String baseCountryCode, String destinationCountryCode) {
 		try {
-			String url_str = "https://v6.exchangerate-api.com/v6/b43099997aab83f2874b91c6/latest/"+baseCountryCode;
+			String url_str = "https://v6.exchangerate-api.com/v6/588e05b36428d517c77d7639/latest/"+baseCountryCode;
 
 			// Making Request
 			URL url = new URL(url_str);
