@@ -92,11 +92,11 @@
                <children>
                   <JFXButton onAction="#processClose" prefHeight="45.0" prefWidth="131.0" style="-fx-background-color: #e05f26;" text="Back" textFill="WHITE">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font></JFXButton>
                   <JFXButton fx:id="btnCreateGoal" onAction="#createGoal" prefHeight="48.0" prefWidth="131.0" style="-fx-background-color: #e05f26;" text="Create Goal" textFill="WHITE">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font></JFXButton>
                </children>
             </HBox>

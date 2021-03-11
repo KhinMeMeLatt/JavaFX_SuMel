@@ -23,6 +23,16 @@ public class AboutController extends FramesController{
 	@FXML
 	private MediaView mediaView;
 	
+    @FXML
+    private JFXButton btnHome;
+
+    @FXML
+    void homeFrame(ActionEvent event) throws IOException {
+    	openFrame("subuView", "HomeUI", "Home");
+    	
+    }
+
+	
 	 @FXML
 	    void processPlay(MouseEvent event) {
 			try { // Linking the new mediaView Scene
@@ -32,10 +42,5 @@ public class AboutController extends FramesController{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 	    }
-	}
-	@FXML
-	void processClose(ActionEvent event) {
-		Stage stage = (Stage) btnClose.getScene().getWindow();
-		stage.close();
 	}
 	}

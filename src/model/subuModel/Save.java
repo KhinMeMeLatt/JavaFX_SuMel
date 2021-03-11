@@ -27,6 +27,7 @@ public class Save {
 		this.saveAmount = saveAmount;
 	}
 	
+	
 	public Save(Double saveAmount, Timestamp sqlTime, int goalId) {
 		super();
 		this.saveAmount = saveAmount;

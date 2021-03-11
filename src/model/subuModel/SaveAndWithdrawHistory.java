@@ -1,6 +1,8 @@
 package model.subuModel;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class SaveAndWithdrawHistory {
@@ -68,5 +70,12 @@ public class SaveAndWithdrawHistory {
 	public String toString() {
 		return "SaveAndWithdrawHistory [atTime=" + atTime + ", action=" + action + ", amount=" + amount + "]";
 	}
+	public double getValue() {
+		return amount;
+	}
+	public void setValue(double amount) {
+		this.amount = amount;
+	}
+
 
 }

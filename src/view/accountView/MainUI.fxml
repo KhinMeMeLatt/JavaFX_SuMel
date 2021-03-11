@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.MainController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.accountController.MainController">
    <children>
       <Label alignment="CENTER" layoutX="74.0" layoutY="14.0" prefHeight="57.0" prefWidth="79.0" text="SUMEL" textFill="#e1460e">
          <font>
@@ -43,12 +43,12 @@
             </Label>
             <JFXButton fx:id="loginBtn" layoutX="86.0" layoutY="362.0" onAction="#processLogin" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #ff8400;" text="LogIn" textFill="#fcfbf9">
                <font>
-                  <Font size="20.0" />
+                  <Font size="18.0" />
                </font>
             </JFXButton>
             <JFXButton fx:id="signUpBtn" layoutX="319.0" layoutY="362.0" onAction="#processSignUp" prefHeight="44.0" prefWidth="113.0" ripplerFill="#e8ca45" style="-fx-background-color: #ff8400;" text="Sign Up" textFill="#f1f2ee">
                <font>
-                  <Font size="20.0" />
+                  <Font size="18.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="173.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">

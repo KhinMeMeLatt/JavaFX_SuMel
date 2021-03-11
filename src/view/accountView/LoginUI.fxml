@@ -25,7 +25,7 @@
             </Label>
             <JFXButton layoutX="103.0" layoutY="357.0" onAction="#processSignUp" prefHeight="44.0" prefWidth="113.0" ripplerFill="#e8ca45" style="-fx-background-color: #ff8400;" text="Sign Up" textFill="#f1f2ee">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="81.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
@@ -57,14 +57,14 @@
       </Label>
       <JFXTextField fx:id="tfUserEmail" focusColor="#ff3d0f" layoutX="415.0" layoutY="242.0" opacity="0.6" prefHeight="51.0" prefWidth="250.0" promptText="User Email" style="-fx-background-color: transparent;" unFocusColor="#ff7b0e">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </JFXTextField>
      <!--  <FontAwesomeIconView fill="#ff7b0e" glyphName="USER" layoutX="369.0" layoutY="347.0" size="25" wrappingWidth="22.0" />
       <FontAwesomeIconView fill="#ff7b0e" glyphName="KEY" layoutX="367.0" layoutY="426.0" size="25" /> -->
       <JFXButton layoutX="415.0" layoutY="431.0" onAction="#processLogin" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: #ff8400;" text="LogIn" textFill="#fcfbf9">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </JFXButton>
    <!--  <FontAwesomeIconView fill="#ff7b0e" glyphName="USERS" layoutX="410.0" layoutY="197.0" size="40" text="" wrappingWidth="43.79411697387695" /> -->
@@ -75,7 +75,7 @@
       </Label>
       <JFXPasswordField fx:id="pfPassword" focusColor="#ff3d0f" layoutX="415.0" layoutY="330.0" opacity="0.6" prefHeight="44.0" prefWidth="250.0" promptText="Password" unFocusColor="#ff7b0e">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </JFXPasswordField>
       <Label fx:id="lblStatus" layoutX="389.0" layoutY="503.0" prefHeight="40.0" prefWidth="268.0" text="Status" visible="false" wrapText="true">
@@ -85,7 +85,7 @@
       </Label>
       <JFXButton fx:id="btnClose" layoutX="556.0" layoutY="431.0" onAction="#processClose" prefHeight="41.0" prefWidth="90.0" style="-fx-background-color: #ff8400;" text="Close" textFill="#fcfbf9">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </JFXButton>
       <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="409.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.WithdrawController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.WithdrawController">
    <children>
       <ImageView fitHeight="61.0" fitWidth="100.0" layoutX="84.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -51,11 +51,14 @@
             <JFXTextField fx:id="txtAmount" prefHeight="44.0" prefWidth="266.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <JFXButton layoutX="258.0" layoutY="484.0" onAction="#processWithdraw" prefHeight="49.0" prefWidth="184.0" style="-fx-background-color: #f8510f;" text="Withdraw" />
+      <JFXButton layoutX="258.0" layoutY="484.0" onAction="#processWithdraw" prefHeight="49.0" prefWidth="184.0" style="-fx-background-color: #f8510f;" text="Withdraw" textFill="#f2eeee">
+         <font>
+            <Font size="14.0" />
+         </font></JFXButton>
       <Label layoutX="210.0" layoutY="547.0" prefHeight="18.0" prefWidth="390.0" text="Powered By UIT NTT-AT Scholarship Students" />
       <Label fx:id="lblValidation" layoutX="351.0" layoutY="441.0" prefHeight="27.0" prefWidth="259.0" textFill="#f87a0b">
          <font>
-            <Font size="18.0" />
+            <Font size="15.0" />
          </font>
       </Label>
    </children>
