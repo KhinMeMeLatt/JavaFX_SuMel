@@ -37,4 +37,8 @@ public class AboutController extends FramesController{
 				e.printStackTrace();
 	    }
 	}
+	 @FXML
+		void processClose(ActionEvent event) {
+			//mediaPlayer.pause();
+		}
 	}

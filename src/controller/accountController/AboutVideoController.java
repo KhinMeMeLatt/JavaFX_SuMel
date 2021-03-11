@@ -6,11 +6,16 @@ import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class AboutVideoController implements Initializable {
 
@@ -19,10 +24,11 @@ public class AboutVideoController implements Initializable {
 	private Media media;
 	private MediaPlayer mediaPlayer;
 
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		// Initialising path of the media file,
-		File videoFile = new File("C:\\JavaFXWorkSpace\\SuMel\\src\\assets\\video.mp4");
+		File videoFile = new File("src/assets/About.mp4");
 		String videoPath = videoFile.toURI().toString();
 		// Instantiating Media class
 		this.media = new Media(videoPath);
@@ -38,6 +44,12 @@ public class AboutVideoController implements Initializable {
 
 		// by setting this property to true, the Video will be played
 		mediaPlayer.setAutoPlay(true);
-
+//		thisStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//
+//			@Override
+//			public void handle(final WindowEvent arg0) {
+//				mediaPlayer.pause();
+//			}
+//		});
 	}
 }
