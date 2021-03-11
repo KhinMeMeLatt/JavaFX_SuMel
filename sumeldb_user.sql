@@ -27,8 +27,9 @@ CREATE TABLE `user` (
   `userName` varchar(60) DEFAULT NULL,
   `email` varchar(60) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
+  `targetExpense` int DEFAULT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +38,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'mgmg','mm@gmail.com','1234'),(2,'kyawkyaw','kk@gmail.com','5678'),(3,'mgwai','mw@gmail.com','1234'),(4,'hlahla','hh@gmail.com','5678'),(5,'winner','win@gmail.com','1234'),(6,'martin','mt@gmail.com','5678'),(7,'jensen','js@gmail.com','1234'),(8,'mike','mk@gmail.com','5678'),(9,'perry','py@gmail.com','1234'),(10,'steve','stv@gmail.com','5678');
+INSERT INTO `user` VALUES (1,'mgmg','mm@gmail.com','1234',NULL),(2,'kyawkyaw','kk@gmail.com','5678',NULL),(3,'mgwai','mw@gmail.com','1234',NULL),(4,'hlahla','hh@gmail.com','5678',NULL),(5,'winner','win@gmail.com','1234',NULL),(6,'martin','mt@gmail.com','5678',NULL),(7,'jensen','js@gmail.com','1234',NULL),(8,'mike','mk@gmail.com','5678',NULL),(9,'perry','py@gmail.com','1234',NULL),(10,'steve','stv@gmail.com','5678',NULL),(11,'thiri','thiri@gmail.com','ePYKPo64xzY/Am6z1YO3gQ==',5000),(12,'mgmg','mm@gmail.com','ePYKPo64xzY/Am6z1YO3gQ==',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-10 20:02:24
+-- Dump completed on 2021-03-12  0:37:31

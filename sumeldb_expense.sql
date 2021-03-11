@@ -27,10 +27,10 @@ CREATE TABLE `expense` (
   `expenseName` varchar(120) DEFAULT NULL,
   `expenseCategory` varchar(120) DEFAULT NULL,
   `expenseAmount` double DEFAULT NULL,
-  `spendAt` datetime(4) DEFAULT NULL,
+  `spendAt` date DEFAULT NULL,
   `userId` int DEFAULT NULL,
   PRIMARY KEY (`expenseId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `expense` (
 
 LOCK TABLES `expense` WRITE;
 /*!40000 ALTER TABLE `expense` DISABLE KEYS */;
-INSERT INTO `expense` VALUES (1,'teashop','teashopbill',3000,'2021-01-02 01:10:20.0000',1),(2,'makeup','beauty',15000,'2021-01-10 02:50:10.0000',4),(3,'taxi','visiting',3000,'2021-01-11 00:00:00.0000',1),(4,'phonebill','phone',5000,'2021-01-15 01:00:00.0000',1),(5,'clothes','shopping',20000,'2021-01-31 17:30:00.0000',1),(6,'wifi','Communicationbill',25000,'2021-02-05 06:10:20.0000',1),(7,'snacks','eating',3000,'2021-02-02 02:20:00.0000',1),(8,'album','kpop',15000,'2021-02-10 06:00:10.0000',4),(9,'edmfestival','festivalticket',30000,'2018-12-31 07:00:10.0000',1),(10,'bubbletea','eatingandDrinking',2500,'2020-01-10 12:30:40.0000',4);
+INSERT INTO `expense` VALUES (1,'teashop','teashopbill',3000,'2021-01-02',11),(2,'makeup','beauty',15000,'2021-01-10',4),(3,'taxi','visiting',3000,'2021-01-11',11),(4,'phonebill','phone',5000,'2021-01-15',11),(5,'clothes','shopping',20000,'2021-01-31',11),(6,'wifi','Communicationbill',25000,'2021-02-05',11),(7,'snacks','eating',3000,'2021-02-02',11),(8,'album','kpop',15000,'2021-02-10',4),(9,'edmfestival','festivalticket',30000,'2018-12-31',11),(10,'bubbletea','eatingandDrinking',2500,'2020-01-10',4),(11,'Got7 Ticket','kpop',20000,'2021-03-10',11),(12,'mpt','Communicationbill',1000,'2021-03-10',11),(13,'telenor','Communicationbill',2000,'2021-03-10',11),(14,'Taxi','Taxii',1000,'2021-03-11',11),(15,'Bus','Bus',200,'2021-03-11',11);
 /*!40000 ALTER TABLE `expense` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-10 20:02:25
+-- Dump completed on 2021-03-12  0:37:32

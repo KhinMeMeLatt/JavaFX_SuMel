@@ -34,7 +34,7 @@ CREATE TABLE `goal` (
   `isBreak` tinyint DEFAULT NULL,
   `userId` int DEFAULT NULL,
   PRIMARY KEY (`goalId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `goal` (
 
 LOCK TABLES `goal` WRITE;
 /*!40000 ALTER TABLE `goal` DISABLE KEYS */;
-INSERT INTO `goal` VALUES (1,'BuyingPhone','Phone',300000,'2020-10-01 00:00:00.0000','2020-12-31 00:00:00.0000','daily',5000,0,1),(2,'shopping','clothes',45000,'2021-01-01 00:00:00.0000','2020-01-31 00:00:00.0000','daily',500,1,1),(3,'BuyingLaptop','laptop',1000000,'2020-01-01 00:00:00.0000','2021-08-31 00:00:00.0000','monthly',50000,1,1),(4,'Trip','taunggyi',150000,'2020-12-31 00:00:00.0000','2021-01-15 00:00:00.0000','daily',3000,0,1),(5,'buyingCosmetic','makeup',50000,'2021-05-01 00:00:00.0000','2021-06-15 00:00:00.0000','daily',500,1,4),(6,'JLPTexamfees','Japan',50000,'2018-03-01 00:00:00.0000','2018-04-15 00:00:00.0000','daily',500,1,1),(7,'Japanese Class','Japan',50000,'2019-05-01 00:00:00.0000','2019-06-15 00:00:00.0000','daily',500,1,1),(8,'JavaSE Class','Java',150000,'2019-09-01 00:00:00.0000','2019-10-15 00:00:00.0000','daily',3000,1,1),(9,'CCNA Class','CCNA',100000,'2020-01-31 00:00:00.0000','2020-02-15 00:00:00.0000','daily',2000,1,1),(10,'JavaEE Class','Java',100000,'2021-02-01 00:00:00.0000','2021-03-18 00:00:00.0000','daily',2000,1,1);
+INSERT INTO `goal` VALUES (1,'BuyingPhone','Phone.png',300000,'2020-10-01 00:00:00.0000','2020-12-31 00:00:00.0000','daily',5000,0,11),(2,'shopping','clothes.png',45000,'2021-01-01 00:00:00.0000','2020-01-31 00:00:00.0000','daily',500,1,11),(3,'BuyingLaptop','laptop.png',1000000,'2020-01-01 00:00:00.0000','2021-08-31 00:00:00.0000','monthly',50000,1,11),(4,'Trip','taunggyi.jpg',150000,'2020-12-31 00:00:00.0000','2021-01-15 00:00:00.0000','daily',3000,0,11),(5,'buyingCosmetic','makeup.jpg',50000,'2021-05-01 00:00:00.0000','2021-06-15 00:00:00.0000','daily',500,1,4),(6,'JLPTexamfees','Japan.png',50000,'2018-03-01 00:00:00.0000','2018-04-15 00:00:00.0000','daily',500,1,11),(7,'Japanese Class','Japan.png',50000,'2019-05-01 00:00:00.0000','2019-06-15 00:00:00.0000','daily',500,1,11),(8,'JavaSE Class','Java.png',150000,'2019-09-01 00:00:00.0000','2019-10-15 00:00:00.0000','daily',3000,1,11),(9,'CCNA Class','CCNA.png',100000,'2020-01-31 00:00:00.0000','2020-02-15 00:00:00.0000','daily',2000,1,11),(10,'JavaEE Class','Java.png',100000,'2021-02-01 00:00:00.0000','2021-03-18 00:00:00.0000','daily',2000,1,11),(12,'Donation','JustSave.png',0,'2021-03-10 00:00:00.0000','2021-03-10 00:00:00.0000',NULL,0,0,11),(13,'General','JustSave.png',0,'2021-03-11 00:00:00.0000','2021-03-11 00:00:00.0000',NULL,0,0,11),(14,'Car','goal.png',50000,'2021-03-11 00:00:00.0000','2021-03-11 00:00:00.0000','Monthly',12500,0,11);
 /*!40000 ALTER TABLE `goal` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-10 20:02:24
+-- Dump completed on 2021-03-12  0:37:32
