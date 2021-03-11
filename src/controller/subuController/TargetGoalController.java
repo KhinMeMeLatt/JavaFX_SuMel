@@ -171,6 +171,18 @@ public class TargetGoalController implements Initializable {
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
+		clearData();
+	}
+	
+	private void clearData() {
+		txtGoalName.setText("");
+		txtObjAmount.setText("");
+		txtSaveAmount.setText("");
+		rbDaily.setSelected(true);
+		rbWeekly.setDisable(true);
+		rbMonthly.setDisable(true);
+		dpStartDate.setValue(LocalDate.now()); // Set current date in date picker for start date
+		dpEndDate.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
 	}
 	@FXML
 	void addImage(MouseEvent event) {
