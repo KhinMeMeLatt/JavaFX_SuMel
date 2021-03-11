@@ -32,6 +32,8 @@ public class LoginController extends FramesController{
 	private Label lblStatus;
 	@FXML
 	private JFXButton btnClose;
+	
+	private AccountDBModel accountDb = AccountDBModel.getInstance();
 
 	@FXML
     void aboutFrame(ActionEvent event) throws IOException {
@@ -56,7 +58,7 @@ public class LoginController extends FramesController{
 				final String secretKey = "ssshhhhhhhhhhh!!!!";
 
 				String encryptedString = Encryption.encrypt(password, secretKey) ;
-				AccountDBModel accountDb = new AccountDBModel();
+				
 				
 				User user = new User();
 				user.setEmail(email);

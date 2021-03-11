@@ -20,11 +20,14 @@ public class FramesController {
 		stage = new Stage();
 		stage.hide();
 		stage.setScene(scene);
-		stage.showAndWait();
-		stage.setTitle(title);
 	    stage.getIcons().add(new Image(getClass().getResourceAsStream("/assets/icon/sumel.png")));
-		//stage.getIcons().add(new Image("/assets/icon/sumel.png"));
-	//	stage.getIcons().add(new Image("/assets/pig.PNG"));
+		if (frameName.equals("JustSaveUI") || frameName.equals("TargetGoalUI") || frameName.equals("WithdrawUI")
+				|| frameName.equals("SaveUI")) {
+			stage.showAndWait();
+		} else {
+			stage.show();
+		}
+		stage.setTitle(title);
 
 	}
 	

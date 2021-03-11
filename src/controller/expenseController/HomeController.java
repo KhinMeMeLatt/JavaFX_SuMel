@@ -33,6 +33,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -74,7 +75,7 @@ public class HomeController implements Initializable {
 
 	private int targetExpense;
 
-	private ExpenseDB expenseDB = new ExpenseDB();
+	private ExpenseDB expenseDB = ExpenseDB.getInstance();
 
 	private List<Expense> expenseList;
 
@@ -116,9 +117,9 @@ public class HomeController implements Initializable {
 
 	@FXML
 	void mySubuFrame(MouseEvent event) throws IOException {	
-		frameController.openFrame("subuView", "HomeUI", "Sumel");
 		Stage home = (Stage) lblGoal.getScene().getWindow();
 		home.close();
+		frameController.openFrame("subuView", "HomeUI", "Sumel");		
 	}
 	
 	@FXML
@@ -255,6 +256,8 @@ public class HomeController implements Initializable {
 							Parent root = fxmlLoader.getRoot();
 							dialog.setScene(new Scene(root));
 							CreatingExpenseController expenseController = fxmlLoader.getController();
+							dialog.setTitle("SUMEL");
+							dialog.getIcons().add(new Image(getClass().getResourceAsStream("/assets/icon/sumel.png")));
 							dialog.showAndWait();
 							drawPieChart();
 							setExpense(expenseDB.getCategoryAmount());
@@ -282,6 +285,8 @@ public class HomeController implements Initializable {
 							Parent root = fxmlLoader.getRoot();
 							dialog.setScene(new Scene(root));
 							HistoryController historyController = fxmlLoader.getController();
+							dialog.setTitle("SUMEL");
+							dialog.getIcons().add(new Image(getClass().getResourceAsStream("/assets/icon/sumel.png")));
 							dialog.showAndWait();
 							drawPieChart();
 							setExpense(expenseDB.getCategoryAmount());

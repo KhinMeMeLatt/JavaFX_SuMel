@@ -98,12 +98,12 @@
                            <children>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../assets/img/wallet.png" />
+                                    <Image url="@../../assets/subu.png" />
                                  </image>
                               </ImageView>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Label text="My Wallet">
+                                    <Label text="My Subu">
                                        <font>
                                           <Font name="Georgia" size="16.0" />
                                        </font>
@@ -181,8 +181,13 @@
                   </VBox>
                   <VBox maxHeight="170.0" prefHeight="150.0" prefWidth="505.0" style="-fx-background-color: F0F1F6;" VBox.vgrow="ALWAYS">
                      <children>
-                        <HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
                            <children>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../assets/subu.png" />
+                                 </image>
+                              </ImageView>
                               <Label text="My SuBus">
                                  <font>
                                     <Font name="Georgia" size="17.0" />

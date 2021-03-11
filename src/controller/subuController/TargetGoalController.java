@@ -24,10 +24,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -103,8 +103,8 @@ public class TargetGoalController implements Initializable {
 
 	private Boolean isInEditMode = false;
 
-	GoalDBModel goalModel = new GoalDBModel();
-	
+	private GoalDBModel goalDbModel;
+
 	HomeController home = new HomeController();
 
 	@FXML
@@ -112,28 +112,32 @@ public class TargetGoalController implements Initializable {
 		Stage stage = (Stage) txtGoalName.getScene().getWindow();
 		stage.close();
 	}
-	
+
 	@FXML
 	void nameExist(KeyEvent event) {
-      if(goalModel.isSubuNameExists(txtGoalName.getText())) {
-    	  nameExistLabel.setTextFill(Color.RED);
-    	  nameExistLabel.setText("***Subu name is already exist!!!Please Enter Different name.");
-      }else {
-    	  nameExistLabel.setTextFill(Color.WHITE);
-    	  nameExistLabel.setText("");
-      }
-	}
-
-	@FXML
-	void convertCurrency(ActionEvent event) {
-
+		if (goalDbModel.isSubuNameExists(txtGoalName.getText())) {
+			nameExistLabel.setTextFill(Color.RED);
+			nameExistLabel.setText("***Subu name is already exist!!!Please Enter Different name.");
+		} else {
+			nameExistLabel.setTextFill(Color.WHITE);
+			nameExistLabel.setText("");
+		}
+		
+		
+		if(txtGoalName.getText().length() > 10) {
+			nameExistLabel.setTextFill(Color.RED);
+			nameExistLabel.setText("***Subu name length must not be greater than 10.");
+		}else {
+			nameExistLabel.setTextFill(Color.WHITE);
+			nameExistLabel.setText("");
+		}
 	}
 
 	@FXML
 	void createGoal(ActionEvent event) throws IOException {
 		if (isInEditMode) {
 			handleUpdateTargetGoal();
-			return ;
+			return;
 		}
 		String goalName = txtGoalName.getText();
 		if(goalName.length()>20) {
@@ -141,7 +145,7 @@ public class TargetGoalController implements Initializable {
 		}
 		
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
-		
+
 		if (imgFile == null) {
 			imgFile = new File("src/assets/goal.png");
 			imageName = "goal.png";
@@ -156,19 +160,17 @@ public class TargetGoalController implements Initializable {
 		Goal newGoal = new Goal(goalName, this.imageName, this.objAmount, this.startDate.toString(),
 				this.endDate.toString(), this.saveType, amountToSave, false, User.userId);
 
-		if (!goalModel.isSubuNameExists(goalName)) {
-			goalModel.insertGoal(newGoal);
+		if (!(goalName.length() > 10)) {
+
+			if (!goalDbModel.isSubuNameExists(goalName)) {
+				goalDbModel.insertGoal(newGoal);
+			} else {
+				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
+			}
+
 		} else {
-			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
+			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
-		
-		
-	}
-
-	@FXML
-	void processAbout(ActionEvent event) {
-
-	}
 
 	@FXML
 	void addImage(MouseEvent event) {
@@ -197,7 +199,7 @@ public class TargetGoalController implements Initializable {
 		rbMonthly.setDisable(monthly);
 		rbWeekly.setDisable(weekly);
 	}
-	
+
 	private void availableSaveType() {
 		if (this.period < 7) {
 			this.disableSaveTypes(true, true);// first argument is for weekly save type radio button, second
@@ -218,7 +220,7 @@ public class TargetGoalController implements Initializable {
 			// Total number of target days
 			this.period = ChronoUnit.DAYS.between(this.startDate, this.endDate);
 			this.availableSaveType();
-			
+
 			processSaveType(event);
 		} else {
 			changeDate = !changeDate;
@@ -258,7 +260,7 @@ public class TargetGoalController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
+		goalDbModel = GoalDBModel.getInstance();
 		dpStartDate.setValue(LocalDate.now()); // Set current date in date picker for start date
 		dpEndDate.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
 
@@ -373,18 +375,28 @@ public class TargetGoalController implements Initializable {
 		Goal newGoal = new Goal(this.goalId, goalName, this.imageName, this.objAmount,
 				dpStartDate.getValue().toString(), dpEndDate.getValue().toString(), this.saveType, amountToSave, false,
 				User.userId);
-		
-		if (!goalModel.isSubuNameExists(goalName)) {
-			if (goalModel.updateTargetGoal(newGoal)) {
-				AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Goal is updated successfully!");
-				Stage homeStage = (Stage) txtGoalName.getScene().getWindow();
-				homeStage.close();
+
+		if (!(goalName.length() > 10)) {
+			if (!goalDbModel.isSubuNameExists(goalName)) {
+				if (goalDbModel.updateTargetGoal(newGoal)) {
+					AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null,
+							"Goal is updated successfully!");
+					/*
+					 * Stage homeStage = (Stage) txtGoalName.getScene().getWindow();
+					 * homeStage.close();
+					 */
+				} else {
+					AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Goal Update Failed!");
+				}
 			} else {
-				AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Goal Update Failed!");
+				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
 			}
+
 		} else {
-			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
+			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
+
+		
 	}
 
 }

@@ -33,7 +33,7 @@ public class UpdateController {
     @FXML
     private JFXButton btnUpdate;
     
-    private ExpenseDB expenseDB = new ExpenseDB();
+    private ExpenseDB expenseDB = ExpenseDB.getInstance();
     
     private int expenseId;
     

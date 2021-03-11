@@ -62,7 +62,7 @@ public class HistoryController implements Initializable{
 	@FXML
 	private JFXButton btnUpdate;
 
-	private ExpenseDB expenseDB = new ExpenseDB();
+	private ExpenseDB expenseDB = ExpenseDB.getInstance();
 
 	private Expense expense;
 

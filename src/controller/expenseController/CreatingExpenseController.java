@@ -91,7 +91,7 @@ public class CreatingExpenseController implements Initializable{
     
     private IntegerProperty totalAmount = new SimpleIntegerProperty(0);
     
-    private ExpenseDB expenseDB = new ExpenseDB(); 
+    private ExpenseDB expenseDB = ExpenseDB.getInstance(); 
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@FXML

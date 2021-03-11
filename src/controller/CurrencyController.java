@@ -130,24 +130,10 @@ public class CurrencyController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		try { 
-			Label USA = new Label("United States (USD)");
-			Image USAicon = new Image(new FileInputStream("src/assets/countries/USD.png"));
-			ImageView USAimg = new ImageView(USAicon);
-			USAimg.setFitHeight(15);
-			USAimg.setFitWidth(15);
-			USA.setGraphic(USAimg);
-			
-			Label Mm = new Label("Myanmar (MMK)");
-			Image Mmicon = new Image(new FileInputStream("src/assets/countries/MMK.png"));
-			ImageView Mmimg = new ImageView(Mmicon);
-			Mmimg.setFitHeight(15);
-			Mmimg.setFitWidth(15);
-			Mm.setGraphic(Mmimg);
-			
 			fromCountry.setItems(getCountries());
-			fromCountry.setValue(USA);
+			fromCountry.setPromptText("From");
 			toCountry.setItems(getCountries());
-			toCountry.setValue(Mm);	
+			toCountry.setPromptText("To");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

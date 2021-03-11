@@ -44,7 +44,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ImageView fitHeight="62.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+            <ImageView fitHeight="60.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
@@ -52,7 +52,7 @@
                   <Image url="@../../assets/JustSave.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="62.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+            <ImageView fitHeight="60.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
@@ -60,10 +60,16 @@
                   <Image url="@../../assets/startDate.jpg" />
                </image>
             </ImageView>
-            <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <JFXTextField fx:id="txtGoalName" onKeyReleased="#nameExist" />
-                  <Label fx:id="nameExistLabel" onKeyReleased="#nameExist" />
+                  <JFXTextField fx:id="txtGoalName" onKeyReleased="#nameExist" prefWidth="328.0">
+                     <VBox.margin>
+                        <Insets right="100.0" />
+                     </VBox.margin></JFXTextField>
+                  <Label fx:id="nameExistLabel" onKeyReleased="#nameExist">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Label>
                </children>
             </VBox>
             <ImageView fx:id="imViewGoal" fitHeight="75.0" fitWidth="143.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
@@ -95,14 +101,16 @@
       </HBox>
       <Label alignment="CENTER" layoutX="115.0" layoutY="560.0" prefHeight="26.0" prefWidth="470.0" text="Powered by UIT NTT-AT Scholarship Students" />
 
-      
-      <JFXButton layoutX="496.0" layoutY="54.0" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: #0728fc;" text="About" textFill="#f4f4f8" />
-
 
       <ImageView fitHeight="62.0" fitWidth="75.0" layoutX="28.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../assets/pig.PNG" />
          </image>
       </ImageView>
+      <Label layoutX="280.0" layoutY="58.0" text="Just Save" textFill="#e05f26">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

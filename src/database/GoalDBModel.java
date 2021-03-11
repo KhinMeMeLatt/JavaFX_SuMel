@@ -1,37 +1,35 @@
 package database;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 
 import alert.AlertMaker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
-import model.Expense;
 import model.accountModel.User;
 import model.subuModel.Goal;
-import model.subuModel.Subu;
 
 public class GoalDBModel {
-	
-	public static int goalId;
 
-	private Connection connection;
+	public static int goalId;
+	public static String goalName;
+	public static String goalImg;
+
 	private PreparedStatement ps;
-	private Statement st;
 	private ResultSet rs;
 	private Goal goal;
 
-	public GoalDBModel() {
-		this.connection = DBConnection.getConnection();
+	private static GoalDBModel goalDbModel = null;
+
+	public static GoalDBModel getInstance() {
+		if (goalDbModel == null) {
+			goalDbModel = new GoalDBModel();
+		}
+		return goalDbModel;
 	}
 
 	public void insertGoal(Goal goal) {
@@ -40,7 +38,7 @@ public class GoalDBModel {
 				+ DBConst.END_DATE + ", " + DBConst.SAVE_TYPE + ", " + DBConst.AMOUNT_TO_SAVE + ", " + DBConst.IS_BREAK
 				+ ", " + DBConst.GOAL_USER_ID + ")" + "VALUES(?,?,?,?,?,?,?,?,?)";
 		try {
-			this.ps = this.connection.prepareStatement(insertGoal);
+			this.ps = DBConnection.getConnection().prepareStatement(insertGoal);
 
 			this.ps.setString(1, goal.getGoalName());
 			this.ps.setString(2, goal.getGoalImgName());
@@ -58,12 +56,18 @@ public class GoalDBModel {
 			this.ps.setInt(9, User.userId);
 
 			this.ps.executeUpdate();
-			AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null,
-					"Goal created successfully!");
+			AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null, "Goal created successfully!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Expenses record process Failed!");
 			e.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -72,7 +76,7 @@ public class GoalDBModel {
 		String selectAllGoal = "SELECT * FROM goal WHERE userId = " + User.userId;
 
 		try {
-			ps = this.connection.prepareStatement(selectAllGoal);
+			ps = DBConnection.getConnection().prepareStatement(selectAllGoal);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				goal = new Goal();
@@ -94,17 +98,23 @@ public class GoalDBModel {
 			e.printStackTrace();
 			// AlertMaker.showErrorMessage("Error", "Goals loading Failed!");
 			return null;
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	
+
 	public ObservableList<Goal> searchSubuByName(String name) {
 		ObservableList<Goal> goalList = FXCollections.observableArrayList();
 		String selectAllGoal = "SELECT * FROM goal WHERE goalName like ? AND userId = " + User.userId;
 
 		try {
-			ps = this.connection.prepareStatement(selectAllGoal);
-			ps.setString(1, "%"+name+"%");
+			ps = DBConnection.getConnection().prepareStatement(selectAllGoal);
+			ps.setString(1, "%" + name + "%");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				goal = new Goal();
@@ -126,6 +136,13 @@ public class GoalDBModel {
 			e.printStackTrace();
 			// AlertMaker.showErrorMessage("Error", "Goals loading Failed!");
 			return null;
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -133,7 +150,7 @@ public class GoalDBModel {
 		Goal goal = new Goal();
 		String selectSubu = "SELECT * FROM goal Where goalName like ? AND userId = " + User.userId;
 		try {
-			ps = this.connection.prepareStatement(selectSubu);
+			ps = DBConnection.getConnection().prepareStatement(selectSubu);
 			ps.setString(1, sbName);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -151,35 +168,21 @@ public class GoalDBModel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
-		}
-	}
-
-	
-	public double getCurrentAmountByID(int goalId) {
-		double currentAmt = 0;
-		String selectAmount = "SELECT SUM(save.saveAmount), SUM(withdraw.withdrawAmount) " + "FROM save "
-				+ "JOIN withdraw ON save.goalId=withdraw.goalId " + "Where save.goalId = ?";
-		try {
-			ps = this.connection.prepareStatement(selectAmount);
-			ps.setInt(1, goalId);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				double saveAmount = rs.getDouble(1);
-				double withDrawAmount = rs.getDouble(2);
-
-				currentAmt = saveAmount - withDrawAmount;
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			return currentAmt;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
 		}
 	}
 
 	public boolean isSubuNameExists(String name) {
 		try {
-			String checkstmt = "SELECT COUNT(*) FROM goal WHERE goalName=? AND goalId != "+goalId+" AND userId = " + User.userId;
-			ps = this.connection.prepareStatement(checkstmt);
+			String checkstmt = "SELECT COUNT(*) FROM goal WHERE goalName=? AND goalId != " + goalId + " AND userId = "
+					+ User.userId;
+			ps = DBConnection.getConnection().prepareStatement(checkstmt);
 			ps.setString(1, name);
 			rs = ps.executeQuery();
 			if (rs.next()) {
@@ -188,6 +191,13 @@ public class GoalDBModel {
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -195,38 +205,29 @@ public class GoalDBModel {
 	public boolean deleteSubuBySubuName(String sbName) {
 		String selectSubu = "Delete FROM goal Where goalName like ? AND userId = " + User.userId;
 		try {
-			ps = this.connection.prepareStatement(selectSubu);
+			ps = DBConnection.getConnection().prepareStatement(selectSubu);
 			ps.setString(1, sbName);
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
-
-	/*
-	 * public boolean updateTargetGoal(Goal newGoal) { try { Statement stmt =
-	 * this.connection.createStatement(); String updateString = "UPDATE goal SET " +
-	 * "goalName = '"+newGoal.getGoalName() +
-	 * "',goalImgName = '"+newGoal.getGoalImgName() +
-	 * "',goalAmount = "+newGoal.getGoalAmount() +
-	 * ",startDate = '"+newGoal.getStartDate() +
-	 * "',endDate = '"+newGoal.getEndDate() + "',saveType = '"+newGoal.getSaveType()
-	 * + "',amountToSave = '"+newGoal.getAmountToSave() +
-	 * "',isBreak = '"+newGoal.getIsBreak() +
-	 * "'WHERE goalId = '"+newGoal.getGoalId()+"';"; return
-	 * stmt.executeUpdate(updateString)>0; } catch (SQLException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); return false; } }
-	 */
 
 	public boolean updateTargetGoal(Goal newGoal) {
 		String updateString = "Update goal SET " + "goalName = ?," + "goalImgName = ?," + "goalAmount = ?,"
 				+ "startDate = ?," + "endDate = ?," + "saveType = ?," + "amountToSave = ?," + "isBreak = ?"
 				+ " WHERE goalId = ? AND userId = " + User.userId;
-		connection = DBConnection.getConnection();
 		try {
-			ps = connection.prepareStatement(updateString);
+			ps = DBConnection.getConnection().prepareStatement(updateString);
 			ps.setString(1, newGoal.getGoalName());
 			ps.setString(2, newGoal.getGoalImgName());
 			ps.setInt(3, newGoal.getGoalAmount());
@@ -253,9 +254,15 @@ public class GoalDBModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
-
 
 }

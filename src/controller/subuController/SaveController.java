@@ -1,9 +1,11 @@
 package controller.subuController;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXTextField;
 
@@ -11,14 +13,16 @@ import database.GoalDBModel;
 import database.SaveDBModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.subuModel.Save;
 
-public class SaveController {
+public class SaveController implements Initializable {
 
 	@FXML
 	private ImageView imgGoal;
@@ -30,26 +34,14 @@ public class SaveController {
 	private JFXTextField txtAmount;
 	@FXML
 	private Label lblValidation;
-
-	@FXML
-	void convertCurrency(ActionEvent event) {
-
-	}
-
-	@FXML
-	void processAbout(ActionEvent event) {
-
-	}
+	private SaveDBModel saveModel;
 
 	@FXML
 	void processSave(ActionEvent event) throws SQLException {
 		try {
-			double amount = Double.parseDouble(txtAmount.getText());
 			lblValidation.setText(" ");
 			if (txtAmount.getText().trim().isEmpty()) {
-
 				txtAmount.setText("Please Enter Amount!");
-
 			}
 
 			else {
@@ -68,7 +60,6 @@ public class SaveController {
 
 					double saveValue = Double.valueOf(txtAmount.getText());
 					Save newSave = new Save(saveValue, sqlTime, GoalDBModel.goalId);
-					SaveDBModel saveModel = new SaveDBModel();
 					saveModel.saveAmount(newSave);
 
 				} else {
@@ -81,6 +72,14 @@ public class SaveController {
 			lblValidation.setText("Please Enter Numbers!");
 		}
 
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		saveModel = SaveDBModel.getInstance();
+		lblGoalName.setText(GoalDBModel.goalName);
+		Image image = new Image("/assets/goals/"+GoalDBModel.goalImg);
+		imgGoal.setImage(image);
 	}
 
 }

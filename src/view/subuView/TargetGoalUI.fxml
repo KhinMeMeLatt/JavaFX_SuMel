@@ -27,13 +27,21 @@
                   <Image url="@../../assets/pig.PNG" />
                </image>
             </ImageView>
-            <Label prefHeight="27.0" prefWidth="88.0" text="SuMel" textFill="#e05f26">
+            <Label prefHeight="27.0" prefWidth="150.0" text="SuMel" textFill="#e05f26">
                <HBox.margin>
-                  <Insets right="150.0" />
+                  <Insets right="100.0" />
                </HBox.margin>
                <font>
                   <Font size="18.0" />
                </font>
+            </Label>
+            <Label prefHeight="35.0" prefWidth="262.0" text="Target Goal" textFill="#e05f26">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="250.0" />
+               </HBox.margin>
             </Label>
          </children>
          <BorderPane.margin>
@@ -61,7 +69,7 @@
             <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="50.0" />
                </GridPane.margin>

@@ -26,12 +26,6 @@ public class AboutController extends FramesController{
     @FXML
     private JFXButton btnHome;
 
-    @FXML
-    void homeFrame(ActionEvent event) throws IOException {
-    	openFrame("subuView", "HomeUI", "Home");
-    	
-    }
-
 	
 	 @FXML
 	    void processPlay(MouseEvent event) {

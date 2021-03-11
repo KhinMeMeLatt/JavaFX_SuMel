@@ -47,7 +47,7 @@ public class JustSaveController implements Initializable {
 
 	@FXML
 	private DatePicker dpStartDate;
-	
+
 	@FXML
 	private Label nameExistLabel;
 
@@ -61,26 +61,33 @@ public class JustSaveController implements Initializable {
 
 	Goal justSaveSubu = new Goal();
 
-	GoalDBModel goalModel = new GoalDBModel();
+	private GoalDBModel goalDbModel;
 
 	@FXML
 	void processBack(ActionEvent event) {
 		Stage stage = (Stage) txtGoalName.getScene().getWindow();
 		stage.close();
-
 	}
 
 	@FXML
 	void nameExist(KeyEvent event) {
-      if(goalModel.isSubuNameExists(txtGoalName.getText())) {
-    	  nameExistLabel.setTextFill(Color.RED);
-    	  nameExistLabel.setText("***Subu name is already exist!!!Please Enter Different name.");
-      }else {
-    	  nameExistLabel.setTextFill(Color.WHITE);
-    	  nameExistLabel.setText("");
-      }
+		if (goalDbModel.isSubuNameExists(txtGoalName.getText())) {
+			nameExistLabel.setTextFill(Color.RED);
+			nameExistLabel.setText("***Subu name is already exist!!!Please Enter Different name.");
+		} else {
+			nameExistLabel.setTextFill(Color.WHITE);
+			nameExistLabel.setText("");
+		}
+
+		if (txtGoalName.getText().length() > 10) {
+			nameExistLabel.setTextFill(Color.RED);
+			nameExistLabel.setText("***Subu name length must not be greater than 10.");
+		} else {
+			nameExistLabel.setTextFill(Color.WHITE);
+			nameExistLabel.setText("");
+		}
 	}
-	
+
 	@FXML
 	void addImage(MouseEvent event) {
 		FileChooser fileChooser = new FileChooser();
@@ -95,10 +102,8 @@ public class JustSaveController implements Initializable {
 		if (imgFile != null) {
 			this.goalImage = new Image(imgFile.toURI().toString());
 			imViewGoal.setImage(this.goalImage);
-			this.imageName = imgFile.getName();
 		} else {
 			imgFile = new File("src/assets/goals/JustSave.png");
-			this.imageName = "JustSave.png";
 		}
 	}
 
@@ -108,17 +113,30 @@ public class JustSaveController implements Initializable {
 			handleUpdateUntargetGoal();
 			return;
 		}
-		
-		
+
 		String goalName = txtGoalName.getText();
-		Goal newGoal = new Goal(goalName, this.imageName, 0, dpStartDate.getValue().toString(), null, null, 0, false,
-				User.userId);
+
 		writeImage();
-		
-		if(!goalModel.isSubuNameExists(goalName)) {
-			goalModel.insertGoal(newGoal);
-		}else {
-			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
+
+		if (!goalDbModel.isSubuNameExists(goalName)) {
+			if (imageName == null) {
+				imageName = "JustSave.png";
+			} else {
+				imageName = imgFile.getName();
+			}
+			Goal newGoal = new Goal(goalName, this.imageName, 0, dpStartDate.getValue().toString(), null, null, 0,
+					false, User.userId);
+
+			if (!(goalName.length() > 10)) {
+
+				goalDbModel.insertGoal(newGoal);
+
+			} else {
+				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
+			}
+
+		} else {
+			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
 		}
 	}
 
@@ -138,7 +156,7 @@ public class JustSaveController implements Initializable {
 		}
 		imageName = goal.getGoalImgName();
 		imViewGoal.setImage(image);
-		imgFile = new File("src/assets/goals/"+imageName);
+		imgFile = new File("src/assets/goals/" + imageName);
 		dpStartDate.setValue(null);
 
 		String start = goal.getStartDate();
@@ -148,13 +166,13 @@ public class JustSaveController implements Initializable {
 		btnCreateGoal.setText("Update Goal");
 		isInEditMode = true;
 	}
-	
+
 	private void writeImage() {
 		BufferedImage bImage;
 		try {
 			if (imgFile == null) {
-				imgFile = new File("src/assets/goal.png");
-				imageName = "goal.png";
+				imgFile = new File("src/assets/JustSave.png");
+				imageName = "JustSave.png";
 			}
 			bImage = ImageIO.read(imgFile);
 			String mimeType = URLConnection.guessContentTypeFromName(imageName);
@@ -169,29 +187,34 @@ public class JustSaveController implements Initializable {
 	private void handleUpdateUntargetGoal() {
 
 		String goalName = txtGoalName.getText();
-		
+
 		writeImage();
 
-		System.out.println(justSaveSubu.getGoalId());
-		System.out.println(this.imageName);
-		System.out.println(dpStartDate.getValue().toString());
 		Goal newGoal = new Goal(justSaveSubu.getGoalId(), goalName, this.imageName, 0,
 				dpStartDate.getValue().toString(), null, null, 0, false, User.userId);
-			
-		if(!goalModel.isSubuNameExists(goalName)) {
-			if (goalModel.updateTargetGoal(newGoal)) {
-				AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Goal is updated successfully!");
+
+		if (!(goalName.length() > 10)) {
+			if (!goalDbModel.isSubuNameExists(goalName)) {
+
+				if (goalDbModel.updateTargetGoal(newGoal)) {
+					AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null,
+							"Just Save Goal is updated successfully!");
+				} else {
+					AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Goal Update Failed!");
+				}
 			} else {
-				AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Goal Update Failed!");
+				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
 			}
-		}else {
-			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
+
+		} else {
+			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
 
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		goalDbModel = GoalDBModel.getInstance();
 		dpStartDate.setValue(LocalDate.now()); // Set current date in date picker for start date
 
 		btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()).not());
