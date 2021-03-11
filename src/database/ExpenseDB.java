@@ -1,6 +1,5 @@
 package database;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,16 +20,18 @@ import model.accountModel.User;
 
 public class ExpenseDB {
 
-	private Connection connection;
 	private PreparedStatement preparedStatement;
 	private Statement stmt;
 	private ResultSet rs;
 	private String query;
+	private static ExpenseDB expenseDb = null;
 	
-	
-	public ExpenseDB() {
-		this.connection = DBConnection.getConnection();
-	}
+	public static ExpenseDB getInstance() {
+        if (expenseDb == null) {
+            expenseDb = new ExpenseDB();
+        }
+        return expenseDb;
+    }
 	
 	public int insertExpense(Expense expense) {
 		this.query = "INSERT INTO "+DBConst.EXPENSE_TABLE+"("+DBConst.EXPENSE_NAME+","
@@ -38,7 +39,7 @@ public class ExpenseDB {
 							+DBConst.EXPENSE_USER_ID+")"
 							+"VALUES(?,?,?,?,?)";
 		try {
-			this.preparedStatement = connection.prepareStatement(this.query);
+			this.preparedStatement = DBConnection.getConnection().prepareStatement(this.query);
 			this.preparedStatement.setString(1, expense.getExpenseName());
 			this.preparedStatement.setString(2, expense.getExpenseCategory());
 			this.preparedStatement.setInt(3, expense.getExpenseAmount());
@@ -51,24 +52,31 @@ public class ExpenseDB {
 			return this.preparedStatement.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			
+			// TODO Auto-generated catch block			
 			e.printStackTrace();
 			return 0;
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	
 	}
 	
 	public void selectTargetExpense() throws SQLException {
-		this.stmt = this.connection.createStatement();
+		this.stmt = DBConnection.getConnection().createStatement();
 		this.rs = this.stmt.executeQuery("SELECT "+DBConst.TARGET_EXPENSE+" FROM "+DBConst.USER_TABLE
 										+" WHERE "+DBConst.USER_ID+"='"+User.userId+"'");
 		this.rs.next();
 		User.expectedExpense = this.rs.getInt(DBConst.TARGET_EXPENSE);
+		DBConnection.getConnection().close();
 	}
 	
 	private void selectCategoryAmount() throws SQLException {
-		this.stmt = this.connection.createStatement();
+		this.stmt = DBConnection.getConnection().createStatement();
 		this.rs = this.stmt.executeQuery("SELECT "+DBConst.EXPENSE_CATEGORY+", sum("+DBConst.EXPENSE_AMOUNT+") AS totalAmount "
 										+" FROM "+DBConst.EXPENSE_TABLE
 										+" WHERE userId='"+User.userId
@@ -82,6 +90,7 @@ public class ExpenseDB {
 		while(this.rs.next()) {
 			pieChartData.add(new Data(rs.getString(DBConst.EXPENSE_CATEGORY), rs.getInt("totalAmount")));
 		}
+		DBConnection.getConnection().close();
 		return pieChartData;
 	}
 	
@@ -96,6 +105,13 @@ public class ExpenseDB {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return expenseList;
 	}
@@ -103,7 +119,7 @@ public class ExpenseDB {
 	//History
 	public ObservableList<Expense> show(String type, String value) throws SQLException{
 		ObservableList<Expense> expenseList = FXCollections.observableArrayList();
-		this.stmt = this.connection.createStatement();
+		this.stmt = DBConnection.getConnection().createStatement();
 		if(type=="all") {
 			this.query = "SELECT * FROM "+DBConst.EXPENSE_TABLE
 					+" WHERE "+DBConst.EXPENSE_USER_ID+"='"+User.userId
@@ -121,12 +137,13 @@ public class ExpenseDB {
 										rs.getInt(DBConst.EXPENSE_AMOUNT), 
 										rs.getString(DBConst.SPEND_AT)));
 		}
+		DBConnection.getConnection().close();
 		return expenseList;
 	}
 	
 	public ObservableList<String> selectCategory() throws SQLException{
 		ObservableList<String> category = FXCollections.observableArrayList();
-		this.stmt = this.connection.createStatement();
+		this.stmt = DBConnection.getConnection().createStatement();
 		this.rs = this.stmt.executeQuery("SELECT DISTINCT "+DBConst.EXPENSE_CATEGORY+" FROM "+DBConst.EXPENSE_TABLE);
 		while(this.rs.next()) {
 			category.add(rs.getString(DBConst.EXPENSE_CATEGORY));
@@ -146,18 +163,26 @@ public class ExpenseDB {
 		if(!category.contains("Others")){
 			category.add("Others");
 		}
+		DBConnection.getConnection().close();
 		return category;
 	}
 	
 	public void deleteExpense(int expenseId) {
 		try {
-			this.stmt = this.connection.createStatement();
+			this.stmt = DBConnection.getConnection().createStatement();
 			this.stmt.executeUpdate("DELETE FROM "+DBConst.EXPENSE_TABLE+" WHERE "+DBConst.EXPENSE_ID+" ='"+expenseId+"';");
 			AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "A record is deleted successfully!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Record deletion process Failed!");
 			e.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -166,7 +191,7 @@ public class ExpenseDB {
 							+DBConst.EXPENSE_CATEGORY+"=?,"+DBConst.EXPENSE_AMOUNT+"=?,"+DBConst.SPEND_AT+"=?"
 							+"WHERE "+DBConst.EXPENSE_ID+" =?";
 		try {
-			this.preparedStatement = connection.prepareStatement(this.query);
+			this.preparedStatement = DBConnection.getConnection().prepareStatement(this.query);
 			this.preparedStatement.setString(1, expense.getExpenseName());
 			this.preparedStatement.setString(2, expense.getExpenseCategory());
 			this.preparedStatement.setInt(3, expense.getExpenseAmount());
@@ -181,12 +206,19 @@ public class ExpenseDB {
 			// TODO Auto-generated catch block
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Record failed to update!");
 			e.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	public void setTargetExpense(int amount) {
 		try {
-			this.stmt = this.connection.createStatement();
+			this.stmt = DBConnection.getConnection().createStatement();
 			this.stmt.executeUpdate("UPDATE "+DBConst.USER_TABLE
 									+" SET "+DBConst.TARGET_EXPENSE+"="+amount
 									+" WHERE "+DBConst.USER_ID+" ='"+User.userId+"';");
@@ -195,13 +227,20 @@ public class ExpenseDB {
 			// TODO Auto-generated catch block
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Setting expense target fail!");
 			e.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	public ObservableList<Expense> selectExpenseWith(String category) {
 		ObservableList<Expense> expenseList = FXCollections.observableArrayList();
 		try {
-			this.stmt = this.connection.createStatement();
+			this.stmt = DBConnection.getConnection().createStatement();
 			this.rs = this.stmt.executeQuery("SELECT "+DBConst.SPEND_AT+","+DBConst.EXPENSE_NAME+","+DBConst.EXPENSE_AMOUNT
 											+" FROM "+DBConst.EXPENSE_TABLE
 											+" WHERE "+DBConst.EXPENSE_USER_ID+"='"+User.userId+"' and "+DBConst.EXPENSE_CATEGORY+" ='"+category+"';");
@@ -211,6 +250,13 @@ public class ExpenseDB {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return expenseList;
 	}
@@ -218,7 +264,7 @@ public class ExpenseDB {
 	public List<Expense> searchByCategory(String category){
 		List<Expense> expenseList = new ArrayList<Expense>();
 		try {
-			this.stmt = this.connection.createStatement();
+			this.stmt = DBConnection.getConnection().createStatement();
 			this.rs = this.stmt.executeQuery("SELECT "+DBConst.EXPENSE_CATEGORY+", sum("+DBConst.EXPENSE_AMOUNT+") AS totalAmount "
 											+" FROM "+DBConst.EXPENSE_TABLE
 											+" WHERE userId='"+User.userId
@@ -230,6 +276,13 @@ public class ExpenseDB {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return expenseList;

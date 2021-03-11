@@ -41,6 +41,7 @@ public class SignupController extends FramesController {
 	@FXML
 	private JFXPasswordField pfRePassword;
 
+	private AccountDBModel accountDb = AccountDBModel.getInstance();
 	@FXML
 	void aboutFrame(ActionEvent event) throws IOException {
 		openFrame("accountView", "AboutUI", "About");
@@ -71,9 +72,10 @@ public class SignupController extends FramesController {
 					final String secretKey = "ssshhhhhhhhhhh!!!!";
 
 					String encryptedString = Encryption.encrypt(password, secretKey);
-					AccountDBModel accountDb = new AccountDBModel();
-					User user = new User(userName, email, encryptedString);
+					
+					User user = new User(userName, email, encryptedString, null);
 
+					
 					int status = accountDb.signUp(user);
 
 					User.userId = accountDb.getLatestUserId();

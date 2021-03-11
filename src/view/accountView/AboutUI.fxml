@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -49,10 +48,5 @@
             <Image url="@../../assets/videoPlay.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btnHome" layoutX="644.0" layoutY="27.0" onAction="#homeFrame" prefHeight="51.0" prefWidth="73.0" style="-fx-background-color: #1a6ada;" text="Home" textFill="#fcf6f6">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
    </children>
 </AnchorPane>

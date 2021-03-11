@@ -1,6 +1,5 @@
 package database;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,15 +11,33 @@ import model.accountModel.User;
 
 public class AccountDBModel {
 
-	private Connection connection;
 	private Statement stmt;
 	private ResultSet rs;
 	private PreparedStatement pStmt;
 	
+    private static AccountDBModel accountDbModel = null;
+	
+	public static AccountDBModel getInstance(){
+        if (accountDbModel == null) {
+            try {
+				accountDbModel = new AccountDBModel();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				try {
+					DBConnection.getConnection().close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+        }
+        return accountDbModel;
+    }    
+	
 	public AccountDBModel() throws SQLException {
-		this.connection = DBConnection.getConnection();
-		this.stmt = this.connection.createStatement();
-		
+		this.stmt = DBConnection.getConnection().createStatement();
 	}	
 	public boolean isValidated(User user) throws SQLException {
 		
@@ -38,7 +55,7 @@ public class AccountDBModel {
 			}
 		}
 
-		connection.close();
+		DBConnection.getConnection().close();
 		return isOk;
 	}
 	
@@ -64,7 +81,7 @@ public class AccountDBModel {
 		String updateUser = "UPDATE "+DBConst.USER_TABLE+" SET "+ DBConst.USER_NAME+ "= ?,"+DBConst.EMAIL+ "= ?,"+DBConst.PASSWORD+"= ?"
 							+" WHERE " +DBConst.USER_ID+ "=?;";
 		try {
-			this.pStmt = this.connection.prepareStatement(updateUser);
+			this.pStmt = DBConnection.getConnection().prepareStatement(updateUser);
 			pStmt.setString(1, user.getUserName());
 			pStmt.setString(2, user.getEmail());
 			pStmt.setString(3, user.getPassword());
@@ -75,6 +92,13 @@ public class AccountDBModel {
 			// TODO Auto-generated catch block
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Sorry, account update fail!");
 			e.printStackTrace();
+		}finally {
+			try {
+				DBConnection.getConnection().close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -84,5 +108,6 @@ public class AccountDBModel {
 		rs.next();
 		User user = new User(rs.getString(DBConst.USER_NAME),rs.getString(DBConst.EMAIL),rs.getString(DBConst.PASSWORD));
 		return user;
+		
 	}	
 }

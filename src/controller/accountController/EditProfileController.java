@@ -40,7 +40,7 @@ public class EditProfileController implements Initializable {
     
     private User user = new User();
     
-    private AccountDBModel accountdb;
+    private AccountDBModel accountdb = AccountDBModel.getInstance();
 
     @FXML
     void processClose(ActionEvent event) {
@@ -59,7 +59,6 @@ public class EditProfileController implements Initializable {
     		AlertMaker.showAlert(AlertType.ERROR, "ERROR", "Wrong Password", "You entered wrong old password!Please Enter agian!");
     	}else {
     		String encryptedNewPwd = Encryption.encrypt(newPassword, secretKey) ;
-        	accountdb = new AccountDBModel();
         	user.setUserName(tfUserName.getText());
         	user.setEmail(tfUserEmail.getText());
         	user.setPassword(encryptedNewPwd);
@@ -72,7 +71,6 @@ public class EditProfileController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		try {
-			accountdb = new AccountDBModel();
 			user = accountdb.selectUser();
 			tfUserName.setText(user.getUserName());
 	    	tfUserEmail.setText(user.getEmail());
