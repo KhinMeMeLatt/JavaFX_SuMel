@@ -108,7 +108,7 @@ public class WithdrawController {
 		ButtonType button = result.orElse(ButtonType.CANCEL);
 
 		if (button == ButtonType.OK) {
-			amount(3);
+			amount(GoalDBModel.goalId);
 			java.util.Date date=new java.util.Date();
 	    	java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
 

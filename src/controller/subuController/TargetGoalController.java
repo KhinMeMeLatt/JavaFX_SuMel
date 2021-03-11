@@ -73,6 +73,8 @@ public class TargetGoalController implements Initializable {
 
 	@FXML
 	private Label nameExistLabel;
+	@FXML
+	private Label lblValidate;
 
 	@FXML
 	private ImageView imViewGoal;
@@ -134,6 +136,10 @@ public class TargetGoalController implements Initializable {
 			return ;
 		}
 		String goalName = txtGoalName.getText();
+		if(goalName.length()>20) {
+			txtGoalName.setText("Invalid Length!");
+		}
+		
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
 		
 		if (imgFile == null) {
@@ -155,6 +161,7 @@ public class TargetGoalController implements Initializable {
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
 		}
+		
 		
 	}
 
@@ -251,6 +258,7 @@ public class TargetGoalController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
 		dpStartDate.setValue(LocalDate.now()); // Set current date in date picker for start date
 		dpEndDate.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
 
@@ -294,6 +302,9 @@ public class TargetGoalController implements Initializable {
 
 		btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()
 				.and(txtObjAmount.textProperty().isNotEmpty()).and(txtSaveAmount.textProperty().isNotEmpty())).not());
+	}catch(NumberFormatException e){
+		txtSaveAmount.setText("Please Enter Numbers!");
+	}
 	}
 
 	public void updateTargetGoalUI(Goal goal) {
