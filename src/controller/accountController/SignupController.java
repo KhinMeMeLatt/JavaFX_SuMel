@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import model.accountModel.Encryption;
 import model.accountModel.User;
 
-public class SignupController extends FramesController{
+public class SignupController extends FramesController {
 
 	@FXML
 	private JFXTextField tfUserEmail;
@@ -42,15 +42,15 @@ public class SignupController extends FramesController{
 	private JFXPasswordField pfRePassword;
 
 	@FXML
-    void aboutFrame(ActionEvent event) throws IOException {
-       openFrame("accountView", "AboutUI", "About");
-    }
+	void aboutFrame(ActionEvent event) throws IOException {
+		openFrame("accountView", "AboutUI", "About");
+	}
 
-    @FXML
-    void currencyConverterFrame(ActionEvent event) throws IOException {
-       openCurrencyFrame("CurrencyConverterUI", "Currency Converter");
-    }
-	
+	@FXML
+	void currencyConverterFrame(ActionEvent event) throws IOException {
+		openCurrencyFrame("CurrencyConverterUI", "Currency Converter");
+	}
+
 	@FXML // User Registration
 	void processSignup(ActionEvent event) throws IOException, NoSuchAlgorithmException, NoSuchProviderException {
 		lblStatus.setVisible(true);
@@ -65,28 +65,25 @@ public class SignupController extends FramesController{
 				lblStatus.setTextFill(Color.RED);
 				lblStatus.setText("All the required fields must be filled! Try Again !!");
 			} else {
-				
+
 				if (password.equals(rePassword)) {
-					
-					
-					 
-					 
+
 					final String secretKey = "ssshhhhhhhhhhh!!!!";
 
-					String encryptedString = Encryption.encrypt(password, secretKey) ;
+					String encryptedString = Encryption.encrypt(password, secretKey);
 					AccountDBModel accountDb = new AccountDBModel();
-					User user = new User(userName, email, encryptedString );
-					
+					User user = new User(userName, email, encryptedString);
+
 					int status = accountDb.signUp(user);
-					
+
 					User.userId = accountDb.getLatestUserId();
-					
+
 					if (status > 0) {
-						AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Account created successfully!Please Log in!");
+						AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null,
+								"Account created successfully!Please Log in!");
 						Stage stage = (Stage) btnClose.getScene().getWindow();
 						stage.close();
-						openFrame("accountView","LoginUI");
-
+						openFrame("accountView", "LoginUI", "Login");
 					}
 				} else {
 					lblStatus.setTextFill(Color.RED);
@@ -103,7 +100,7 @@ public class SignupController extends FramesController{
 	void processLogin(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
 		stage.close();
-		openFrame("accountView","LoginUI");
+		openFrame("accountView", "LoginUI", "Login");
 	}
 
 	@FXML // Close the scenes

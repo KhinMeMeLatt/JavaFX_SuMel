@@ -90,13 +90,14 @@ public class JustSaveController implements Initializable {
 
 		// define image extension
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.ico"));
-		File imgFile = fileChooser.showOpenDialog(null);
+		imgFile = fileChooser.showOpenDialog(null);
 
 		if (imgFile != null) {
 			this.goalImage = new Image(imgFile.toURI().toString());
 			imViewGoal.setImage(this.goalImage);
 			this.imageName = imgFile.getName();
 		} else {
+			imgFile = new File("src/assets/goals/JustSave.png");
 			this.imageName = "JustSave.png";
 		}
 	}
@@ -107,10 +108,12 @@ public class JustSaveController implements Initializable {
 			handleUpdateUntargetGoal();
 			return;
 		}
+		
+		
 		String goalName = txtGoalName.getText();
 		Goal newGoal = new Goal(goalName, this.imageName, 0, dpStartDate.getValue().toString(), null, null, 0, false,
 				User.userId);
-		
+		writeImage();
 		
 		if(!goalModel.isSubuNameExists(goalName)) {
 			goalModel.insertGoal(newGoal);
@@ -125,17 +128,17 @@ public class JustSaveController implements Initializable {
 		txtGoalName.setText(goal.getGoalName());
 		Image image = null;
 		if (goal.getGoalImgName() == null) {
-			image = new Image(getClass().getResourceAsStream("../assets/img/JustSave.png"));
+			image = new Image(getClass().getResourceAsStream("../../assets/JustSave.png"));
 		} else {
 			try {
-				image = new Image(new FileInputStream("src/assets/img/" + goal.getGoalImgName()));
+				image = new Image(new FileInputStream("src/assets/goals/" + goal.getGoalImgName()));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
 		imageName = goal.getGoalImgName();
 		imViewGoal.setImage(image);
-
+		imgFile = new File("src/assets/goals/"+imageName);
 		dpStartDate.setValue(null);
 
 		String start = goal.getStartDate();
@@ -145,27 +148,29 @@ public class JustSaveController implements Initializable {
 		btnCreateGoal.setText("Update Goal");
 		isInEditMode = true;
 	}
-
-	private void handleUpdateUntargetGoal() {
-
-		String goalName = txtGoalName.getText();
-
+	
+	private void writeImage() {
 		BufferedImage bImage;
 		try {
-
 			if (imgFile == null) {
-				imgFile = new File("src/assets/goals/JustSave.png");
+				imgFile = new File("src/assets/goal.png");
+				imageName = "goal.png";
 			}
-
 			bImage = ImageIO.read(imgFile);
 			String mimeType = URLConnection.guessContentTypeFromName(imageName);
-
 			ImageIO.write(bImage, mimeType.substring(mimeType.indexOf("/") + 1),
 					new File("src/assets/goals/" + imageName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void handleUpdateUntargetGoal() {
+
+		String goalName = txtGoalName.getText();
+		
+		writeImage();
 
 		System.out.println(justSaveSubu.getGoalId());
 		System.out.println(this.imageName);

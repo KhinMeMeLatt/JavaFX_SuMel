@@ -57,10 +57,10 @@ public class SubuController implements Initializable {
 	public void setSubuDataToUI(Subu subu) {
 		Image image = null;
 		if (subu.getSbImageSrc() == null) {
-			image = new Image(getClass().getResourceAsStream("../assets/goal.png"));
+			image = new Image(getClass().getResourceAsStream("../../assets/goal.png"));
 		} else {
 			try {
-				image = new Image(new FileInputStream("src/assets/img/" + subu.getSbImageSrc()));
+				image = new Image(new FileInputStream("src/assets/goals/" + subu.getSbImageSrc()));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}

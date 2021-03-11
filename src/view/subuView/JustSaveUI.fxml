@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.JustSaveController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.JustSaveController">
    <children>
       <Label layoutX="103.0" layoutY="53.0" prefHeight="45.0" prefWidth="218.0" text="SuMel" textFill="#e05f26">
          <font>
@@ -63,7 +63,7 @@
             <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <JFXTextField fx:id="txtGoalName" onKeyReleased="#nameExist" />
-                  <Label fx:id="nameExistLabel" />
+                  <Label fx:id="nameExistLabel" onKeyReleased="#nameExist" />
                </children>
             </VBox>
             <ImageView fx:id="imViewGoal" fitHeight="75.0" fitWidth="143.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">

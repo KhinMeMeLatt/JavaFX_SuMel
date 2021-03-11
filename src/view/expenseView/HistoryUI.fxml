@@ -43,15 +43,15 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dpExpense" layoutX="470.0" layoutY="89.0" visible="false" />
-      <JFXComboBox fx:id="cobCategory" layoutX="462.0" layoutY="89.0" prefHeight="27.0" prefWidth="174.0" promptText="Choose category" visible="false" />
+      <DatePicker fx:id="dpExpense" layoutX="489.0" layoutY="89.0" prefHeight="25.0" prefWidth="155.0" visible="false" />
+      <JFXComboBox fx:id="cobCategory" layoutX="490.0" layoutY="89.0" prefHeight="27.0" prefWidth="146.0" promptText="Choose category" visible="false" />
       <ImageView fx:id="ivSearch" fitHeight="27.0" fitWidth="28.0" layoutX="650.0" layoutY="89.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../assets/search.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="237.0" layoutY="83.0" onAction="#showAll" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #e1460e;" text="Show All" textFill="WHITE" />
-      <JFXButton layoutX="430.0" layoutY="83.0" onAction="#deleteExpense" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #f00;" text="Delete" textFill="WHITE" />
-      <JFXButton fx:id="btnUpdate" layoutX="330.0" layoutY="84.0" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #e1460e;" text="Update" textFill="WHITE" />
+      <JFXButton layoutX="210.0" layoutY="83.0" onAction="#showAll" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #e1460e;" text="Show All" textFill="WHITE" />
+      <JFXButton layoutX="400.0" layoutY="84.0" onAction="#deleteExpense" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #f00;" text="Delete" textFill="WHITE" />
+      <JFXButton fx:id="btnUpdate" layoutX="302.0" layoutY="84.0" prefHeight="38.0" prefWidth="81.0" style="-fx-background-color: #e1460e;" text="Update" textFill="WHITE" />
    </children>
 </AnchorPane>

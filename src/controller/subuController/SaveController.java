@@ -1,6 +1,8 @@
 package controller.subuController;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Optional;
 
 import com.jfoenix.controls.JFXTextField;
@@ -16,92 +18,69 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import model.subuModel.Save;
 
-
-
 public class SaveController {
 
-    @FXML
-    private ImageView imgGoal;
+	@FXML
+	private ImageView imgGoal;
 
-    @FXML
-    private Label lblGoalName;
+	@FXML
+	private Label lblGoalName;
 
-    @FXML
-    private JFXTextField txtAmount;
-    @FXML
-    private Label lblValidation;
-    
-   
+	@FXML
+	private JFXTextField txtAmount;
+	@FXML
+	private Label lblValidation;
 
+	@FXML
+	void convertCurrency(ActionEvent event) {
 
-    @FXML
-    void convertCurrency(ActionEvent event) {
+	}
 
-    }
+	@FXML
+	void processAbout(ActionEvent event) {
 
-    @FXML
-    void processAbout(ActionEvent event) {
+	}
 
-    }
-    
-
-    @FXML
-    void processSave(ActionEvent event) throws SQLException {
-    	try {
-			double amount=Double.parseDouble(txtAmount.getText());
+	@FXML
+	void processSave(ActionEvent event) throws SQLException {
+		try {
+			double amount = Double.parseDouble(txtAmount.getText());
 			lblValidation.setText(" ");
-			if(txtAmount.getText().trim().isEmpty()) {
-	    		
-	    		txtAmount.setText("Please Enter Amount!");
-	    		
-	    	}
-	    	
-	    	else{
-	    		
-				
-	    	Alert a = new Alert(AlertType.NONE); 
-			
-			
-			a.setAlertType(AlertType.CONFIRMATION); 
-			a.setHeaderText("Are you sure you want to save?");
-			
-			Optional<ButtonType> result = a.showAndWait();
-			ButtonType button = result.orElse(ButtonType.CANCEL);
+			if (txtAmount.getText().trim().isEmpty()) {
 
-			if (button == ButtonType.OK) {
-				java.util.Date date=new java.util.Date();
-		    	java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime());
+				txtAmount.setText("Please Enter Amount!");
 
+			}
 
-		    	double saveValue =Double.valueOf(txtAmount.getText()); 
-		    	Save newSave = new Save(saveValue,sqlTime, GoalDBModel.goalId); 
-		    	SaveDBModel saveModel = new SaveDBModel();
-		    	saveModel.saveAmount(newSave);		    	
-				
-				  } else {
-					  System.out.println("canceled"); }
-				 
-			
-	    	
-			  
-	    	}
-			
-		}
-		catch(NumberFormatException e){
+			else {
+
+				Alert a = new Alert(AlertType.NONE);
+
+				a.setAlertType(AlertType.CONFIRMATION);
+				a.setHeaderText("Are you sure you want to save?");
+
+				Optional<ButtonType> result = a.showAndWait();
+				ButtonType button = result.orElse(ButtonType.CANCEL);
+
+				if (button == ButtonType.OK) {
+					Date date = new Date();
+					Timestamp sqlTime = new Timestamp(date.getTime());
+
+					double saveValue = Double.valueOf(txtAmount.getText());
+					Save newSave = new Save(saveValue, sqlTime, GoalDBModel.goalId);
+					SaveDBModel saveModel = new SaveDBModel();
+					saveModel.saveAmount(newSave);
+
+				} else {
+					System.out.println("canceled");
+				}
+
+			}
+
+		} catch (NumberFormatException e) {
 			lblValidation.setText("Please Enter Numbers!");
 		}
-    	
-    	
-    	
-		
-    	
-    	
 
-    }
-
-	
-
-	
-   
+	}
 
 }

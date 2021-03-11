@@ -67,7 +67,7 @@ public class LoginController extends FramesController{
 					lblStatus.setText("Congratulations! Login Success! ");
 					Stage stage = (Stage) btnClose.getScene().getWindow();
 					stage.close();
-					openFrame("subuView","HomeUI");
+					openFrame("subuView","HomeUI","Home");
 				} else {
 					lblStatus.setTextFill(Color.RED);
 					lblStatus.setText("Incorrect email or password! Try Again !!");
@@ -81,7 +81,7 @@ public class LoginController extends FramesController{
 	void processSignUp(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
 		stage.close();
-		openFrame("accountView","SignupUI");
+		openFrame("accountView","SignupUI","Sign Up");
 	}
 
 	@FXML // Close the scene

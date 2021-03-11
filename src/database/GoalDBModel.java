@@ -59,7 +59,7 @@ public class GoalDBModel {
 
 			this.ps.executeUpdate();
 			AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null,
-					"Expenses are recorded successfully!");
+					"Goal created successfully!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Expenses record process Failed!");
@@ -100,7 +100,7 @@ public class GoalDBModel {
 	
 	public ObservableList<Goal> searchSubuByName(String name) {
 		ObservableList<Goal> goalList = FXCollections.observableArrayList();
-		String selectAllGoal = "SELECT * FROM goal WHERE goalName like ? AND userId = " + 2;
+		String selectAllGoal = "SELECT * FROM goal WHERE goalName like ? AND userId = " + User.userId;
 
 		try {
 			ps = this.connection.prepareStatement(selectAllGoal);
@@ -131,7 +131,7 @@ public class GoalDBModel {
 
 	public Goal selectSubuBySubuName(String sbName) {
 		Goal goal = new Goal();
-		String selectSubu = "SELECT * FROM goal Where goalName like ? AND userId = " + 2;
+		String selectSubu = "SELECT * FROM goal Where goalName like ? AND userId = " + User.userId;
 		try {
 			ps = this.connection.prepareStatement(selectSubu);
 			ps.setString(1, sbName);
@@ -178,13 +178,13 @@ public class GoalDBModel {
 
 	public boolean isSubuNameExists(String name) {
 		try {
-			String checkstmt = "SELECT COUNT(*) FROM goal WHERE goalName=?";
+			String checkstmt = "SELECT COUNT(*) FROM goal WHERE goalName=? AND goalId != "+goalId+" AND userId = " + User.userId;
 			ps = this.connection.prepareStatement(checkstmt);
 			ps.setString(1, name);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				int count = rs.getInt(1);
-				return (count > 1);
+				return (count > 0);
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -193,7 +193,7 @@ public class GoalDBModel {
 	}
 
 	public boolean deleteSubuBySubuName(String sbName) {
-		String selectSubu = "Delete FROM goal Where goalName like ? ";
+		String selectSubu = "Delete FROM goal Where goalName like ? AND userId = " + User.userId;
 		try {
 			ps = this.connection.prepareStatement(selectSubu);
 			ps.setString(1, sbName);
@@ -223,7 +223,7 @@ public class GoalDBModel {
 	public boolean updateTargetGoal(Goal newGoal) {
 		String updateString = "Update goal SET " + "goalName = ?," + "goalImgName = ?," + "goalAmount = ?,"
 				+ "startDate = ?," + "endDate = ?," + "saveType = ?," + "amountToSave = ?," + "isBreak = ?"
-				+ " WHERE goalId = ?;";
+				+ " WHERE goalId = ? AND userId = " + User.userId;
 		connection = DBConnection.getConnection();
 		try {
 			ps = connection.prepareStatement(updateString);

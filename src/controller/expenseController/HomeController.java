@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -26,6 +27,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -140,6 +143,23 @@ public class HomeController implements Initializable {
 	void showHistory(ActionEvent event) throws IOException {
     	frameController.openFrame("expenseView", "HistoryUI", "Expense History");
 	}
+	
+	@FXML
+    void userUpdateForm(MouseEvent event) throws IOException {
+		frameController.openFrame("accountView", "EditProfileUI", "Edit Profile");
+    }
+
+	@FXML
+    void logout(MouseEvent event) throws IOException {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Logout");
+		alert.setContentText("Are you sure want to Logout?");
+		Optional<ButtonType> answer = alert.showAndWait();
+		if (answer.get() == ButtonType.OK) {
+			lblmySubu.getScene().getWindow().hide();
+			frameController.openFrame("accountView", "MainUI", "Main UI");
+		}
+    }
 
 	private void setExpense(List<Expense> expenseList) {
 		clearGrid();
