@@ -122,8 +122,8 @@ public class TargetGoalController implements Initializable {
 			nameExistLabel.setTextFill(Color.WHITE);
 			nameExistLabel.setText("");
 		}
-		
-		
+
+
 		if(txtGoalName.getText().length() > 10) {
 			nameExistLabel.setTextFill(Color.RED);
 			nameExistLabel.setText("***Subu name length must not be greater than 10.");
@@ -143,7 +143,7 @@ public class TargetGoalController implements Initializable {
 		if(goalName.length()>20) {
 			txtGoalName.setText("Invalid Length!");
 		}
-		
+
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
 
 		if (imgFile == null) {
@@ -171,7 +171,7 @@ public class TargetGoalController implements Initializable {
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
-
+	}
 	@FXML
 	void addImage(MouseEvent event) {
 		FileChooser fileChooser = new FileChooser();
@@ -203,7 +203,7 @@ public class TargetGoalController implements Initializable {
 	private void availableSaveType() {
 		if (this.period < 7) {
 			this.disableSaveTypes(true, true);// first argument is for weekly save type radio button, second
-												// argument is for monthly save type radio button
+			// argument is for monthly save type radio button
 		} else if (this.period < 30) {
 			this.disableSaveTypes(false, true);
 		} else {
@@ -260,53 +260,54 @@ public class TargetGoalController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		goalDbModel = GoalDBModel.getInstance();
-		dpStartDate.setValue(LocalDate.now()); // Set current date in date picker for start date
-		dpEndDate.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
+		try {
+			goalDbModel = GoalDBModel.getInstance();
+			dpStartDate.setValue(LocalDate.now()); // Set current date in date picker for start date
+			dpEndDate.setValue(LocalDate.now().plus(1, ChronoUnit.DAYS));
 
-		this.disableSaveTypes(true, true);
+			this.disableSaveTypes(true, true);
 
-		txtSaveAmount.textProperty().addListener(new ChangeListener<Object>() {
+			txtSaveAmount.textProperty().addListener(new ChangeListener<Object>() {
 
-			@Override
-			public void changed(ObservableValue<? extends Object> observableValue, Object oldValue, Object newValue) {
-				if (changeDate) {
-					double saveAmount = Double.valueOf(txtSaveAmount.getText());
-					LocalDate today = LocalDate.now();
-					LocalDate amountToAdd = null;
-					int noOfDays = (int) Math.ceil(objAmount / saveAmount);
+				@Override
+				public void changed(ObservableValue<? extends Object> observableValue, Object oldValue, Object newValue) {
+					if (changeDate) {
+						double saveAmount = Double.valueOf(txtSaveAmount.getText());
+						LocalDate today = LocalDate.now();
+						LocalDate amountToAdd = null;
+						int noOfDays = (int) Math.ceil(objAmount / saveAmount);
 
-					if (rbDaily.isSelected()) {
-						amountToAdd = today.plus(noOfDays, ChronoUnit.DAYS);
-					} else if (rbWeekly.isSelected()) {
-						amountToAdd = today.plus(noOfDays * 7, ChronoUnit.DAYS);
-					} else if (rbMonthly.isSelected()) {
-						amountToAdd = today.plus(noOfDays * 30, ChronoUnit.DAYS);
+						if (rbDaily.isSelected()) {
+							amountToAdd = today.plus(noOfDays, ChronoUnit.DAYS);
+						} else if (rbWeekly.isSelected()) {
+							amountToAdd = today.plus(noOfDays * 7, ChronoUnit.DAYS);
+						} else if (rbMonthly.isSelected()) {
+							amountToAdd = today.plus(noOfDays * 30, ChronoUnit.DAYS);
+						}
+						changeDate = !changeDate;
+						dpEndDate.setValue(amountToAdd);
+					} else {
+						changeDate = !changeDate;
 					}
-					changeDate = !changeDate;
-					dpEndDate.setValue(amountToAdd);
-				} else {
-					changeDate = !changeDate;
+
 				}
+			});
 
-			}
-		});
+			// get Object Amount when user is entering in text field
+			txtObjAmount.textProperty().addListener(new ChangeListener<Object>() {
 
-		// get Object Amount when user is entering in text field
-		txtObjAmount.textProperty().addListener(new ChangeListener<Object>() {
+				@Override
+				public void changed(ObservableValue<? extends Object> observableValue, Object oldValue, Object newValue) {
+					objAmount = (txtObjAmount.getText() == "") ? 0 : Integer.valueOf(txtObjAmount.getText());
+					calculateSaveAmount();
+				}
+			});
 
-			@Override
-			public void changed(ObservableValue<? extends Object> observableValue, Object oldValue, Object newValue) {
-				objAmount = (txtObjAmount.getText() == "") ? 0 : Integer.valueOf(txtObjAmount.getText());
-				calculateSaveAmount();
-			}
-		});
-
-		btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()
-				.and(txtObjAmount.textProperty().isNotEmpty()).and(txtSaveAmount.textProperty().isNotEmpty())).not());
-	}catch(NumberFormatException e){
-		txtSaveAmount.setText("Please Enter Numbers!");
-	}
+			btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()
+					.and(txtObjAmount.textProperty().isNotEmpty()).and(txtSaveAmount.textProperty().isNotEmpty())).not());
+		}catch(NumberFormatException e){
+			txtSaveAmount.setText("Please Enter Numbers!");
+		}
 	}
 
 	public void updateTargetGoalUI(Goal goal) {
@@ -396,7 +397,7 @@ public class TargetGoalController implements Initializable {
 			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
 
-		
+
 	}
 
 }
