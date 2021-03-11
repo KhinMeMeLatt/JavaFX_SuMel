@@ -135,6 +135,11 @@ public class TargetGoalController implements Initializable {
 		}
 		String goalName = txtGoalName.getText();
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
+		
+		if (imgFile == null) {
+			imgFile = new File("src/assets/goal.png");
+			imageName = "goal.png";
+		}
 
 		BufferedImage bImage = ImageIO.read(imgFile);
 
@@ -147,11 +152,8 @@ public class TargetGoalController implements Initializable {
 
 		if (!goalModel.isSubuNameExists(goalName)) {
 			goalModel.insertGoal(newGoal);
-			home.refresh(true);
-
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
-			home.refresh(false);
 		}
 		
 	}
@@ -303,7 +305,7 @@ public class TargetGoalController implements Initializable {
 			image = new Image(getClass().getResourceAsStream("../assets/goal.png"));
 		} else {
 			try {
-				image = new Image(new FileInputStream("src/assets/img/" + goal.getGoalImgName()));
+				image = new Image(new FileInputStream("src/assets/goals/" + goal.getGoalImgName()));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -366,14 +368,11 @@ public class TargetGoalController implements Initializable {
 				AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", null, "Goal is updated successfully!");
 				Stage homeStage = (Stage) txtGoalName.getScene().getWindow();
 				homeStage.close();
-				home.refresh(true);
 			} else {
 				AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Goal Update Failed!");
-				home.refresh(false);
 			}
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR,"Error", "Error", "Please Enter Different Subu name!");
-			home.refresh(false);
 		}
 	}
 

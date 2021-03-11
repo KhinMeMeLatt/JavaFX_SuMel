@@ -24,7 +24,7 @@
 
 <!-- <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?> -->
 
-<AnchorPane prefHeight="700.0" prefWidth="1300.0" style="-fx-background-color: gray;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.HomeController">
+<AnchorPane prefHeight="700.0" prefWidth="1300.0" style="-fx-background-color: gray;" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.subuController.HomeController">
    <children>
       <HBox prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -160,7 +160,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
                                  <children>
-                                    <LineChart prefHeight="330.0" prefWidth="500.0">
+                                    <LineChart fx:id="lcMoney" prefHeight="330.0" prefWidth="500.0">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -237,9 +237,14 @@
                                           <Font name="Georgia" size="16.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="imageBorder">
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#userUpdateForm" pickOnBounds="true" preserveRatio="true" styleClass="imageBorder">
                                        <image>
-                                          <Image url="@../../assets/img/user.png" />
+                                          <Image url="@../../assets/img/user1.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/logout.png" />
                                        </image>
                                     </ImageView>
                                     <!-- <FontAwesomeIconView glyphName="BELL_ALT" size="17" /> -->
@@ -256,13 +261,8 @@
                                           <Font name="Georgia Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton buttonType="RAISED" onAction="#goalCreateAction" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="I have goal" textAlignment="CENTER" wrapText="true" />
-                                    <JFXButton buttonType="RAISED" onAction="#justSaveAction" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="I just want to save" wrapText="true">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </JFXButton>
-                                    <JFXButton buttonType="RAISED" onAction="#showHistory" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="History" wrapText="true">
+                                    <JFXButton fx:id="goalCreateBtn" buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="I have goal" textAlignment="CENTER" wrapText="true" />
+                                    <JFXButton fx:id="justSaveBtn" buttonType="RAISED" prefHeight="70.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="sidebutton" text="I just want to save" wrapText="true">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

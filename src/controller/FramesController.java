@@ -10,20 +10,6 @@ import javafx.stage.Stage;
 
 public class FramesController {
 	
-
-	public final void openFrame(String path, String frameName) throws IOException {
-		Parent mainParent;
-		Stage stage = new Stage();
-		mainParent = FXMLLoader.load(getClass().getResource("../../view/"+path+"/"+frameName+".fxml"));
-		Scene scene = new Scene(mainParent);
-		scene.getStylesheets().add(getClass().getResource("../../view/main.css").toExternalForm());
-		stage = new Stage();
-		stage.hide();
-		stage.setScene(scene);
-		stage.show();
-		stage.setTitle(frameName);
-		stage.getIcons().add(new Image("../../assets/pig.PNG"));
-	}
   
 	public final void openFrame(String path, String frameName,String title) throws IOException {
 		Parent mainParent;
@@ -34,9 +20,11 @@ public class FramesController {
 		stage = new Stage();
 		stage.hide();
 		stage.setScene(scene);
-		stage.show();
+		stage.showAndWait();
 		stage.setTitle(title);
-		stage.getIcons().add(new Image("../../assets/pig.PNG"));
+	    stage.getIcons().add(new Image(getClass().getResourceAsStream("/assets/icon/sumel.png")));
+		//stage.getIcons().add(new Image("/assets/icon/sumel.png"));
+	//	stage.getIcons().add(new Image("/assets/pig.PNG"));
 
 	}
 	
@@ -51,7 +39,9 @@ public class FramesController {
 		stage.setScene(scene);
 		stage.show();
 		stage.setTitle(title);
-		stage.getIcons().add(new Image("../../assets/pig.PNG"));
+		//stage.getIcons().add(new Image("/assets/icon/sumel.png"));
+		stage.getIcons().add(new Image(getClass().getResourceAsStream("/assets/icon/sumel.png")));
+		//stage.getIcons().add(new Image("/assets/pig.PNG"));
 	}
 	
 }

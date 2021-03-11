@@ -2,6 +2,9 @@ package controller.subuController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -21,6 +24,7 @@ import com.jfoenix.effects.JFXDepthManager;
 import alert.AlertMaker;
 import controller.FramesController;
 import controller.accountController.MainController;
+import database.AccountDBModel;
 import database.GoalDBModel;
 import database.SaveDBModel;
 import database.WithdrawDBModel;
@@ -37,6 +41,9 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -72,9 +79,14 @@ public class HomeController implements Initializable {
 
 	@FXML
 	private Label lblAbout;
-	
+
 	@FXML
-    private TableView<SaveAndWithdrawHistory> subuHistory;
+	private JFXButton goalCreateBtn;
+
+	@FXML
+	private JFXButton justSaveBtn;
+	@FXML
+	private TableView<SaveAndWithdrawHistory> subuHistory;
 
 	@FXML
 	private GridPane mySubus;
@@ -100,12 +112,15 @@ public class HomeController implements Initializable {
 	@FXML
 	private TableColumn<SaveAndWithdrawHistory, Double> tcAmount;
 
+	@FXML
+	private LineChart<String, Double> lcMoney;
+
 	private JFXPopup popup, actionPopup;
 
 	private VBox actionBox;
 
 	static ObservableList<Goal> goalList = FXCollections.observableArrayList();
-	
+
 	ObservableList<SaveAndWithdrawHistory> swhList = FXCollections.observableArrayList();
 
 	SubuController subuController = new SubuController();
@@ -117,8 +132,9 @@ public class HomeController implements Initializable {
 	SaveDBModel saveDBModel = new SaveDBModel();
 	WithdrawDBModel withdrawDBModel = new WithdrawDBModel();
 
-
 	FramesController frameController = new FramesController();
+
+	List<SaveAndWithdrawHistory> sortedList = new ArrayList<SaveAndWithdrawHistory>();
 
 	int row = 1;
 	int column = 0;
@@ -131,6 +147,13 @@ public class HomeController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		try {
+			AccountDBModel account = new AccountDBModel();
+			userName.setText(account.getUser());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		lblmySubu.setTextFill(Color.RED);
 		JFXDepthManager.setDepth(history, 1);
 		JFXDepthManager.setDepth(subuScrollPane, 1);
@@ -148,39 +171,74 @@ public class HomeController implements Initializable {
 				loadSubuDataToGrid(goalList);
 			}
 		});
-		
-		tcDate.setCellValueFactory(new PropertyValueFactory<SaveAndWithdrawHistory,String>("atTime")); 
+
+		tcDate.setCellValueFactory(new PropertyValueFactory<SaveAndWithdrawHistory, String>("atTime"));
 		tcAction.setCellValueFactory(new PropertyValueFactory<SaveAndWithdrawHistory, String>("action"));
-		tcAmount.setCellValueFactory(new PropertyValueFactory<SaveAndWithdrawHistory ,Double>("amount"));
-		 
+		tcAmount.setCellValueFactory(new PropertyValueFactory<SaveAndWithdrawHistory, Double>("amount"));
 
 		goalList = goalDbModel.selectAllSubu();
 		loadSubuDataToGrid(goalList);
 		initPopup();
 		actionPopup();
-		refresh(false);
+		
+		goalCreateBtn.setOnAction(e -> {
+			try {
+				frameController.openFrame("subuView", "TargetGoalUI", "Target Goal");
+				goalList = goalDbModel.selectAllSubu();
+				loadSubuDataToGrid(goalList);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		justSaveBtn.setOnAction(e->{
+			try {
+				frameController.openFrame("subuView", "JustSaveUI", "Just Save");
+				goalList = goalDbModel.selectAllSubu();
+				loadSubuDataToGrid(goalList);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		save.setOnMouseClicked(e -> {
+			loadSaveUI();
+			goalList = goalDbModel.selectAllSubu();
+			loadSubuDataToGrid(goalList);
+		});
+
+		withdraw.setOnMouseClicked(e -> {
+			loadWithdrawUI();
+			goalList = goalDbModel.selectAllSubu();
+			loadSubuDataToGrid(goalList);
+		});
+		
 		edit.setOnMouseClicked(e -> {
 			handleGoalEdit(actionGoal);
+			loadSubuDataToGrid(goalList);
 		});
 
 		delete.setOnMouseClicked(e -> {
 			handleGoalDelete(actionGoal);
+			loadSubuDataToGrid(goalList);
 
 		});
-		
-		
-	}
 
-	@FXML
-	void goalCreateAction(ActionEvent event) throws IOException {
-		frameController.openFrame("subuView", "TargetGoalUI", "Target Goal");
-	}
-
-	@FXML
-	void justSaveAction(ActionEvent event) throws IOException {
-		frameController.openFrame("subuView", "JustSaveUI", "Just Save");
+            
 
 	}
+
+	/*
+	 * @FXML void goalCreateAction(ActionEvent event) throws IOException {
+	 * frameController.openFrame("subuView", "TargetGoalUI", "Target Goal");
+	 * loadSubuDataToGrid(goalDbModel.selectAllSubu()); }
+	 * 
+	 * @FXML void justSaveAction(ActionEvent event) throws IOException {
+	 * frameController.openFrame("subuView", "JustSaveUI", "Just Save");
+	 * loadSubuDataToGrid(goalDbModel.selectAllSubu()); }
+	 */
 
 	@FXML
 	void aboutFrame(MouseEvent event) throws IOException {
@@ -198,14 +256,25 @@ public class HomeController implements Initializable {
 		Stage home = (Stage) lblExpense.getScene().getWindow();
 		home.close();
 	}
+	
+	@FXML
+    void userUpdateForm(MouseEvent event) throws IOException {
+		frameController.openFrame("accountView", "EditProfileUI", "Edit Profile");
+    }
 
 	@FXML
-	void showHistory(ActionEvent event) throws IOException {
-		frameController.openFrame("expenseView", "HistoryUI", "Expense History");
-	}
+	void logout(MouseEvent event) throws IOException {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Logout");
+		alert.setContentText("Are you sure want to Logout?");
+		Optional<ButtonType> answer = alert.showAndWait();
+		if (answer.get() == ButtonType.OK) {
+			lblmySubu.getScene().getWindow().hide();
+			frameController.openFrame("accountView", "MainUI", "Main UI");
+		}
 
+	}
 	public void loadSubuDataToGrid(ObservableList<Goal> goalList) {
-		System.out.println(mySubus.getChildren());
 		mySubus.getChildren().clear();
 		row = 1;
 		column = 0;
@@ -220,12 +289,17 @@ public class HomeController implements Initializable {
 				subuBox.setOnMouseClicked((e) -> {
 					subuHistory.getItems().clear();
 					GoalDBModel.goalId = goal.getGoalId();
-					
-                    setTable(GoalDBModel.goalId);
+
+					if (e.getButton() == MouseButton.PRIMARY) {
+						setTable(GoalDBModel.goalId);
+						drawLineChart();
+					}
+
 					if (e.getButton() == MouseButton.SECONDARY) {
 						popup.show(subuBox, PopupVPosition.TOP, PopupHPosition.LEFT, e.getX(), e.getY());
 						actionGoal = new Goal();
-						this.actionGoal = goal;
+
+						actionGoal = goal;
 					}
 				});
 				SubuController subuController = loader.getController();
@@ -236,9 +310,7 @@ public class HomeController implements Initializable {
 			} catch (IOException e) { // TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 	private Subu getSubu(Goal goal) {
@@ -252,26 +324,27 @@ public class HomeController implements Initializable {
 	}
 
 	private void handleGoalEdit(Goal goal) {
-		Goal goalForEdit = goalDbModel.selectSubuBySubuName(goal.getGoalName());
-		if (goalForEdit == null) {
+		// Goal goalForEdit = goalDbModel.selectSubuBySubuName(goal.getGoalName());
+		if (goal == null) {
 			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Goal loaded Failed!");
 			return;
 		}
 		try {
 			Parent parent = null;
 
-			if (goalForEdit.getSaveType() == null) {
+			if (goal.getSaveType() == null) {
 				FXMLLoader justSaveLoader = new FXMLLoader(
 						getClass().getResource("../../view/subuView/JustSaveUI.fxml"));
 				parent = justSaveLoader.load();
 				JustSaveController justSaveController = (JustSaveController) justSaveLoader.getController();
-				justSaveController.updateUntargetGoalUI(goalForEdit);
+				justSaveController.updateUntargetGoalUI(goal);
+				goal.getStartDate();
 			} else {
 				FXMLLoader targetGoalLoader = new FXMLLoader(
 						getClass().getResource("../../view/subuView/TargetGoalUI.fxml"));
 				parent = targetGoalLoader.load();
 				TargetGoalController targetGoalController = (TargetGoalController) targetGoalLoader.getController();
-				targetGoalController.updateTargetGoalUI(goalForEdit);
+				targetGoalController.updateTargetGoalUI(goal);
 
 			}
 
@@ -279,10 +352,11 @@ public class HomeController implements Initializable {
 			stage.setTitle("Edit Goal");
 			Scene scene = new Scene(parent);
 			scene.getStylesheets().add(getClass().getResource("../../view/main.css").toExternalForm());
+	
 			stage.setScene(scene);
 			stage.showAndWait();
 			stage.getIcons().add(new Image("/assets/icon/sumel.png"));
-
+			loadSubuDataToGrid(goalDbModel.selectAllSubu());
 		} catch (IOException ex) {
 			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -312,7 +386,7 @@ public class HomeController implements Initializable {
 	private void initPopup() {
 
 		Separator separator1 = new Separator(Orientation.HORIZONTAL);
-		Separator separator2 = new Separator(Orientation.HORIZONTAL); //
+		Separator separator2 = new Separator(Orientation.HORIZONTAL);
 		// separator.setStyle("-fx-border-color:
 		// black;-fx-border-style:solid;fx-border-width:0 0 1 0");
 		Font font = Font.font("Georgia", 16);
@@ -324,14 +398,6 @@ public class HomeController implements Initializable {
 		action.setMaxWidth(Double.MAX_VALUE);
 		save.setMaxWidth(Double.MAX_VALUE);
 		withdraw.setMaxWidth(Double.MAX_VALUE);
-
-		save.setOnMouseClicked(e -> {
-			loadSaveUI();
-		});
-
-		withdraw.setOnMouseClicked(e -> {
-			loadWithdrawUI();
-		});
 
 		VBox vbox = new VBox(action, separator1, save, separator2, withdraw);
 
@@ -372,15 +438,6 @@ public class HomeController implements Initializable {
 
 		actionPopup = new JFXPopup(actionBox);
 
-		edit.setOnMouseClicked(e -> {
-			handleGoalEdit(actionGoal);
-		});
-
-		delete.setOnMouseClicked(e -> {
-			handleGoalDelete(actionGoal);
-
-		});
-
 	}
 
 	private void loadSaveUI() {
@@ -401,31 +458,77 @@ public class HomeController implements Initializable {
 		}
 	}
 
-	public void refresh(boolean isneed) {
-		if (isneed) {
-			goalList = goalDbModel.selectAllSubu();
-			System.out.println(goalList);
-			loadSubuDataToGrid(goalList);
-			System.out.println("True");
-		} else {
-			System.out.println("false");
-		}
-	}
-	
-	void setTable(int goalId) {
-		List<SaveAndWithdrawHistory> swhArrayList = new ArrayList<SaveAndWithdrawHistory>();	
-
+	private void setTable(int goalId) {
+		List<SaveAndWithdrawHistory> swhArrayList = new ArrayList<SaveAndWithdrawHistory>();
 		swhArrayList = saveDBModel.selectAllSaveData(goalId);
 		swhArrayList.addAll(withdrawDBModel.selectAllWithdrawData(goalId));
-		for (SaveAndWithdrawHistory s : swhArrayList) {
-			System.out.println(s.getAmount());
-		}
-		List<SaveAndWithdrawHistory> sortedList = swhArrayList.stream()
-	            .sorted(Comparator.comparing(SaveAndWithdrawHistory::getAtTime))
-	            .collect(Collectors.toList());
-		
-		swhList.addAll(sortedList);	    
+		sortedList = swhArrayList.stream().sorted(Comparator.comparing(SaveAndWithdrawHistory::getAtTime))
+				.collect(Collectors.toList());
+
+		swhList.addAll(sortedList);
 		subuHistory.setItems(swhList);
+	}
+
+	private void drawLineChart() {
+		lcMoney.getData().clear();
+		double total[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		for (SaveAndWithdrawHistory money : sortedList) {
+			String swDateTime = money.getAtTime();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			LocalDateTime lswDateTime = LocalDateTime.parse(swDateTime, formatter);
+			switch (lswDateTime.getMonth()) {
+			case JANUARY:
+				total[0] = (money.getAction() == "Save") ? total[0] + money.getAmount() : total[0] - money.getAmount();
+				break;
+			case FEBRUARY:
+				total[1] = (money.getAction() == "Save") ? total[1] + money.getAmount() : total[1] - money.getAmount();
+				break;
+			case MARCH:
+				total[2] = (money.getAction() == "Save") ? total[2] + money.getAmount() : total[2] - money.getAmount();
+				break;
+			case APRIL:
+				total[3] = (money.getAction() == "Save") ? total[3] + money.getAmount() : total[3] - money.getAmount();
+				break;
+			case MAY:
+				total[4] = (money.getAction() == "Save") ? total[4] + money.getAmount() : total[4] - money.getAmount();
+				break;
+			case JUNE:
+				total[5] = (money.getAction() == "Save") ? total[5] + money.getAmount() : total[5] - money.getAmount();
+				break;
+			case JULY:
+				total[6] = (money.getAction() == "Save") ? total[6] + money.getAmount() : total[6] - money.getAmount();
+				break;
+			case AUGUST:
+				total[7] = (money.getAction() == "Save") ? total[7] + money.getAmount() : total[7] - money.getAmount();
+				break;
+			case SEPTEMBER:
+				total[8] = (money.getAction() == "Save") ? total[8] + money.getAmount() : total[8] - money.getAmount();
+				break;
+			case OCTOBER:
+				total[9] = (money.getAction() == "Save") ? total[9] + money.getAmount() : total[9] - money.getAmount();
+				break;
+			case NOVEMBER:
+				total[10] = (money.getAction() == "Save") ? total[10] + money.getAmount() : total[10] - money.getAmount();
+				break;
+			case DECEMBER:
+				total[11] = (money.getAction() == "Save") ? total[11] + money.getAmount() : total[11] - money.getAmount();
+				break;
+			}
+		}
+		Series<String, Double> goalLineChart = new Series<String, Double>();
+		goalLineChart.getData().add(new Data<String, Double>("Jan", total[0]));
+		goalLineChart.getData().add(new Data<String, Double>("Feb", total[1]));
+		goalLineChart.getData().add(new Data<String, Double>("Mar", total[2]));
+		goalLineChart.getData().add(new Data<String, Double>("Apr", total[3]));
+		goalLineChart.getData().add(new Data<String, Double>("May", total[4]));
+		goalLineChart.getData().add(new Data<String, Double>("Jun", total[5]));
+		goalLineChart.getData().add(new Data<String, Double>("Jul", total[6]));
+		goalLineChart.getData().add(new Data<String, Double>("Aug", total[7]));
+		goalLineChart.getData().add(new Data<String, Double>("Sep", total[8]));
+		goalLineChart.getData().add(new Data<String, Double>("Oct", total[9]));
+		goalLineChart.getData().add(new Data<String, Double>("Nov", total[10]));
+		goalLineChart.getData().add(new Data<String, Double>("Dec", total[11]));
+		lcMoney.getData().add(goalLineChart);
 	}
 
 }

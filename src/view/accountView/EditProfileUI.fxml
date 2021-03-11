@@ -13,17 +13,17 @@
    <children>
       <ImageView fitHeight="67.0" fitWidth="80.0" layoutX="31.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/assets/pig.PNG" />
+            <Image url="@../../assets/icon/sumel.png" />
          </image>
       </ImageView>
-      <Label layoutX="157.0" layoutY="32.0" prefHeight="32.0" prefWidth="273.0" text="Edit User Information" textFill="#ff8400">
+      <Label layoutX="157.0" layoutY="32.0" prefHeight="32.0" prefWidth="273.0" text="Edit User Information" textFill="#e1460e">
          <font>
-            <Font size="22.0" />
+            <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="86.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="56.0" fitWidth="49.0" layoutX="86.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/assets/user.png" />
+            <Image url="@../../assets/user.PNG" />
          </image>
       </ImageView>
       <JFXTextField fx:id="tfUserName" focusColor="#ff3d0f" layoutX="170.0" layoutY="122.0" prefHeight="37.0" prefWidth="230.0" promptText="User Name" unFocusColor="#ff7b0e">
@@ -31,36 +31,47 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="86.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="49.0" fitWidth="60.0" layoutX="86.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/assets/envelopment.png" />
+            <Image url="@../../assets/key.PNG" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="tfUserEmail" focusColor="#ff3d0f" layoutX="170.0" layoutY="219.0" prefHeight="37.0" prefWidth="230.0" promptText="User Email" unFocusColor="#ff7b0e">
+      <JFXTextField fx:id="tfUserEmail" focusColor="#ff3d0f" layoutX="170.0" layoutY="192.0" prefHeight="37.0" prefWidth="230.0" promptText="User Email" unFocusColor="#ff7b0e">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <ImageView fitHeight="67.0" fitWidth="71.0" layoutX="86.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="49.0" fitWidth="49.0" layoutX="87.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/assets/key.png" />
+            <Image url="@../../assets/key.PNG" />
          </image>
       </ImageView>
-      <Button fx:id="btnUpdate" layoutX="303.0" layoutY="397.0" mnemonicParsing="false" onAction="#processUpdate" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #ff8400;" text="Update" textFill="WHITE">
+      <Button fx:id="btnUpdate" layoutX="302.0" layoutY="397.0" mnemonicParsing="false" onAction="#processUpdate" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #ff8400;" text="Update" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnClose" layoutX="170.0" layoutY="397.0" mnemonicParsing="false" onAction="#processClose" prefHeight="40.0" prefWidth="71.0" style="-fx-background-color: #ff8400;" text="Close" textFill="WHITE">
+
+      <Button fx:id="btnClose" layoutX="170.0" layoutY="397.0" mnemonicParsing="false" onAction="#processClose" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #ff8400;" text="Close" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="165.0" layoutY="463.0" text="Powered by UIT NTT-AT Scholarship Students" />
-      <JFXPasswordField fx:id="pfPassword" focusColor="#ff3d0f" layoutX="170.0" layoutY="312.0" prefHeight="37.0" prefWidth="230.0" promptText="Password" unFocusColor="#ff7b0e">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="473.0" text="Powered by UIT NTT-AT Scholarship Students" />
+      <JFXPasswordField fx:id="pfPassword" focusColor="#ff3d0f" layoutX="170.0" layoutY="320.0" prefHeight="37.0" prefWidth="230.0" promptText="New Password" unFocusColor="#ff7b0e">   
          <font>
             <Font size="14.0" />
          </font>
       </JFXPasswordField>
+      <JFXPasswordField fx:id="pfOldPassword" focusColor="#ff3d0f" layoutX="170.0" layoutY="260.0" prefHeight="37.0" prefWidth="230.0" promptText="Old Password" unFocusColor="#ff7b0e">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXPasswordField>
+      <ImageView fitHeight="55.0" fitWidth="49.0" layoutX="86.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/envelopment.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

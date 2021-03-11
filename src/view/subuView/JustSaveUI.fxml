@@ -63,7 +63,7 @@
             <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <JFXTextField fx:id="txtGoalName" onKeyReleased="#nameExist" />
-                  <Label fx:id="nameExistLabel" />
+                  <Label fx:id="nameExistLabel" onKeyReleased="#nameExist" />
                </children>
             </VBox>
             <ImageView fx:id="imViewGoal" fitHeight="75.0" fitWidth="143.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">

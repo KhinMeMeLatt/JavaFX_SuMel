@@ -67,7 +67,7 @@
                </GridPane.margin>
                <children>
                   <JFXTextField fx:id="txtGoalName" labelFloat="true" onKeyReleased="#nameExist" prefHeight="25.0" prefWidth="352.0" promptText="Goal Name" />
-                  <Label fx:id="nameExistLabel" />
+                  <Label fx:id="nameExistLabel" onKeyReleased="#nameExist" />
                </children>
             </VBox>
             <JFXTextField fx:id="txtObjAmount" labelFloat="true" promptText="Objective Amount" GridPane.columnIndex="1" GridPane.rowIndex="2">

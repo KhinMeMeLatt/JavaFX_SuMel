@@ -61,7 +61,7 @@
                                     <Font name="Georgia" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblGoal" text="Goal" HBox.hgrow="ALWAYS">
+                              <Label fx:id="lblGoal" text="Expense" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Georgia" size="16.0" />
                                  </font>
@@ -220,9 +220,14 @@
                                           <Font name="Georgia" size="16.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="imageBorder">
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#userUpdateForm" pickOnBounds="true" preserveRatio="true" styleClass="imageBorder">
                                        <image>
                                           <Image url="@../../assets/img/user1.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../assets/logout.png" />
                                        </image>
                                     </ImageView>
                                  </children>
