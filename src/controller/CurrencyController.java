@@ -100,11 +100,16 @@ public class CurrencyController implements Initializable{
 		String toCountrycb = String.valueOf(toCountry.getValue());
 		//Extract currency code from combo box data
 		String destinationCountryCode = toCountrycb.substring(toCountrycb.indexOf("(")+1, toCountrycb.indexOf(")"));
+		try {
 
 		float rate = getExchangeRate(baseCountryCode,destinationCountryCode);
 		float result = rate * Float.valueOf(txtAmount.getText());
 		
 		AlertMaker.showAlert(AlertType.INFORMATION,"Successful Message", "From "+baseCountryCode+" currency to "+destinationCountryCode+" currency", "Result: "+result);
+		}
+		catch(NumberFormatException e){
+			txtAmount.setText("Please Enter Numbers!");
+		}
 	}
 
 	private ObservableList<Label> getCountries() throws FileNotFoundException{

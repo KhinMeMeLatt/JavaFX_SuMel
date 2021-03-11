@@ -73,6 +73,8 @@ public class TargetGoalController implements Initializable {
 
 	@FXML
 	private Label nameExistLabel;
+	@FXML
+	private Label lblValidate;
 
 	@FXML
 	private ImageView imViewGoal;
@@ -138,6 +140,10 @@ public class TargetGoalController implements Initializable {
 			return;
 		}
 		String goalName = txtGoalName.getText();
+		if(goalName.length()>20) {
+			txtGoalName.setText("Invalid Length!");
+		}
+		
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
 
 		if (imgFile == null) {
@@ -165,8 +171,6 @@ public class TargetGoalController implements Initializable {
 		} else {
 			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
-
-	}
 
 	@FXML
 	void addImage(MouseEvent event) {
@@ -300,6 +304,9 @@ public class TargetGoalController implements Initializable {
 
 		btnCreateGoal.disableProperty().bind((txtGoalName.textProperty().isNotEmpty()
 				.and(txtObjAmount.textProperty().isNotEmpty()).and(txtSaveAmount.textProperty().isNotEmpty())).not());
+	}catch(NumberFormatException e){
+		txtSaveAmount.setText("Please Enter Numbers!");
+	}
 	}
 
 	public void updateTargetGoalUI(Goal goal) {
