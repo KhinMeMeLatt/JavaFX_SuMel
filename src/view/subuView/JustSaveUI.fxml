@@ -60,16 +60,21 @@
                   <Image url="@../../assets/startDate.jpg" />
                </image>
             </ImageView>
-            <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
+             <VBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <JFXTextField fx:id="txtGoalName" onKeyReleased="#nameExist" prefWidth="328.0">
                      <VBox.margin>
                         <Insets right="100.0" />
                      </VBox.margin></JFXTextField>
-                  <Label fx:id="nameExistLabel" onKeyReleased="#nameExist">
+                  <HBox>
                      <VBox.margin>
                         <Insets />
-                     </VBox.margin></Label>
+                     </VBox.margin>
+                     <children>
+                        <Label fx:id="nameExistLabel" onKeyReleased="#nameExist" />
+                        <Label fx:id="nameLengthLbl" onKeyReleased="#nameExist" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <ImageView fx:id="imViewGoal" fitHeight="75.0" fitWidth="143.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
