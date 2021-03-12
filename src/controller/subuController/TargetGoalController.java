@@ -43,7 +43,10 @@ public class TargetGoalController implements Initializable {
 
 	@FXML
 	private JFXTextField txtGoalName;
-
+	
+	@FXML
+        private Label nameLengthLbl;
+ 
 	@FXML
 	private JFXTextField txtObjAmount;
 
