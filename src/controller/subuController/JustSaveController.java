@@ -38,6 +38,9 @@ public class JustSaveController implements Initializable {
 
 	@FXML
 	private JFXTextField txtGoalName;
+	
+	@FXML
+        private Label nameLengthLbl;
 
 	@FXML
 	private ImageView imViewGoal;
@@ -79,12 +82,13 @@ public class JustSaveController implements Initializable {
 			nameExistLabel.setText("");
 		}
 
-		if (txtGoalName.getText().length() > 10) {
-			nameExistLabel.setTextFill(Color.RED);
-			nameExistLabel.setText("***Subu name length must not be greater than 10.");
-		} else {
-			nameExistLabel.setTextFill(Color.WHITE);
-			nameExistLabel.setText("");
+
+		if(txtGoalName.getText().length() > 10) {
+			nameLengthLbl.setTextFill(Color.RED);
+			nameLengthLbl.setText("***Subu name length must not be greater than 10.");
+		}else {
+			nameLengthLbl.setTextFill(Color.WHITE);
+			nameLengthLbl.setText("");
 		}
 	}
 
