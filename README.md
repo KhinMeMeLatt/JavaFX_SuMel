@@ -15,6 +15,9 @@ his/her activities with high visualized formative charts. It also supports forei
 - Adding custom or default categories of expense
 - Multiple currency exchange
 
+## Tutorial
+![Tutorial](https://github.com/KhinMeMeLatt/SuMel/tree/main/src/assets/About.mp4)
+
 ## Installation
 
 ### Prerequisites
