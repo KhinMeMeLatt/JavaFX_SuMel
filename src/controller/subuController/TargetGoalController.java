@@ -119,13 +119,11 @@ public class TargetGoalController implements Initializable {
 		Stage stage = (Stage) txtGoalName.getScene().getWindow();
 		stage.close();
 	}
-
-	@FXML
+        @FXML
 	void nameExist(KeyEvent event) {
 		if (goalDbModel.isSubuNameExists(txtGoalName.getText())) {
 			nameExistLabel.setTextFill(Color.RED);
 			nameExistLabel.setText("***Subu name is already exist!!!Please Enter Different name.");
-
 		} else {
 			nameExistLabel.setTextFill(Color.WHITE);
 			nameExistLabel.setText("");
@@ -133,11 +131,11 @@ public class TargetGoalController implements Initializable {
 
 
 		if(txtGoalName.getText().length() > 10) {
-			nameExistLabel.setTextFill(Color.RED);
-			nameExistLabel.setText("***Subu name length must not be greater than 10.");
+			nameLengthLbl.setTextFill(Color.RED);
+			nameLengthLbl.setText("***Subu name length must not be greater than 10.");
 		}else {
-			nameExistLabel.setTextFill(Color.WHITE);
-			nameExistLabel.setText("");
+			nameLengthLbl.setTextFill(Color.WHITE);
+			nameLengthLbl.setText("");
 		}
 	}
 
