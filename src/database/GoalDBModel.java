@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import alert.AlertMaker;
 import javafx.collections.FXCollections;
@@ -45,10 +46,10 @@ public class GoalDBModel {
 			this.ps.setInt(3, goal.getGoalAmount());
 
 			LocalDate sdate = LocalDate.parse(goal.getStartDate());
-			Date startDate = Date.valueOf(sdate);
+			Date startDate = Date.valueOf(sdate.plus(1,ChronoUnit.DAYS));
 			this.ps.setDate(4, startDate);
-			LocalDate edate = LocalDate.parse(goal.getStartDate());
-			Date endDate = Date.valueOf(edate);
+			LocalDate edate = LocalDate.parse(goal.getEndDate());
+			Date endDate = Date.valueOf(edate.plus(1,ChronoUnit.DAYS));
 			this.ps.setDate(5, endDate);
 			this.ps.setString(6, goal.getSaveType());
 			this.ps.setDouble(7, goal.getAmountToSave());

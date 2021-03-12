@@ -45,7 +45,7 @@ public class ExpenseDB {
 			this.preparedStatement.setInt(3, expense.getExpenseAmount());
 			
 			LocalDate date = LocalDate.parse(expense.getSpendAt());
-			Date spendAt = Date.valueOf(date);
+			Date spendAt = Date.valueOf(date.plus(1,ChronoUnit.DAYS));
 			this.preparedStatement.setDate(4, spendAt);
 			this.preparedStatement.setInt(5, User.userId);
 			

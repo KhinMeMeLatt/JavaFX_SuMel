@@ -8,8 +8,7 @@ public class DBConnection {
 	
 	private static String url = "jdbc:mysql://localhost:3306/sumeldb?useSSL=false&useTimezone=true&serverTimezone=UTC";
 	private static String user = "root";
-	private static String password = "1234";
-	//public static Connection dbConnector;
+	private static String password = "root";
 
 	public static Connection getConnection() {
 		Connection connection = null;
@@ -21,22 +20,4 @@ public class DBConnection {
 		}
 		return connection;
 	}
-	
-	/*
-	 * public static Connection getConnctionInstance() { if(dbConnector == null) {
-	 * dbConnector = getConnection(); System.out.println(dbConnector+" is null if");
-	 * return dbConnector; }else { System.out.println(dbConnector); return
-	 * dbConnector; } }
-	 */
-	
-//	public static void getConnectiond() {
-//		Connection connection = null;
-//		try {
-//			connection = DriverManager.getConnection(url, user, password);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		dbConnector = connection;
-//	}
 }
