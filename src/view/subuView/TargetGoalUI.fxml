@@ -75,6 +75,12 @@
                </GridPane.margin>
                <children>
                   <JFXTextField fx:id="txtGoalName" labelFloat="true" onKeyReleased="#nameExist" prefHeight="25.0" prefWidth="352.0" promptText="Goal Name" />
+                  <HBox>
+                     <children>
+                        <Label fx:id="nameExistLabel" onKeyReleased="#nameExist" />
+                        <Label fx:id="nameLengthLbl" onKeyReleased="#nameExist" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
