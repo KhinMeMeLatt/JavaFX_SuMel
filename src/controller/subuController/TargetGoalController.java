@@ -117,8 +117,7 @@ public class TargetGoalController implements Initializable {
 		Stage stage = (Stage) txtGoalName.getScene().getWindow();
 		stage.close();
 	}
-
-	@FXML
+        @FXML
 	void nameExist(KeyEvent event) {
 		if (goalDbModel.isSubuNameExists(txtGoalName.getText())) {
 			nameExistLabel.setTextFill(Color.RED);
