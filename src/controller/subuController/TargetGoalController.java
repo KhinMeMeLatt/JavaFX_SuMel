@@ -43,10 +43,10 @@ public class TargetGoalController implements Initializable {
 
 	@FXML
 	private JFXTextField txtGoalName;
-	
+
 	@FXML
-        private Label nameLengthLbl;
- 
+	private Label nameLengthLbl;
+
 	@FXML
 	private JFXTextField txtObjAmount;
 
@@ -109,8 +109,6 @@ public class TargetGoalController implements Initializable {
 	private Boolean isInEditMode = false;
 
 	private GoalDBModel goalDbModel;
-	
-	private boolean isValid = true;
 
 	HomeController home = new HomeController();
 
@@ -125,7 +123,6 @@ public class TargetGoalController implements Initializable {
 		if (goalDbModel.isSubuNameExists(txtGoalName.getText())) {
 			nameExistLabel.setTextFill(Color.RED);
 			nameExistLabel.setText("***Subu name is already exist!!!Please Enter Different name.");
-
 		} else {
 			nameExistLabel.setTextFill(Color.WHITE);
 			nameExistLabel.setText("");
@@ -133,11 +130,11 @@ public class TargetGoalController implements Initializable {
 
 
 		if(txtGoalName.getText().length() > 10) {
-			nameExistLabel.setTextFill(Color.RED);
-			nameExistLabel.setText("***Subu name length must not be greater than 10.");
+			nameLengthLbl.setTextFill(Color.RED);
+			nameLengthLbl.setText("***Subu name length must not be greater than 10.");
 		}else {
-			nameExistLabel.setTextFill(Color.WHITE);
-			nameExistLabel.setText("");
+			nameLengthLbl.setTextFill(Color.WHITE);
+			nameLengthLbl.setText("");
 		}
 	}
 
@@ -147,45 +144,40 @@ public class TargetGoalController implements Initializable {
 			handleUpdateTargetGoal();
 			return;
 		}
-		
+
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
-		if(String.valueOf(amountToSave).equals(txtSaveAmount.getText())) {
-			isValid = false;
+
+		String goalName = txtGoalName.getText();
+
+		if (imgFile == null) {
+			imgFile = new File("src/assets/goal.png");
+			imageName = "goal.png";
 		}
-		if(isValid) {
-			String goalName = txtGoalName.getText();
 
-			if (imgFile == null) {
-				imgFile = new File("src/assets/goal.png");
-				imageName = "goal.png";
-			}
+		BufferedImage bImage = ImageIO.read(imgFile);
 
-			BufferedImage bImage = ImageIO.read(imgFile);
+		String mimeType = URLConnection.guessContentTypeFromName(imageName);
 
-			String mimeType = URLConnection.guessContentTypeFromName(imageName);
+		ImageIO.write(bImage, mimeType.substring(mimeType.indexOf("/") + 1),
+				new File("src/assets/goals/" + imageName));
 
-			ImageIO.write(bImage, mimeType.substring(mimeType.indexOf("/") + 1),
-					new File("src/assets/goals/" + imageName));
+		Goal newGoal = new Goal(goalName, this.imageName, this.objAmount, this.startDate.toString(),
+				this.endDate.toString(), this.saveType, amountToSave, false, User.userId);
 
-			Goal newGoal = new Goal(goalName, this.imageName, this.objAmount, this.startDate.toString(),
-					this.endDate.toString(), this.saveType, amountToSave, false, User.userId);
+		if (!(goalName.length() > 10)) {
 
-			if (!(goalName.length() > 10)) {
-
-				if (!goalDbModel.isSubuNameExists(goalName)) {
-					goalDbModel.insertGoal(newGoal);
-				} else {
-					AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
-				}
-
+			if (!goalDbModel.isSubuNameExists(goalName)) {
+				goalDbModel.insertGoal(newGoal);
 			} else {
-				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
+				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
 			}
-			clearData();
-		}else {
-			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please enter number in save amount or objective amount.");
+
+		} else {
+			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
-		
+		clearData();
+
+
 	}
 
 	private void clearData() {
@@ -302,23 +294,21 @@ public class TargetGoalController implements Initializable {
 					try {
 						saveAmount = Double.valueOf(txtSaveAmount.getText());
 					}catch(NumberFormatException e) {
-						isValid = false;
 						nameAmount.setText("Please Enter Numbers!");
-						System.out.println("text save:"+isValid);
 					}
-						LocalDate today = LocalDate.now();
-						LocalDate amountToAdd = null;
-						int noOfDays = (int) Math.ceil(objAmount / saveAmount);
-						if (rbDaily.isSelected()) {
-							amountToAdd = today.plus(noOfDays, ChronoUnit.DAYS);
-						} else if (rbWeekly.isSelected()) {
-							amountToAdd = today.plus(noOfDays * 7, ChronoUnit.DAYS);
-						} else if (rbMonthly.isSelected()) {
-							amountToAdd = today.plus(noOfDays * 30, ChronoUnit.DAYS);
-						}
-						changeDate = !changeDate;
-						dpEndDate.setValue(amountToAdd);
-					
+					LocalDate today = LocalDate.now();
+					LocalDate amountToAdd = null;
+					int noOfDays = (int) Math.ceil(objAmount / saveAmount);
+					if (rbDaily.isSelected()) {
+						amountToAdd = today.plus(noOfDays, ChronoUnit.DAYS);
+					} else if (rbWeekly.isSelected()) {
+						amountToAdd = today.plus(noOfDays * 7, ChronoUnit.DAYS);
+					} else if (rbMonthly.isSelected()) {
+						amountToAdd = today.plus(noOfDays * 30, ChronoUnit.DAYS);
+					}
+					changeDate = !changeDate;
+					dpEndDate.setValue(amountToAdd);
+
 				} else {
 					changeDate = !changeDate;
 				}
@@ -337,9 +327,6 @@ public class TargetGoalController implements Initializable {
 
 				} catch (NumberFormatException e) {
 					nameAmount.setText("Please Enter Numbers!");
-					//					btnCreateGoal.setDisable(true);
-
-
 				}
 
 			}
@@ -396,54 +383,47 @@ public class TargetGoalController implements Initializable {
 	private void handleUpdateTargetGoal() {
 		String goalName = txtGoalName.getText();
 		double amountToSave = Double.valueOf(txtSaveAmount.getText());
-		if(String.valueOf(amountToSave).equals(txtSaveAmount.getText())) {
-			isValid = false;
-		}
-		if(isValid) {
-			System.out.println(isValid);
-			BufferedImage bImage;
-			try {
+		BufferedImage bImage;
+		try {
 
-				if (imgFile == null) {
-					imgFile = new File("src/assets/goal.png");
-				}
-
-				bImage = ImageIO.read(imgFile);
-				String mimeType = URLConnection.guessContentTypeFromName(imageName);
-
-				ImageIO.write(bImage, mimeType.substring(mimeType.indexOf("/") + 1),
-						new File("src/assets/goals/" + imageName));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (imgFile == null) {
+				imgFile = new File("src/assets/goal.png");
 			}
-			Goal newGoal = new Goal(this.goalId, goalName, this.imageName, this.objAmount,
-					dpStartDate.getValue().toString(), dpEndDate.getValue().toString(), this.saveType, amountToSave, false,
-					User.userId);
 
-			if (!(goalName.length() > 10)) {
-				if (!goalDbModel.isSubuNameExists(goalName)) {
-					if (goalDbModel.updateTargetGoal(newGoal)) {
-						AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null,
-								"Goal is updated successfully!");
-						/*
-						 * Stage homeStage = (Stage) txtGoalName.getScene().getWindow();
-						 * homeStage.close();
-						 */
-					} else {
-						AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Goal Update Failed!");
-					}
+			bImage = ImageIO.read(imgFile);
+			String mimeType = URLConnection.guessContentTypeFromName(imageName);
+
+			ImageIO.write(bImage, mimeType.substring(mimeType.indexOf("/") + 1),
+					new File("src/assets/goals/" + imageName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Goal newGoal = new Goal(this.goalId, goalName, this.imageName, this.objAmount,
+				dpStartDate.getValue().toString(), dpEndDate.getValue().toString(), this.saveType, amountToSave, false,
+				User.userId);
+
+		if (!(goalName.length() > 10)) {
+			if (!goalDbModel.isSubuNameExists(goalName)) {
+				if (goalDbModel.updateTargetGoal(newGoal)) {
+					AlertMaker.showAlert(AlertType.INFORMATION, "Successful Message", null,
+							"Goal is updated successfully!");
+					/*
+					 * Stage homeStage = (Stage) txtGoalName.getScene().getWindow();
+					 * homeStage.close();
+					 */
 				} else {
-					AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
+					AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Goal Update Failed!");
 				}
-
 			} else {
-				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
+				AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please Enter Different Subu name!");
 			}
-		}else {
-			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Please enter number in save amount or objective amount");
+
+		} else {
+			AlertMaker.showAlert(AlertType.ERROR, "Error", "Error", "Subu Name length must not be larger than 10.");
 		}
-		
+
+
 	}
 
 }
