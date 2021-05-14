@@ -16,7 +16,7 @@ his/her activities with high visualized formative charts. It also supports forei
 - Multiple currency exchange
 
 ## Tutorial
-![Tutorial](https://github.com/KhinMeMeLatt/SuMel/tree/main/src/assets/About.mp4)
+Tutorial can be watched [here](https://github.com/KhinMeMeLatt/SuMel/tree/main/src/assets/About.mp4).
 
 ## Installation
 
@@ -26,7 +26,7 @@ his/her activities with high visualized formative charts. It also supports forei
 ### Step 1
 Begin by cloning this repository to your machine
 ```bash
-git clone https://github.com/KhinMeMeLatt/SuMel.git
+git clone https://github.com/KhinMeMeLatt/JavaFX_SuMel.git
 ```
 
 ### Step 2
